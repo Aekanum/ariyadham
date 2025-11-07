@@ -19,8 +19,7 @@ import { createClient as createSupabaseClient } from '@supabase/supabase-js';
  */
 export function createServerClient() {
   // Use dummy values during build if environment variables are not set
-  const supabaseUrl =
-    process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co';
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co';
   const supabaseServiceRoleKey =
     process.env.SUPABASE_SERVICE_ROLE_KEY || 'placeholder-service-role-key';
 

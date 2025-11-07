@@ -9,7 +9,6 @@ import Link from 'next/link';
 
 import { useAuth } from '@/contexts/AuthContext';
 
-
 export default function ForgotPasswordPage() {
   const { resetPassword } = useAuth();
 

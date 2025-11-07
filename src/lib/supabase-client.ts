@@ -19,10 +19,8 @@ import { createClient as createSupabaseClient } from '@supabase/supabase-js';
  */
 export function createClient() {
   // Use dummy values during build if environment variables are not set
-  const supabaseUrl =
-    process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co';
-  const supabaseAnonKey =
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-anon-key';
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co';
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-anon-key';
 
   // Only validate in browser environment
   if (typeof window !== 'undefined') {

@@ -11,7 +11,6 @@ import Link from 'next/link';
 
 import { useAuth } from '@/contexts/AuthContext';
 
-
 export default function SignUpPage() {
   const router = useRouter();
   const { signUp, signInWithGoogle } = useAuth();
