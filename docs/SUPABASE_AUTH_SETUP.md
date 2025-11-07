@@ -67,6 +67,7 @@ You can customize the following templates under **Authentication** → **Email T
 - **Reset Password**: Sent when user requests password reset
 
 **Recommended customization:**
+
 - Add your logo
 - Update branding colors
 - Adjust wording to match Ariyadham's tone
@@ -131,7 +132,6 @@ You can customize the following templates under **Authentication** → **Email T
 
 1. Go to **Authentication** → **URL Configuration**
 2. Set the following URLs:
-
    - **Site URL**: `http://localhost:3000` (dev) or `https://ariyadham.com` (prod)
    - **Redirect URLs**: Add all allowed redirect URLs:
      ```
@@ -161,6 +161,7 @@ RLS policies are already included in the database migration (`migrations/001_cre
 ### Test Email/Password Signup
 
 1. Start your development server:
+
    ```bash
    npm run dev
    ```
@@ -209,22 +210,26 @@ Before deploying to production:
 ## Troubleshooting
 
 ### "Invalid API key"
+
 - Verify `.env.local` has correct values
 - Restart development server after changing `.env.local`
 - Check that keys match Supabase dashboard
 
 ### "Signup failed"
+
 - Check browser console for errors
 - Verify Supabase project is not paused
 - Check RLS policies allow INSERT on users table
 - Verify email provider is enabled
 
 ### "OAuth redirect failed"
+
 - Verify redirect URI in OAuth provider matches Supabase
 - Check that provider is enabled in Supabase
 - Ensure Site URL is configured correctly
 
 ### "Session expired too quickly"
+
 - Check JWT expiry settings in Supabase
 - Verify refresh token is being used correctly
 - Check browser localStorage for session data

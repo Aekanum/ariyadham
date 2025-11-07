@@ -19,10 +19,12 @@ So that **all team members can quickly understand the codebase and contribute ef
 ## Acceptance Criteria
 
 ### Given
+
 - An empty Git repository ready for the Ariyadham project
 - Node.js 18+ and npm 9+ installed locally
 
 ### When
+
 1. Developer clones the repository
 2. Developer reviews the project structure
 3. Developer runs `npm install`
@@ -30,7 +32,9 @@ So that **all team members can quickly understand the codebase and contribute ef
 5. Developer runs `npm run build`
 
 ### Then
+
 ✅ The following structure exists:
+
 - `/src` folder with TypeScript support configured
 - `/public` folder for static assets
 - `/docs` folder containing documentation
@@ -42,12 +46,14 @@ So that **all team members can quickly understand the codebase and contribute ef
 ✅ Running `npm run build` creates an optimized production build without errors
 
 ✅ Code quality tools configured and working:
+
 - ESLint for code linting
 - Prettier for code formatting
 - Pre-commit hooks with husky for automatic checks
 - TypeScript type checking enabled
 
 ✅ Development experience:
+
 - IDE recognizes TypeScript paths and imports correctly
 - Hot reload works when files are modified
 - Errors are displayed clearly in terminal and browser
@@ -64,6 +70,7 @@ None - this is the first story in Epic 1 (Foundation).
 ## Technical Notes
 
 ### Technology Stack (from Architecture)
+
 - **Framework:** Next.js 14+ with App Router
 - **Language:** TypeScript 5.0+
 - **Styling:** Tailwind CSS 3.3+
@@ -88,6 +95,7 @@ npx create-next-app@latest ariyadham \
 ```
 
 **Flag Explanations:**
+
 - `--typescript` - Enable TypeScript
 - `--tailwind` - Include Tailwind CSS
 - `--app` - Use App Router (not Pages Router)
@@ -142,17 +150,20 @@ ariyadham/
 ### Setup Steps
 
 1. **Create project with Next.js starter**
+
    ```bash
    cd /Users/aphichat/Projects
    npx create-next-app@latest ariyadham [flags above]
    ```
 
 2. **Navigate to project**
+
    ```bash
    cd ariyadham
    ```
 
 3. **Initialize Git**
+
    ```bash
    git init
    git add .
@@ -160,12 +171,14 @@ ariyadham/
    ```
 
 4. **Setup environment variables**
+
    ```bash
    cp .env.example .env.local
    # Edit .env.local with Supabase keys (from project dashboard)
    ```
 
 5. **Install additional dev dependencies**
+
    ```bash
    npm install --save-dev husky lint-staged
    npx husky install
@@ -185,6 +198,7 @@ ariyadham/
 ### Configuration Files to Create/Modify
 
 **`.env.example`** (for documentation)
+
 ```
 # Supabase Configuration
 NEXT_PUBLIC_SUPABASE_URL=https://YOUR_PROJECT.supabase.co
@@ -200,6 +214,7 @@ NEXT_PUBLIC_SENTRY_DSN=
 ```
 
 **`.prettierrc.json`** (code formatting)
+
 ```json
 {
   "semi": true,
@@ -211,6 +226,7 @@ NEXT_PUBLIC_SENTRY_DSN=
 ```
 
 **`tsconfig.json`** (ensure paths are configured)
+
 ```json
 {
   "compilerOptions": {
@@ -240,6 +256,7 @@ NEXT_PUBLIC_SENTRY_DSN=
 ### Documentation to Create
 
 **`README.md`** - Include:
+
 - Project description
 - Technology stack
 - Setup instructions
@@ -254,16 +271,19 @@ NEXT_PUBLIC_SENTRY_DSN=
 From architecture, these dependencies should be installed:
 
 **Core:**
+
 - `next@14+`
 - `react@18.2+`
 - `typescript@5+`
 
 **Styling:**
+
 - `tailwindcss@3.3+`
 - `postcss@8+`
 - `autoprefixer@10+`
 
 **Development:**
+
 - `eslint@8+`
 - `eslint-config-next`
 - `prettier@3+`
@@ -271,6 +291,7 @@ From architecture, these dependencies should be installed:
 - `lint-staged@15+`
 
 Later stories will add:
+
 - `zustand` (state management)
 - `@supabase/supabase-js` (backend client)
 - `next-i18next` (internationalization)
@@ -324,6 +345,7 @@ Later stories will add:
 **Depends on:** None (this is the first story)
 
 **Blocks:**
+
 - Story 1.2 (Database Schema) - needs project initialized
 - Story 1.3 (Authentication) - needs project initialized
 - Story 1.4 (Deployment) - needs Git repo setup
@@ -332,6 +354,7 @@ Later stories will add:
 - All other stories
 
 **Related:**
+
 - Story 1.4 (Deployment Pipeline) - should know about this project structure
 
 ---
@@ -339,19 +362,23 @@ Later stories will add:
 ## Implementation Notes
 
 ### Architecture References
+
 - See `docs/architecture.md` Section "Project Structure" for complete file layout
 - See "Decision Summary" table for technology versions
 
 ### Decisions Already Made
+
 - ✅ Framework: Next.js 14+ (decided in architecture)
 - ✅ Language: TypeScript (decided in architecture)
 - ✅ Styling: Tailwind CSS (decided in architecture)
 - ✅ Package Manager: npm (decided in architecture)
 
 ### No Decisions Needed
+
 All technical choices for project setup are already determined in the architecture document.
 
 ### Common Pitfalls to Avoid
+
 - ❌ Don't use Yarn or pnpm - architecture specifies npm
 - ❌ Don't use Pages Router - architecture specifies App Router
 - ❌ Don't commit .env.local - add to .gitignore
@@ -363,6 +390,7 @@ All technical choices for project setup are already determined in the architectu
 ## Context & Rationale
 
 This story is foundational. It establishes:
+
 1. **Development Environment** - All developers use same setup
 2. **Code Quality Tools** - Linting and formatting from day one
 3. **Project Structure** - Matches architecture specification

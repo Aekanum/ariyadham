@@ -20,9 +20,11 @@ So that **all subsequent features have a solid foundation for data persistence**
 ## Acceptance Criteria
 
 ### Schema Creation
+
 **Given** an empty Supabase project
 **When** migrations run
 **Then** the following tables exist with proper structure:
+
 - ✅ `users` - user profiles, roles, metadata
 - ✅ `authors` - author information and verification status
 - ✅ `articles` - content with metadata, status, publish dates
@@ -36,7 +38,9 @@ So that **all subsequent features have a solid foundation for data persistence**
 - ✅ `audit_logs` - system audit trail
 
 ### Indexes & Performance
+
 **And** appropriate indexes exist for:
+
 - ✅ Article lookup by slug
 - ✅ User profile queries
 - ✅ Category filtering
@@ -45,7 +49,9 @@ So that **all subsequent features have a solid foundation for data persistence**
 - ✅ User reading history by date
 
 ### Row Level Security (RLS)
+
 **And** Row Level Security (RLS) policies are configured:
+
 - ✅ Users can only view/modify own profile
 - ✅ Users can only create articles under own author account
 - ✅ Published articles visible to all
@@ -54,13 +60,17 @@ So that **all subsequent features have a solid foundation for data persistence**
 - ✅ Anjali reactions user-specific
 
 ### Timestamps & Audit
+
 **And** all tables have audit timestamps:
+
 - ✅ `created_at` - auto-set on insert
 - ✅ `updated_at` - auto-updated on modification
 - ✅ `deleted_at` - soft-delete support where needed
 
 ### Data Validation
+
 **And** database constraints ensure data integrity:
+
 - ✅ Unique constraints (email, username, article slug)
 - ✅ Foreign key constraints
 - ✅ Check constraints for status values
@@ -85,6 +95,7 @@ So that **all subsequent features have a solid foundation for data persistence**
 ## Technical Notes
 
 ### Technology Stack
+
 - **Database Engine:** PostgreSQL (via Supabase)
 - **Migrations:** SQL files in `migrations/` directory
 - **RLS Implementation:** PostgreSQL Row Level Security
@@ -841,6 +852,7 @@ articles (self-ref) ───→ article_translations (translated_from_id)
 ## Definition of Done
 
 ✅ All acceptance criteria met:
+
 - [ ] All 11 tables created with proper structure
 - [ ] All indexes created for performance
 - [ ] RLS policies configured and tested
@@ -856,6 +868,7 @@ articles (self-ref) ───→ article_translations (translated_from_id)
 - [ ] Schema documented in SCHEMA.md
 
 ✅ Code quality:
+
 - [ ] No TypeScript errors
 - [ ] No ESLint warnings
 - [ ] Proper naming conventions followed
@@ -866,18 +879,21 @@ articles (self-ref) ───→ article_translations (translated_from_id)
 ## Dependencies & Context
 
 ### Architecture Patterns Used
+
 - RLS for authorization (from architecture.md)
 - Denormalized counts via triggers (from architecture.md)
 - Soft deletes with `deleted_at` (from architecture.md)
 - Multi-language support via article_translations (from architecture.md)
 
 ### Related Stories
+
 - **Blocks:** Story 1.3 (Authentication depends on users table)
 - **Blocks:** Story 2.1 (User profiles depend on users table)
 - **Blocks:** Story 3.1 (Article reading depends on articles table)
 - **Blocks:** All Epic 4+ stories (Author CMS, community features)
 
 ### Technologies
+
 - PostgreSQL (SQL dialect via Supabase)
 - Row Level Security
 - Database Triggers

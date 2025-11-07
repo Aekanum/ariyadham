@@ -1,7 +1,12 @@
 'use client';
 
+// Force dynamic rendering - don't pre-render at build time
+export const dynamic = 'force-dynamic';
+
 import { useState, FormEvent } from 'react';
+
 import { useRouter } from 'next/navigation';
+
 import { createClient } from '@/lib/supabase-client';
 
 export default function ResetPasswordPage() {
@@ -80,9 +85,7 @@ export default function ResetPasswordPage() {
             {/* Error Message */}
             {error && (
               <div className="rounded-md bg-red-50 p-4 dark:bg-red-900/20">
-                <p className="text-sm text-red-800 dark:text-red-200">
-                  {error}
-                </p>
+                <p className="text-sm text-red-800 dark:text-red-200">{error}</p>
               </div>
             )}
 

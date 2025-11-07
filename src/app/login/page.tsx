@@ -1,11 +1,14 @@
 'use client';
 
-import { useState, FormEvent, useEffect } from 'react';
+import { useState, FormEvent, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
 
-export default function LoginPage() {
+// Force dynamic rendering - don't pre-render at build time
+export const dynamic = 'force-dynamic';
+
+function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { signIn, signInWithGoogle, isLoggedIn } = useAuth();
@@ -101,18 +104,14 @@ export default function LoginPage() {
             {/* Error Message */}
             {error && (
               <div className="rounded-md bg-red-50 p-4 dark:bg-red-900/20">
-                <p className="text-sm text-red-800 dark:text-red-200">
-                  {error}
-                </p>
+                <p className="text-sm text-red-800 dark:text-red-200">{error}</p>
               </div>
             )}
 
             {/* Success/Info Message */}
             {message && (
               <div className="rounded-md bg-blue-50 p-4 dark:bg-blue-900/20">
-                <p className="text-sm text-blue-800 dark:text-blue-200">
-                  {message}
-                </p>
+                <p className="text-sm text-blue-800 dark:text-blue-200">{message}</p>
               </div>
             )}
 
@@ -219,15 +218,22 @@ export default function LoginPage() {
           {/* Sign Up Link */}
           <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
             Don&apos;t have an account?{' '}
-            <Link
-              href="/signup"
-              className="font-medium text-primary hover:text-primary/90"
-            >
+            <Link href="/signup" className="font-medium text-primary hover:text-primary/90">
               Sign up
             </Link>
           </p>
         </div>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense
+      fallback={<div className="flex min-h-screen items-center justify-center">Loading...</div>}
+    >
+      <LoginForm />
+    </Suspense>
   );
 }

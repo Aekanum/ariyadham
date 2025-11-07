@@ -25,6 +25,7 @@ Ariyadham will be built through 8 coherent epics, each delivering independent bu
 8. **Epic 8: Multi-Language & Accessibility** - i18n, WCAG compliance, special features
 
 This sequencing ensures:
+
 - Epic 1 establishes all foundations
 - Epics 2-3 create the basic user experience
 - Epic 4 enables content creators
@@ -47,6 +48,7 @@ So that **all team members can quickly understand the codebase and contribute ef
 **Given** an empty Git repository
 **When** the developer clones the repository
 **Then** the following structure exists:
+
 - Frontend project in `/frontend` with Next.js configured
 - Backend configuration ready for Supabase
 - `/docs` folder for documentation
@@ -59,6 +61,7 @@ So that **all team members can quickly understand the codebase and contribute ef
 **Prerequisites:** None (first story)
 
 **Technical Notes:**
+
 - Use Next.js 14+ with TypeScript
 - Initialize Supabase client configuration (keys in .env)
 - Setup ESLint and Prettier for code consistency
@@ -78,6 +81,7 @@ So that **all subsequent features have a solid foundation for data persistence**
 **Given** an empty Supabase project
 **When** migrations run
 **Then** the following tables exist:
+
 - `users` - user profiles, roles, metadata
 - `articles` - content with metadata, status, publish dates
 - `authors` - author information, verification
@@ -95,6 +99,7 @@ So that **all subsequent features have a solid foundation for data persistence**
 **Prerequisites:** Story 1.1
 
 **Technical Notes:**
+
 - Use Supabase's PostgreSQL with migrations via SQL
 - RLS policies: Users can only modify own data, articles visible based on status
 - Consider denormalized fields for performance (e.g., comment_count, anjali_count)
@@ -129,6 +134,7 @@ So that **users can securely create accounts and sign in**.
 **Prerequisites:** Story 1.2
 
 **Technical Notes:**
+
 - Setup Supabase Auth configuration
 - Configure Google/Facebook OAuth credentials
 - Create sign up, login, reset password pages
@@ -159,6 +165,7 @@ So that **code changes are automatically tested and deployed to production**.
 **Prerequisites:** Stories 1.1, 1.2
 
 **Technical Notes:**
+
 - Configure GitHub Actions workflow
 - Setup Vercel deployment configuration
 - Database migrations should be manual approval in prod
@@ -193,6 +200,7 @@ So that **all API endpoints follow consistent patterns**.
 **Prerequisites:** Stories 1.1, 1.3
 
 **Technical Notes:**
+
 - Create middleware for auth verification
 - Implement standardized request/response types
 - Setup request validation library (zod or joi)
@@ -221,6 +229,7 @@ So that **code is DRY and team can reuse common patterns**.
 **Prerequisites:** Story 1.1
 
 **Technical Notes:**
+
 - Create `/lib/utils.ts` for common functions
 - Create `/lib/types.ts` for shared TypeScript types
 - Create `/hooks/` folder for custom React hooks
@@ -256,6 +265,7 @@ So that **my account reflects who I am**.
 **Prerequisites:** Story 1.3
 
 **Technical Notes:**
+
 - Use Supabase Storage for avatar images
 - Image optimization: resize to 200x200, 400x400 for different displays
 - Profile page: `/profile` route (authenticated)
@@ -290,6 +300,7 @@ So that **features and access are properly controlled**.
 **Prerequisites:** Story 1.3
 
 **Technical Notes:**
+
 - Store role in user metadata or separate table
 - Use Supabase RLS for enforcement
 - Role-based route guards in frontend
@@ -321,6 +332,7 @@ So that **content quality is maintained**.
 **Prerequisites:** Stories 2.1, 2.2
 
 **Technical Notes:**
+
 - Create "Apply as Author" form
 - Store applications in a separate table
 - Admin dashboard shows pending applications
@@ -353,6 +365,7 @@ So that **my experience is personalized**.
 **Prerequisites:** Story 2.1
 
 **Technical Notes:**
+
 - Store preferences in both user DB and localStorage
 - Use React Context/Zustand for theme state
 - Sync on login
@@ -388,6 +401,7 @@ So that **I can focus on the dharma content**.
 **Prerequisites:** Story 1.1
 
 **Technical Notes:**
+
 - Article page route: `/articles/[slug]`
 - Use Next.js Image optimization for featured images
 - Render markdown/rich text as HTML
@@ -420,6 +434,7 @@ So that **I can discover dharma I'm interested in**.
 **Prerequisites:** Story 1.2 (categories data)
 
 **Technical Notes:**
+
 - Homepage layout with featured + recent + popular sections
 - Category page: `/categories/[slug]`
 - Implement pagination or infinite scroll
@@ -448,6 +463,7 @@ So that **I can quickly find what I'm looking for**.
 **Prerequisites:** Story 3.2, Story 1.2
 
 **Technical Notes:**
+
 - Implement with PostgreSQL full-text search or Algolia
 - Search by title, content, author name
 - Debounce search input to reduce queries
@@ -475,6 +491,7 @@ So that **search engines index content properly**.
 **Prerequisites:** Story 3.1, 1.5
 
 **Technical Notes:**
+
 - Generate meta tags in Next.js head
 - Include: og:title, og:description, og:image, og:url
 - Schema markup: Article type with author, datePublished, headline
@@ -509,6 +526,7 @@ So that **I can write dharma content with formatting**.
 **Prerequisites:** Stories 1.3, 2.2
 
 **Technical Notes:**
+
 - Use a rich text editor (Tiptap, Slate, or Draft.js)
 - Rich editor features: bold, italic, heading, quote, code, list
 - Image upload to Supabase Storage
@@ -541,6 +559,7 @@ So that **I can plan content ahead of time**.
 **Prerequisites:** Story 4.1
 
 **Technical Notes:**
+
 - Publish status: draft, scheduled, published, archived
 - Store publish_date and scheduled_publish_at in DB
 - Implement background job or cron for scheduled publishing
@@ -571,6 +590,7 @@ So that **articles are discoverable and organized**.
 **Prerequisites:** Story 4.1
 
 **Technical Notes:**
+
 - Categories: pre-defined (Ethics, Meditation, etc.)
 - Tags: can be created by authors (with admin moderation option)
 - Implement tag autocomplete/suggestion
@@ -602,6 +622,7 @@ So that **I can understand the impact of my writing**.
 **Prerequisites:** Stories 4.1, 4.2, 4.3
 
 **Technical Notes:**
+
 - Dashboard route: `/author/dashboard`
 - Track views per article
 - Calculate statistics from events
@@ -637,6 +658,7 @@ So that **I can show respect for the dharma and encourage authors**.
 **Prerequisites:** Stories 1.3, 3.1
 
 **Technical Notes:**
+
 - Anjali icon/button with count display
 - Store anjali reactions in DB
 - User can only anjali once per article
@@ -669,6 +691,7 @@ So that **we can engage in meaningful conversations**.
 **Prerequisites:** Stories 1.3, 3.1
 
 **Technical Notes:**
+
 - Comment form with textarea and submit button
 - Store comment hierarchy (parent_comment_id for replies)
 - Rich text support in comments (basic formatting)
@@ -699,6 +722,7 @@ So that **dharma spreads to more people**.
 **Prerequisites:** Stories 3.1, 3.4
 
 **Technical Notes:**
+
 - Integrate social media sharing APIs
 - Ensure Open Graph tags are correct for proper preview
 - Use Next.js built-in sharing or standard Web Share API
@@ -732,6 +756,7 @@ So that **I can manage content I want to return to**.
 **Prerequisites:** Stories 1.3, 3.1
 
 **Technical Notes:**
+
 - Bookmarks page: `/reader/bookmarks`
 - Reading history: `/reader/history`
 - Store in DB with user relationships
@@ -756,6 +781,7 @@ So that **I can monitor the platform at a glance**.
 **Given** an admin user visiting the admin dashboard
 **When** the page loads
 **Then** they see:
+
 - Total users count
 - Total articles count
 - Monthly active users (MAU)
@@ -767,6 +793,7 @@ So that **I can monitor the platform at a glance**.
 **Prerequisites:** Stories 1.3, 2.2
 
 **Technical Notes:**
+
 - Admin dashboard route: `/admin`
 - Fetch aggregated stats from database
 - Consider caching heavy calculations
@@ -798,6 +825,7 @@ So that **I can control platform access**.
 **Prerequisites:** Stories 1.3, 2.2
 
 **Technical Notes:**
+
 - Users management page: `/admin/users`
 - Implement filtering and sorting
 - Bulk actions (change role, deactivate multiple users)
@@ -832,6 +860,7 @@ So that **the platform maintains quality and avoids inappropriate content**.
 **Prerequisites:** Stories 1.3, 2.2, 4.1
 
 **Technical Notes:**
+
 - Content moderation page: `/admin/moderation`
 - Queue shows pending articles for approval
 - Preview shows full article formatting
@@ -851,6 +880,7 @@ So that **I can understand user behavior and platform performance**.
 **Given** an admin on the analytics page
 **When** they view the dashboard
 **Then** they see:
+
 - User growth trends
 - Article publication trends
 - Most popular articles
@@ -865,6 +895,7 @@ So that **I can understand user behavior and platform performance**.
 **Prerequisites:** Stories 1.3, 3.1, 4.4, 5.1
 
 **Technical Notes:**
+
 - Analytics page: `/admin/analytics`
 - Integrate with Google Analytics
 - Track custom events (anjali, comments, shares)
@@ -895,6 +926,7 @@ So that **I can highlight the best content**.
 **Prerequisites:** Stories 3.1, 4.1
 
 **Technical Notes:**
+
 - Featured content page: `/admin/featured`
 - Limit featured articles (e.g., 5-10 max)
 - Drag-and-drop reordering
@@ -929,6 +961,7 @@ So that **the site feels fast and responsive**.
 **Prerequisites:** Stories 3.1, 4.1
 
 **Technical Notes:**
+
 - Use Next.js Image component with automatic optimization
 - Implement responsive image srcset
 - Lazy load images below the fold
@@ -958,6 +991,7 @@ So that **I enjoy reading without frustration**.
 **Prerequisites:** Stories 7.1, 1.5
 
 **Technical Notes:**
+
 - Implement code splitting and lazy loading
 - Minimize JavaScript bundle
 - Optimize CSS delivery
@@ -990,6 +1024,7 @@ So that **more people find our dharma**.
 **Prerequisites:** Stories 3.4, 4.2
 
 **Technical Notes:**
+
 - Implement Schema.org Article markup
 - Generate dynamic sitemap.xml
 - Robots.txt for search engine crawling
@@ -1021,6 +1056,7 @@ So that **repeated requests are served quickly**.
 **Prerequisites:** Stories 1.5, 7.2
 
 **Technical Notes:**
+
 - Browser caching headers (Cache-Control)
 - Implement Redis caching (if needed)
 - ISR (Incremental Static Regeneration) in Next.js for articles
@@ -1059,6 +1095,7 @@ So that **I can understand and engage with content**.
 **Prerequisites:** Story 1.1
 
 **Technical Notes:**
+
 - Use i18n framework (next-i18next or similar)
 - Translation files: `/public/locales/[lang]/[namespace].json`
 - Default language: Thai, fallback: English
@@ -1091,6 +1128,7 @@ So that **dharma reaches Thai and English speakers**.
 **Prerequisites:** Stories 4.1, 8.1
 
 **Technical Notes:**
+
 - Article table includes language field
 - Articles can have multiple translations (one content per language)
 - Display available language versions
@@ -1129,6 +1167,7 @@ So that **everyone can access dharma**.
 **Prerequisites:** Stories 3.1, 4.1, 2.4
 
 **Technical Notes:**
+
 - Semantic HTML: use proper heading hierarchy, alt text for images
 - ARIA labels for interactive elements
 - Test with screen readers (NVDA, JAWS)
@@ -1165,6 +1204,7 @@ So that **I can access dharma anywhere, anytime**.
 **Prerequisites:** Stories 3.1, 4.1
 
 **Technical Notes:**
+
 - Mobile-first design approach
 - Responsive breakpoints: 320px, 768px, 1024px, 1440px
 - Touch targets min 44x44px (44px is mobile standard)
@@ -1197,6 +1237,7 @@ So that **I can comfortably read dharma**.
 **Prerequisites:** Stories 2.4, 8.3
 
 **Technical Notes:**
+
 - Add "Senior Mode" preference in settings
 - Increase base font size by 20-30%
 - Simplify interface: hide less important features
@@ -1251,6 +1292,7 @@ So that **I can comfortably read dharma**.
 ### Quality Gates
 
 Before moving to next epic:
+
 - All stories in current epic have passing tests
 - Code review completed
 - No critical bugs open
@@ -1263,6 +1305,7 @@ Before moving to next epic:
 ### Story Completion Checklist
 
 For each story:
+
 - ✅ Code written and tested
 - ✅ Unit tests pass (>80% coverage)
 - ✅ Integration tests pass
@@ -1275,6 +1318,7 @@ For each story:
 ### Context for Development Agents
 
 Each epic/story includes:
+
 - Clear user story format
 - BDD-style acceptance criteria
 - Technical implementation notes

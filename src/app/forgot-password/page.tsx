@@ -1,7 +1,12 @@
 'use client';
 
+// Force dynamic rendering - don't pre-render at build time
+export const dynamic = 'force-dynamic';
+
 import { useState, FormEvent } from 'react';
+
 import Link from 'next/link';
+
 import { useAuth } from '@/contexts/AuthContext';
 
 export default function ForgotPasswordPage() {
@@ -62,9 +67,7 @@ export default function ForgotPasswordPage() {
             {/* Error Message */}
             {error && (
               <div className="rounded-md bg-red-50 p-4 dark:bg-red-900/20">
-                <p className="text-sm text-red-800 dark:text-red-200">
-                  {error}
-                </p>
+                <p className="text-sm text-red-800 dark:text-red-200">{error}</p>
               </div>
             )}
 
@@ -72,8 +75,7 @@ export default function ForgotPasswordPage() {
             {success && (
               <div className="rounded-md bg-green-50 p-4 dark:bg-green-900/20">
                 <p className="text-sm text-green-800 dark:text-green-200">
-                  Password reset email sent! Please check your inbox and follow
-                  the instructions.
+                  Password reset email sent! Please check your inbox and follow the instructions.
                 </p>
               </div>
             )}
@@ -111,10 +113,7 @@ export default function ForgotPasswordPage() {
 
           {/* Back to Login Link */}
           <div className="mt-6 text-center">
-            <Link
-              href="/login"
-              className="text-sm font-medium text-primary hover:text-primary/90"
-            >
+            <Link href="/login" className="text-sm font-medium text-primary hover:text-primary/90">
               Back to Sign In
             </Link>
           </div>
