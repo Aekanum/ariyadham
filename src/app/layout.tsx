@@ -1,9 +1,6 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import '@/styles/globals.css';
 import { AuthProvider } from '@/contexts/AuthContext';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Ariyadham - Buddhist Dharma Platform',
@@ -32,7 +29,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className="font-sans antialiased">
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>

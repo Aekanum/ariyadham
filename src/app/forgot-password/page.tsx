@@ -1,8 +1,14 @@
 'use client';
 
+// Force dynamic rendering - don't pre-render at build time
+export const dynamic = 'force-dynamic';
+
 import { useState, FormEvent } from 'react';
+
 import Link from 'next/link';
+
 import { useAuth } from '@/contexts/AuthContext';
+
 
 export default function ForgotPasswordPage() {
   const { resetPassword } = useAuth();

@@ -1,8 +1,14 @@
 'use client';
 
+// Force dynamic rendering - don't pre-render at build time
+export const dynamic = 'force-dynamic';
+
 import { useState, FormEvent } from 'react';
+
 import { useRouter } from 'next/navigation';
+
 import { createClient } from '@/lib/supabase-client';
+
 
 export default function ResetPasswordPage() {
   const router = useRouter();
