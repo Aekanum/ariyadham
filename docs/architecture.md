@@ -12,6 +12,7 @@
 Ariyadham is a greenfield web application designed to democratize access to Buddhist dharma through a modern, accessible platform. The architecture employs a **Next.js-based full-stack approach** with **Supabase** as the backend-as-a-service provider, enabling rapid MVP development while maintaining production-grade scalability.
 
 The architecture prioritizes:
+
 - **Accessibility First** - WCAG 2.1 AA compliance from foundation
 - **Developer Experience** - Modern tooling and clear patterns for autonomous agent implementation
 - **Performance** - Core Web Vitals targets (FCP < 1.5s, LCP < 2.5s)
@@ -25,6 +26,7 @@ The architecture prioritizes:
 ### Starter Template Selected: Create Next.js App
 
 **Initialization Command:**
+
 ```bash
 npx create-next-app@latest ariyadham \
   --typescript \
@@ -38,6 +40,7 @@ npx create-next-app@latest ariyadham \
 ```
 
 **Rationale:**
+
 - Next.js 14+ provides best-in-class React framework with server-side rendering, static optimization, and API routes
 - Vercel deployment integration for seamless CI/CD
 - Built-in Image Optimization and Font Optimization for Core Web Vitals
@@ -46,6 +49,7 @@ npx create-next-app@latest ariyadham \
 - Native ESLint configuration
 
 **Starter-Provided Architectural Decisions:**
+
 - ✅ TypeScript for type safety
 - ✅ ESLint/Prettier for code quality
 - ✅ Tailwind CSS for styling
@@ -56,24 +60,24 @@ npx create-next-app@latest ariyadham \
 
 ## Decision Summary
 
-| Category | Decision | Version | Affects Epics | Rationale |
-|----------|----------|---------|---------------|-----------|
-| **Frontend Framework** | Next.js | 14.0+ LTS | All | Best React meta-framework; SSR for SEO; built-in optimization |
-| **UI Library** | React | 18.2+ | All | Industry standard; rich ecosystem; excellent tooling |
-| **Styling** | Tailwind CSS | 3.3+ | All, esp. 3, 8 | Rapid development; responsive design; accessibility tokens |
-| **Hosting/Deployment** | Vercel | - | All | Native Next.js support; auto-scaling; environment management |
-| **Backend/Database** | Supabase (PostgreSQL) | Latest | All, esp. 1, 2, 4 | Managed PostgreSQL; real-time; RLS; auth; storage |
-| **Authentication** | Supabase Auth + JWT | - | 2, 3, 4, 6 | Secure; scalable; supports OAuth (Google, Facebook) |
-| **State Management** | React Context + Zustand | - | All | Context for global UI state; Zustand for complex app state |
-| **API Routes** | Next.js API Routes | - | All, esp. 4, 6 | Serverless functions; no separate backend needed |
-| **Real-time Features** | Supabase Realtime | - | 4, 5 | WebSocket-based; minimal latency; built into Supabase |
-| **Image Optimization** | Next.js Image + Cloudflare CDN | - | 3, 4, 7 | Automatic responsive images; WebP; CDN delivery |
-| **SEO** | Next.js Meta + Schema | - | 3, 4, 7 | Server-side rendering; meta tags; structured data |
-| **Internationalization** | next-i18next | 13.0+ | 8 | Standard i18n for Next.js; file-based translations |
-| **Testing** | Vitest + React Testing Library | - | All | Fast unit tests; E2E with Playwright |
-| **Build & Deploy** | GitHub Actions + Vercel | - | All | Automated testing; built-in deploy previews |
-| **Monitoring/Errors** | Sentry | - | All | Error tracking; performance monitoring |
-| **Search** | PostgreSQL Full-Text + Meilisearch (optional) | - | 3 | PostgreSQL native FTS for MVP; Meilisearch for advanced search |
+| Category                 | Decision                                      | Version   | Affects Epics     | Rationale                                                      |
+| ------------------------ | --------------------------------------------- | --------- | ----------------- | -------------------------------------------------------------- |
+| **Frontend Framework**   | Next.js                                       | 14.0+ LTS | All               | Best React meta-framework; SSR for SEO; built-in optimization  |
+| **UI Library**           | React                                         | 18.2+     | All               | Industry standard; rich ecosystem; excellent tooling           |
+| **Styling**              | Tailwind CSS                                  | 3.3+      | All, esp. 3, 8    | Rapid development; responsive design; accessibility tokens     |
+| **Hosting/Deployment**   | Vercel                                        | -         | All               | Native Next.js support; auto-scaling; environment management   |
+| **Backend/Database**     | Supabase (PostgreSQL)                         | Latest    | All, esp. 1, 2, 4 | Managed PostgreSQL; real-time; RLS; auth; storage              |
+| **Authentication**       | Supabase Auth + JWT                           | -         | 2, 3, 4, 6        | Secure; scalable; supports OAuth (Google, Facebook)            |
+| **State Management**     | React Context + Zustand                       | -         | All               | Context for global UI state; Zustand for complex app state     |
+| **API Routes**           | Next.js API Routes                            | -         | All, esp. 4, 6    | Serverless functions; no separate backend needed               |
+| **Real-time Features**   | Supabase Realtime                             | -         | 4, 5              | WebSocket-based; minimal latency; built into Supabase          |
+| **Image Optimization**   | Next.js Image + Cloudflare CDN                | -         | 3, 4, 7           | Automatic responsive images; WebP; CDN delivery                |
+| **SEO**                  | Next.js Meta + Schema                         | -         | 3, 4, 7           | Server-side rendering; meta tags; structured data              |
+| **Internationalization** | next-i18next                                  | 13.0+     | 8                 | Standard i18n for Next.js; file-based translations             |
+| **Testing**              | Vitest + React Testing Library                | -         | All               | Fast unit tests; E2E with Playwright                           |
+| **Build & Deploy**       | GitHub Actions + Vercel                       | -         | All               | Automated testing; built-in deploy previews                    |
+| **Monitoring/Errors**    | Sentry                                        | -         | All               | Error tracking; performance monitoring                         |
+| **Search**               | PostgreSQL Full-Text + Meilisearch (optional) | -         | 3                 | PostgreSQL native FTS for MVP; Meilisearch for advanced search |
 
 ---
 
@@ -291,16 +295,16 @@ ariyadham/
 
 ## Epic to Architecture Mapping
 
-| Epic | Focus | Architecture Components | Key Routes | Key API Endpoints |
-|------|-------|-------------------------|-----------|-------------------|
-| **1: Foundation** | Setup & Infrastructure | Project structure, build system, deployment, auth foundation | - | `/api/health` |
-| **2: Authentication** | User accounts & roles | Supabase Auth, AuthContext, useAuth hook, Protected routes | `/login`, `/signup`, `/profile`, `/settings` | `/api/auth/*`, `/api/users/*` |
-| **3: Reader Experience** | Content discovery & reading | ArticleReader, AnjaliButton, BookmarkButton, ShareButton | `/`, `/articles/[slug]`, `/categories/[slug]`, `/search` | `/api/articles/*`, `/api/search` |
-| **4: Author CMS** | Content creation & publishing | RichEditor, ArticleForm, AuthorDashboard, SchedulePublish | `/dashboard`, `/articles/new`, `/articles/[id]/edit` | `/api/articles/*`, `/api/articles/[id]/publish` |
-| **5: Community** | Comments & engagement | CommentSection, AnjaliButton, ShareButton | `/articles/[slug]#comments` | `/api/articles/[id]/comments`, `/api/articles/[id]/anjali` |
-| **6: Admin & Moderation** | Platform management | UserTable, ContentModerationQueue, AnalyticsDashboard | `/admin/*` | `/api/admin/*` |
-| **7: Performance & SEO** | Optimization & visibility | Next.js Image, Meta tags, Schema, Caching strategies | All pages | JSON-LD endpoints for search engines |
-| **8: i18n & Accessibility** | Localization & inclusive design | next-i18next, LanguageContext, WCAG components | All with `/[lang]/` prefix | `/api/locales/*` |
+| Epic                        | Focus                           | Architecture Components                                      | Key Routes                                               | Key API Endpoints                                          |
+| --------------------------- | ------------------------------- | ------------------------------------------------------------ | -------------------------------------------------------- | ---------------------------------------------------------- |
+| **1: Foundation**           | Setup & Infrastructure          | Project structure, build system, deployment, auth foundation | -                                                        | `/api/health`                                              |
+| **2: Authentication**       | User accounts & roles           | Supabase Auth, AuthContext, useAuth hook, Protected routes   | `/login`, `/signup`, `/profile`, `/settings`             | `/api/auth/*`, `/api/users/*`                              |
+| **3: Reader Experience**    | Content discovery & reading     | ArticleReader, AnjaliButton, BookmarkButton, ShareButton     | `/`, `/articles/[slug]`, `/categories/[slug]`, `/search` | `/api/articles/*`, `/api/search`                           |
+| **4: Author CMS**           | Content creation & publishing   | RichEditor, ArticleForm, AuthorDashboard, SchedulePublish    | `/dashboard`, `/articles/new`, `/articles/[id]/edit`     | `/api/articles/*`, `/api/articles/[id]/publish`            |
+| **5: Community**            | Comments & engagement           | CommentSection, AnjaliButton, ShareButton                    | `/articles/[slug]#comments`                              | `/api/articles/[id]/comments`, `/api/articles/[id]/anjali` |
+| **6: Admin & Moderation**   | Platform management             | UserTable, ContentModerationQueue, AnalyticsDashboard        | `/admin/*`                                               | `/api/admin/*`                                             |
+| **7: Performance & SEO**    | Optimization & visibility       | Next.js Image, Meta tags, Schema, Caching strategies         | All pages                                                | JSON-LD endpoints for search engines                       |
+| **8: i18n & Accessibility** | Localization & inclusive design | next-i18next, LanguageContext, WCAG components               | All with `/[lang]/` prefix                               | `/api/locales/*`                                           |
 
 ---
 
@@ -309,6 +313,7 @@ ariyadham/
 ### Core Framework Stack
 
 **Next.js 14+ (App Router)**
+
 - Server-side rendering for SEO
 - Static generation for performance
 - API routes for backend functionality
@@ -316,11 +321,13 @@ ariyadham/
 - Automatic code splitting
 
 **React 18.2+**
+
 - Server and client components
 - Streaming for faster responses
 - Built-in Suspense boundaries
 
 **TypeScript 5.0+**
+
 - Full type safety
 - Better IDE support
 - Refactoring confidence
@@ -328,6 +335,7 @@ ariyadham/
 ### UI & Styling
 
 **Tailwind CSS 3.3+**
+
 - Utility-first responsive design
 - Dark mode support via dark: prefix
 - Accessibility color tokens
@@ -335,6 +343,7 @@ ariyadham/
 - No CSS-in-JS overhead
 
 **Headless UI Components** (optional)
+
 - Accessible form components
 - Modal/dropdown patterns
 - Dialog and disclosure components
@@ -342,16 +351,19 @@ ariyadham/
 ### State Management
 
 **React Context API**
+
 - Global UI state (theme, language, user)
 - Auth state (current user, permissions)
 - Minimal bundle impact
 
 **Zustand** (if complex state emerges)
+
 - Simple store pattern
 - Minimal boilerplate
 - DevTools integration
 
 **Client-Side Caching**
+
 - Next.js ISR for articles
 - Service Worker for offline capability (Phase 2)
 - Browser localStorage for user preferences
@@ -359,6 +371,7 @@ ariyadham/
 ### Backend & Database
 
 **Supabase**
+
 - PostgreSQL database
 - Real-time subscriptions
 - Row Level Security (RLS)
@@ -367,6 +380,7 @@ ariyadham/
 - Edge Functions (optional, for custom logic)
 
 **PostgreSQL 15+**
+
 - JSONB for flexible data
 - Full-text search (native)
 - Row-level security policies
@@ -375,17 +389,20 @@ ariyadham/
 ### API Design
 
 **Next.js API Routes**
+
 - Serverless functions on Vercel
 - TypeScript request/response types
 - Middleware for auth
 - Error handling patterns
 
 **RESTful Conventions**
+
 - Resource-based URLs (/articles, /users, /comments)
 - Standard HTTP methods (GET, POST, PATCH, DELETE)
 - Consistent response format
 
 **Response Format**
+
 ```typescript
 // Success response
 {
@@ -408,6 +425,7 @@ ariyadham/
 ### Real-time Features
 
 **Supabase Realtime**
+
 - WebSocket-based updates
 - Article view counts
 - Comment notifications
@@ -416,6 +434,7 @@ ariyadham/
 ### Internationalization
 
 **next-i18next**
+
 - File-based translations
 - Namespacing (common, auth, reader, author, admin)
 - Dynamic language switching
@@ -424,11 +443,13 @@ ariyadham/
 ### Search
 
 **PostgreSQL Full-Text Search** (MVP)
+
 - Native to Supabase
 - Query articles by title, content, author
 - Simple but effective
 
 **Meilisearch** (future, Phase 2)
+
 - Dedicated search engine
 - Better relevance scoring
 - Typo tolerance
@@ -437,6 +458,7 @@ ariyadham/
 ### Deployment & Hosting
 
 **Vercel**
+
 - Auto-scaling Node.js
 - Built-in Next.js optimization
 - Environment variables
@@ -444,24 +466,28 @@ ariyadham/
 - Analytics integration
 
 **Supabase Hosting**
+
 - Managed PostgreSQL on AWS
 - Auto-backups
 - Point-in-time recovery
 - Free tier for development
 
 **CDN**
+
 - Vercel Edge Network for static assets
 - Cloudflare optional for additional caching
 
 ### Monitoring & Error Tracking
 
 **Sentry**
+
 - Error tracking and aggregation
 - Performance monitoring
 - Release tracking
 - Environment separation (dev/staging/prod)
 
 **Google Analytics 4**
+
 - User behavior tracking
 - Custom event tracking (anjali, bookmarks, shares)
 - Conversion tracking
@@ -470,16 +496,19 @@ ariyadham/
 ### Development Tools
 
 **ESLint + Prettier**
+
 - Code quality
 - Consistent formatting
 - Pre-commit hooks (husky)
 
 **Vitest + React Testing Library**
+
 - Fast unit tests
 - Component testing
 - Accessibility testing
 
 **Playwright**
+
 - End-to-end testing
 - Cross-browser testing
 - Visual regression testing
@@ -491,17 +520,20 @@ ariyadham/
 ### Frontend ↔ Backend
 
 **API Communication**
+
 - Fetch API or Axios for HTTP requests
 - Centralized in `/lib/api.ts`
 - Error handling middleware
 - Request retry logic
 
 **Real-time Subscriptions**
+
 - Supabase client subscribes to changes
 - Updates reflected in React state via Zustand/Context
 - Optimistic updates for better UX
 
 **Authentication Flow**
+
 ```
 Login Form → Supabase Auth → JWT Token → localStorage
 Request → API Route → Verify JWT → Supabase RLS → Database
@@ -510,12 +542,14 @@ Request → API Route → Verify JWT → Supabase RLS → Database
 ### Database ↔ API
 
 **Row Level Security (RLS)**
+
 - Users can only see/modify own profile
 - Only authors can edit own articles
 - Only admins can moderate content
 - Publicly published articles visible to all
 
 **Triggers & Functions**
+
 - Auto-update article view counts
 - Update author article counts
 - Audit logging for moderation
@@ -523,16 +557,19 @@ Request → API Route → Verify JWT → Supabase RLS → Database
 ### External Services
 
 **Supabase OAuth**
+
 - Google & Facebook authentication
 - Social login flow
 - Profile data mapping
 
 **Email Service** (SendGrid/AWS SES)
+
 - Welcome emails
 - Password reset
 - Notifications (future)
 
 **Image Optimization**
+
 - Cloudinary API (optional for advanced optimization)
 - Vercel Image Optimization (included)
 
@@ -545,6 +582,7 @@ Request → API Route → Verify JWT → Supabase RLS → Database
 The Anjali button (🙏) is a unique dharma-specific interaction that replaces generic "likes". This requires special architectural consideration.
 
 **Architecture:**
+
 ```
 AnjaliButton Component
 ├── Frontend: React component with click handler
@@ -566,6 +604,7 @@ anjali_reactions (
 ```
 
 **Data Flow:**
+
 1. User clicks Anjali button
 2. Frontend optimistically updates count
 3. POST request to `/api/articles/[id]/anjali`
@@ -574,6 +613,7 @@ anjali_reactions (
 6. All viewing users see updated count in real-time
 
 **Consistency:**
+
 - Max one anjali per user per article
 - Authors cannot anjali their own articles
 - Count reflects current state
@@ -584,6 +624,7 @@ anjali_reactions (
 Articles can exist in multiple languages with linked translations.
 
 **Architecture:**
+
 ```
 Database Schema:
 articles (
@@ -602,6 +643,7 @@ Frontend Logic:
 ```
 
 **Routing:**
+
 ```
 Next.js App Router with locale prefix:
 src/app/[locale]/(reader)/articles/[slug]/page.tsx
@@ -614,6 +656,7 @@ URL Pattern: /th/articles/dharma-basics vs /en/articles/dharma-basics
 Authors need to manage article lifecycle across multiple states.
 
 **States:**
+
 ```
 draft → scheduled → published
    ↓
@@ -623,6 +666,7 @@ archived
 ```
 
 **Implementation:**
+
 ```typescript
 // Database columns
 articles {
@@ -647,6 +691,7 @@ These patterns ensure consistent implementation across all AI agents and stories
 ### Naming Conventions
 
 #### REST API Endpoints
+
 ```
 Resource naming: PLURAL (users, articles, comments)
 GET    /api/articles           → List all articles
@@ -658,6 +703,7 @@ POST   /api/articles/[id]/publish  → Special action
 ```
 
 #### Database Tables & Columns
+
 ```
 Table naming: snake_case, plural
 users, articles, comments, anjali_reactions, reading_history
@@ -670,6 +716,7 @@ article_count (denormalized counts)
 ```
 
 #### TypeScript/JavaScript Files
+
 ```
 Components: PascalCase + .tsx
 useHooks: camelCase + .ts
@@ -686,6 +733,7 @@ Example:
 ```
 
 #### React Components
+
 ```
 Component naming: PascalCase
 Props interface: Component name + Props
@@ -703,6 +751,7 @@ export default function ArticleCard({ article, onAnjali }: ArticleCardProps) {
 ### Code Organization Patterns
 
 #### Component Structure
+
 ```typescript
 // 1. Imports
 import { useState } from 'react';
@@ -735,16 +784,14 @@ export default function MyComponent({ title, onClick }: Props) {
 ```
 
 #### API Route Structure
+
 ```typescript
 // app/api/articles/[id]/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase';
 import { validateAuth } from '@/lib/auth';
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
   try {
     const supabase = createClient();
     const { data, error } = await supabase
@@ -764,10 +811,7 @@ export async function GET(
   }
 }
 
-export async function PATCH(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function PATCH(request: NextRequest, { params }: { params: { id: string } }) {
   try {
     // Auth validation
     const { user, error: authError } = await validateAuth(request);
@@ -960,6 +1004,7 @@ export async function POST(request: NextRequest) {
 ### Styling Consistency
 
 **Tailwind Color Palette**
+
 ```css
 Primary: Blue (for actions)
 Success: Green (for confirmations)
@@ -973,6 +1018,7 @@ Accessibility: Use semantic colors, sufficient contrast (WCAG AA)
 ```
 
 **Spacing Scale**
+
 ```css
 2, 4, 6, 8, 12, 16, 24, 32, 48, 64 px
 Use Tailwind classes: p-2, p-4, gap-4, etc.
@@ -982,6 +1028,7 @@ Consistent padding/margins across components
 ### Loading & Error States
 
 **Loading State**
+
 ```
 - Show loading spinner or skeleton
 - Disable interactions during loading
@@ -990,6 +1037,7 @@ Consistent padding/margins across components
 ```
 
 **Error State**
+
 ```
 - Display user-friendly error message
 - Show retry button if applicable
@@ -998,6 +1046,7 @@ Consistent padding/margins across components
 ```
 
 **Empty State**
+
 ```
 - Show helpful empty state illustration
 - Provide call-to-action
@@ -1048,6 +1097,7 @@ export function ArticleList() {
 ### Core Data Models
 
 **users**
+
 ```sql
 id (uuid, primary key)
 email (text, unique)
@@ -1063,6 +1113,7 @@ updated_at (timestamp)
 ```
 
 **articles**
+
 ```sql
 id (uuid, primary key)
 title (text)
@@ -1087,6 +1138,7 @@ updated_at (timestamp)
 ```
 
 **comments**
+
 ```sql
 id (uuid, primary key)
 article_id (uuid, not null, foreign key)
@@ -1099,6 +1151,7 @@ updated_at (timestamp)
 ```
 
 **anjali_reactions**
+
 ```sql
 id (uuid, primary key)
 user_id (uuid, not null, foreign key)
@@ -1108,6 +1161,7 @@ UNIQUE(user_id, article_id)
 ```
 
 **bookmarks**
+
 ```sql
 id (uuid, primary key)
 user_id (uuid, not null, foreign key)
@@ -1117,6 +1171,7 @@ UNIQUE(user_id, article_id)
 ```
 
 **reading_history**
+
 ```sql
 id (uuid, primary key)
 user_id (uuid, not null, foreign key)
@@ -1128,6 +1183,7 @@ created_at (timestamp)
 ```
 
 **categories**
+
 ```sql
 id (uuid, primary key)
 name_th (text)
@@ -1139,6 +1195,7 @@ display_order (integer)
 ```
 
 **article_tags**
+
 ```sql
 id (uuid, primary key)
 article_id (uuid, not null, foreign key)
@@ -1173,6 +1230,7 @@ comments (self-ref) ──→ parent_comment_id (threading)
 ### Authentication Endpoints
 
 **POST /api/auth/signup**
+
 ```json
 Request:
 {
@@ -1193,6 +1251,7 @@ Response (201):
 ```
 
 **POST /api/auth/login**
+
 ```json
 Request:
 {
@@ -1213,12 +1272,14 @@ Response (200):
 ### Article Endpoints
 
 **GET /api/articles**
+
 ```
 Query params: ?page=1&limit=10&category=ethics&sort=newest
 Response: { success: true, data: [articles...], total: 100, pages: 10 }
 ```
 
 **POST /api/articles**
+
 ```json
 Request (auth required):
 {
@@ -1238,6 +1299,7 @@ Response (201):
 ```
 
 **PATCH /api/articles/[id]**
+
 ```
 Authorization required (author or admin)
 Same request body as POST
@@ -1245,6 +1307,7 @@ Response: 200 with updated article
 ```
 
 **POST /api/articles/[id]/anjali**
+
 ```
 Authorization required
 Request body: {} (empty)
@@ -1259,6 +1322,7 @@ Toggle: removes if already exists, adds if not
 ### Authentication
 
 **Supabase Auth**
+
 - Email/password with hashed storage
 - Email verification (future)
 - Password reset via email
@@ -1267,6 +1331,7 @@ Toggle: removes if already exists, adds if not
 - Refresh token rotation
 
 **JWT Token Management**
+
 ```
 Access Token:
 - Expires: 1 hour
@@ -1282,6 +1347,7 @@ Refresh Token:
 ### Authorization
 
 **Row Level Security (RLS) in Supabase**
+
 ```sql
 -- Users can view their own profile
 CREATE POLICY user_select_own ON users
@@ -1313,11 +1379,13 @@ CREATE POLICY article_delete_admin ON articles
 ### Data Protection
 
 **Encryption**
+
 - Passwords: Hashed by Supabase Auth (bcrypt)
 - Sensitive data: Encrypted at rest in Supabase
 - HTTPS: All communication over TLS
 
 **Secrets Management**
+
 - Environment variables: `.env.local` (never committed)
 - Supabase keys: Service role in server-only (API routes)
 - Anon key: Client-side (only for public data)
@@ -1325,11 +1393,13 @@ CREATE POLICY article_delete_admin ON articles
 ### Input Validation
 
 **Frontend**
+
 - HTML5 validation
 - React Hook Form validation
 - User-friendly error messages
 
 **Backend (Critical)**
+
 ```typescript
 import { z } from 'zod';
 
@@ -1347,10 +1417,12 @@ const validated = CreateArticleSchema.parse(body);
 ### CORS & CSRF Protection
 
 **CORS**
+
 - Vercel handles CORS for same-origin requests
 - API routes only accept requests from same domain
 
 **CSRF**
+
 - SameSite cookie attribute on JWT
 - POST/PATCH/DELETE require valid session
 - Next.js built-in CSRF protection
@@ -1362,18 +1434,21 @@ const validated = CreateArticleSchema.parse(body);
 ### Core Web Vitals Targets
 
 **FCP (First Contentful Paint) < 1.5 seconds**
+
 - Minimize JavaScript
 - Inline critical CSS
 - Defer non-critical scripts
 - Server-side render initial content
 
 **LCP (Largest Contentful Paint) < 2.5 seconds**
+
 - Optimize images (WebP, responsive)
 - Preload critical resources
 - Lazy load below-the-fold content
 - Use next/image component
 
 **CLS (Cumulative Layout Shift) < 0.1**
+
 - Reserve space for images
 - Avoid inserting content above existing content
 - Use CSS transforms for animations, not layout changes
@@ -1382,6 +1457,7 @@ const validated = CreateArticleSchema.parse(body);
 ### Image Optimization
 
 **Next.js Image Component**
+
 ```tsx
 import Image from 'next/image';
 
@@ -1392,10 +1468,11 @@ import Image from 'next/image';
   height={400}
   responsive
   priority={isAboveTheFold}
-/>
+/>;
 ```
 
 **Formats**
+
 - Serve WebP with JPEG fallback
 - Responsive srcset for different screen sizes
 - CDN delivery via Vercel
@@ -1403,6 +1480,7 @@ import Image from 'next/image';
 ### Caching Strategy
 
 **Browser Caching**
+
 ```
 Static assets: Cache-Control: public, max-age=31536000, immutable
 Dynamic pages: Cache-Control: public, max-age=60, s-maxage=3600
@@ -1410,6 +1488,7 @@ API responses: Cache-Control: private, max-age=60
 ```
 
 **ISR (Incremental Static Regeneration)**
+
 ```typescript
 export const revalidate = 60; // Revalidate every 60 seconds
 
@@ -1420,6 +1499,7 @@ export default async function ArticlePage() {
 ```
 
 **Database Connection Pooling**
+
 - Supabase handles connection pooling
 - PgBouncer for efficient connections
 
@@ -1427,6 +1507,7 @@ export default async function ArticlePage() {
 
 - Automatic via Next.js
 - Dynamic imports for heavy components
+
 ```typescript
 import dynamic from 'next/dynamic';
 
@@ -1438,11 +1519,13 @@ const RichEditor = dynamic(() => import('@/components/RichEditor'), {
 ### Monitoring
 
 **Web Vitals**
+
 - Use web-vitals library
 - Send to Google Analytics
 - Monitor in Vercel Analytics
 
 **Performance Budgets**
+
 - JavaScript: < 200KB (gzipped)
 - CSS: < 50KB (gzipped)
 - Images: Optimized with next/image
@@ -1483,6 +1566,7 @@ npm start
 ```
 
 **Production Database**
+
 - Supabase PostgreSQL on AWS
 - Automated daily backups
 - Point-in-time recovery available
@@ -1506,9 +1590,10 @@ on: [push to main]
 ### Monitoring in Production
 
 **Sentry Integration**
+
 ```typescript
 // sentry.client.config.ts
-import * as Sentry from "@sentry/nextjs";
+import * as Sentry from '@sentry/nextjs';
 
 Sentry.init({
   dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
@@ -1518,6 +1603,7 @@ Sentry.init({
 ```
 
 **Uptime Monitoring**
+
 - Vercel uptime monitoring
 - Health check endpoint: `/api/health`
 
@@ -1594,6 +1680,7 @@ npm run test:coverage
 **Decision:** Use Next.js 14 with Supabase as backend-as-a-service
 
 **Rationale:**
+
 - Next.js provides best-in-class React framework with SSR, optimization, and API routes
 - Supabase offers managed PostgreSQL with auth, RLS, and real-time
 - Reduces infrastructure complexity
@@ -1601,11 +1688,13 @@ npm run test:coverage
 - Scales from startup to enterprise
 
 **Alternatives Considered:**
+
 - Separate React SPA + Express backend (more complexity)
 - Remix (good, but Next.js has larger ecosystem)
 - Firebase (limited customization for complex domains)
 
 **Consequences:**
+
 - Tight coupling to Vercel deployment (can be moved)
 - Learning curve for RLS and Supabase patterns
 - Cold starts on serverless functions (acceptable for MVP)
@@ -1617,6 +1706,7 @@ npm run test:coverage
 **Decision:** Use Tailwind CSS exclusively, no shadow DOM or CSS-in-JS
 
 **Rationale:**
+
 - Rapid development with utility-first approach
 - Built-in dark mode support
 - Better performance (no runtime CSS generation)
@@ -1624,6 +1714,7 @@ npm run test:coverage
 - Large community and good tooling
 
 **Consequences:**
+
 - Larger HTML with class names
 - Learning curve for utility-first mindset
 - Must configure custom themes carefully
@@ -1635,11 +1726,13 @@ npm run test:coverage
 **Decision:** Use PostgreSQL FTS for MVP, upgrade to Meilisearch in Phase 2
 
 **Rationale:**
+
 - PostgreSQL FTS is built-in, no external dependencies
 - Good enough for MVP scale
 - Meilisearch provides better UX (typo tolerance, relevance) at scale
 
 **Consequences:**
+
 - Migration path needed for Phase 2
 - Search quality limited in MVP
 
@@ -1650,12 +1743,14 @@ npm run test:coverage
 **Decision:** Use Row Level Security policies for all authorization
 
 **Rationale:**
+
 - Database-level enforcement is most secure
 - Prevents bugs where authorization is forgotten
 - Scales to any number of features
 - Built into Supabase architecture
 
 **Consequences:**
+
 - Requires careful RLS policy design
 - Cannot bypass authorization in bugs
 - Testing RLS policies requires special setup
@@ -1667,12 +1762,14 @@ npm run test:coverage
 **Decision:** Use Supabase Realtime for article counts, anjali reactions, comments
 
 **Rationale:**
+
 - WebSocket-based, low-latency updates
 - Real-time broadcast to all connected users
 - Integrated into Supabase
 - Minimal additional complexity
 
 **Consequences:**
+
 - WebSocket connections add server load
 - Requires client-side subscription management
 - Testing realtime features more complex

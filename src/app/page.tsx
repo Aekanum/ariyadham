@@ -10,14 +10,12 @@ export default function Home() {
         <div className="bg-blue-50 p-8 rounded-lg mb-8">
           <h2 className="text-2xl font-semibold mb-4">Welcome, Developer! 👋</h2>
           <p className="text-gray-700 mb-4">
-            You&rsquo;ve successfully initialized the Ariyadham project with Next.js,
-            TypeScript, and Tailwind CSS.
+            You&rsquo;ve successfully initialized the Ariyadham project with Next.js, TypeScript,
+            and Tailwind CSS.
           </p>
           <p className="text-gray-700 mb-4">
             This is the home page. Start building by editing{' '}
-            <code className="bg-gray-200 px-2 py-1 rounded">
-              src/app/page.tsx
-            </code>
+            <code className="bg-gray-200 px-2 py-1 rounded">src/app/page.tsx</code>
           </p>
         </div>
 
@@ -25,16 +23,15 @@ export default function Home() {
           <div className="border border-gray-300 p-6 rounded-lg">
             <h3 className="font-semibold mb-2">📚 Getting Started</h3>
             <p className="text-sm text-gray-600">
-              Read the architecture and epic documentation to understand the
-              project structure.
+              Read the architecture and epic documentation to understand the project structure.
             </p>
           </div>
 
           <div className="border border-gray-300 p-6 rounded-lg">
             <h3 className="font-semibold mb-2">🔧 Development</h3>
             <p className="text-sm text-gray-600">
-              Run <code className="bg-gray-200 px-1">npm run dev</code> to
-              start the development server.
+              Run <code className="bg-gray-200 px-1">npm run dev</code> to start the development
+              server.
             </p>
           </div>
         </div>

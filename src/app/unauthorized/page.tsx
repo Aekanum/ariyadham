@@ -25,14 +25,12 @@ export default function UnauthorizedPage() {
           </div>
 
           {/* Title */}
-          <h1 className="mb-2 text-2xl font-bold text-gray-900 dark:text-white">
-            Access Denied
-          </h1>
+          <h1 className="mb-2 text-2xl font-bold text-gray-900 dark:text-white">Access Denied</h1>
 
           {/* Message */}
           <p className="mb-6 text-gray-600 dark:text-gray-400">
-            You don&apos;t have permission to access this page. Please contact
-            an administrator if you believe this is an error.
+            You don&apos;t have permission to access this page. Please contact an administrator if
+            you believe this is an error.
           </p>
 
           {/* Actions */}

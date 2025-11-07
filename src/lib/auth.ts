@@ -6,9 +6,7 @@ import type { User } from '@/types/database';
  * Get the current authenticated user from a Next.js request
  * Used in API routes and server components
  */
-export async function getCurrentUser(
-  _request: NextRequest
-): Promise<User | null> {
+export async function getCurrentUser(_request: NextRequest): Promise<User | null> {
   try {
     const supabase = createServerClient();
 
@@ -82,10 +80,7 @@ export function isAuthor(user: User | null): boolean {
 /**
  * Check if user can access resource
  */
-export function canAccessResource(
-  user: User | null,
-  resourceOwnerId: string
-): boolean {
+export function canAccessResource(user: User | null, resourceOwnerId: string): boolean {
   if (!user) return false;
   return user.id === resourceOwnerId || isAdmin(user);
 }

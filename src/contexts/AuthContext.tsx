@@ -1,12 +1,6 @@
 'use client';
 
-import React, {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { User as SupabaseUser, Session } from '@supabase/supabase-js';
 import { createClient } from '@/lib/supabase-client';
 import type { User } from '@/types/database';
@@ -39,11 +33,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const loadUserProfile = useCallback(
     async (userId: string) => {
       try {
-        const { data, error } = await supabase
-          .from('users')
-          .select('*')
-          .eq('id', userId)
-          .single();
+        const { data, error } = await supabase.from('users').select('*').eq('id', userId).single();
 
         if (error) throw error;
         setProfile(data);
@@ -207,10 +197,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       if (!user) throw new Error('No user logged in');
 
-      const { error } = await supabase
-        .from('users')
-        .update(updates)
-        .eq('id', user.id);
+      const { error } = await supabase.from('users').update(updates).eq('id', user.id);
 
       if (error) throw error;
 

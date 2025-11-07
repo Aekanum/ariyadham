@@ -22,28 +22,34 @@ Ariyadham is designed to democratize access to Buddhist teachings through a thou
 ### Setup
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd ariyadham
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Configure environment variables**
+
    ```bash
    cp .env.example .env.local
    ```
+
    Edit `.env.local` and add your Supabase credentials:
    - Get these from your Supabase project dashboard
    - Required for database and authentication
 
 4. **Start development server**
+
    ```bash
    npm run dev
    ```
+
    Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 5. **Build for production**
@@ -55,12 +61,14 @@ Ariyadham is designed to democratize access to Buddhist teachings through a thou
 ## Technology Stack
 
 ### Frontend
+
 - **Framework**: [Next.js 14](https://nextjs.org/) - React framework with SSR and optimization
 - **Language**: [TypeScript 5](https://www.typescriptlang.org/) - Type-safe JavaScript
 - **Styling**: [Tailwind CSS 3](https://tailwindcss.com/) - Utility-first CSS
 - **State Management**: React Context + [Zustand](https://zustand-demo.vercel.app/)
 
 ### Backend & Database
+
 - **Backend-as-a-Service**: [Supabase](https://supabase.com/)
   - PostgreSQL database
   - Authentication (email, OAuth)
@@ -69,6 +77,7 @@ Ariyadham is designed to democratize access to Buddhist teachings through a thou
   - Row-level security (RLS)
 
 ### Hosting & Deployment
+
 - **Frontend**: [Vercel](https://vercel.com/) - Optimized Next.js hosting
 - **Database**: Supabase on AWS
 - **CDN**: Cloudflare
@@ -131,6 +140,7 @@ git push origin feature-branch
 ```
 
 Commits should follow conventional commit format:
+
 - `feat:` - New feature
 - `fix:` - Bug fix
 - `docs:` - Documentation
@@ -149,6 +159,7 @@ Commits should follow conventional commit format:
 ## Development Phases
 
 ### Phase 1 (Weeks 1-2): Foundation
+
 - Project initialization
 - Database setup
 - Authentication system
@@ -156,11 +167,13 @@ Commits should follow conventional commit format:
 - Deployment pipeline
 
 ### Phase 2 (Weeks 3-6): Core Features
+
 - User authentication and profiles
 - Reader experience (browse, read, bookmark)
 - Author CMS (create, edit, publish)
 
 ### Phase 3 (Weeks 8-12): Polish & Scale
+
 - Community features (comments, anjali reactions)
 - Admin dashboard
 - Performance optimization
@@ -197,6 +210,7 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 ## Accessibility
 
 This project prioritizes accessibility:
+
 - ✅ WCAG 2.1 AA compliance
 - ✅ Keyboard navigation support
 - ✅ Dark mode for reduced eye strain
@@ -207,6 +221,7 @@ This project prioritizes accessibility:
 ## Performance
 
 Target metrics (from architecture):
+
 - **FCP (First Contentful Paint)**: < 1.5 seconds
 - **LCP (Largest Contentful Paint)**: < 2.5 seconds
 - **CLS (Cumulative Layout Shift)**: < 0.1
@@ -215,10 +230,12 @@ Target metrics (from architecture):
 ## Deployment
 
 ### Preview Deployments
+
 - Automatically created for pull requests
 - Share with stakeholders before merging
 
 ### Production
+
 - Automatically deployed to vercel.com when pushed to `main`
 - Database migrations must be manually approved
 - Use environment variables for secrets
@@ -226,6 +243,7 @@ Target metrics (from architecture):
 ## Troubleshooting
 
 ### Port 3000 already in use
+
 ```bash
 # Find and kill the process using port 3000
 lsof -i :3000
@@ -236,11 +254,13 @@ npm run dev -- -p 3001
 ```
 
 ### TypeScript errors
+
 ```bash
 npm run type-check  # Check all TypeScript errors
 ```
 
 ### Node modules issues
+
 ```bash
 rm -rf node_modules package-lock.json
 npm install

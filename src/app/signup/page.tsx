@@ -97,9 +97,7 @@ export default function SignUpPage() {
             {/* Error Message */}
             {error && (
               <div className="rounded-md bg-red-50 p-4 dark:bg-red-900/20">
-                <p className="text-sm text-red-800 dark:text-red-200">
-                  {error}
-                </p>
+                <p className="text-sm text-red-800 dark:text-red-200">{error}</p>
               </div>
             )}
 
@@ -228,10 +226,7 @@ export default function SignUpPage() {
           {/* Sign In Link */}
           <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
             Already have an account?{' '}
-            <Link
-              href="/login"
-              className="font-medium text-primary hover:text-primary/90"
-            >
+            <Link href="/login" className="font-medium text-primary hover:text-primary/90">
               Sign in
             </Link>
           </p>

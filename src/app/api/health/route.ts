@@ -33,21 +33,14 @@ export async function GET() {
 
   // Check environment variables
   try {
-    const requiredEnvVars = [
-      'NEXT_PUBLIC_SUPABASE_URL',
-      'NEXT_PUBLIC_SUPABASE_ANON_KEY',
-    ];
+    const requiredEnvVars = ['NEXT_PUBLIC_SUPABASE_URL', 'NEXT_PUBLIC_SUPABASE_ANON_KEY'];
 
-    const missingVars = requiredEnvVars.filter(
-      (varName) => !process.env[varName]
-    );
+    const missingVars = requiredEnvVars.filter((varName) => !process.env[varName]);
 
     if (missingVars.length === 0) {
       health.checks.environment = true;
     } else {
-      health.errors.push(
-        `Missing environment variables: ${missingVars.join(', ')}`
-      );
+      health.errors.push(`Missing environment variables: ${missingVars.join(', ')}`);
     }
   } catch (error) {
     health.errors.push('Environment check failed');
@@ -58,10 +51,7 @@ export async function GET() {
     const supabase = createClient();
 
     // Simple query to check database connection
-    const { error } = await supabase
-      .from('users')
-      .select('id')
-      .limit(1);
+    const { error } = await supabase.from('users').select('id').limit(1);
 
     if (!error) {
       health.checks.database = true;

@@ -126,14 +126,14 @@ Or manually execute SQL from `migrations/001_create_base_tables.sql` in Supabase
 
 Configure in Vercel Project Settings → Environment Variables:
 
-| Variable | Value | Environment |
-|----------|-------|-------------|
-| `NEXT_PUBLIC_SUPABASE_URL` | `https://xxxxx.supabase.co` | Production |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Your anon key | Production |
-| `SUPABASE_SERVICE_ROLE_KEY` | Your service role key | Production |
-| `NEXT_PUBLIC_APP_URL` | `https://ariyadham.vercel.app` | Production |
-| `NODE_ENV` | `production` | Production |
-| `NEXT_PUBLIC_SENTRY_DSN` | (optional) Sentry DSN | Production |
+| Variable                        | Value                          | Environment |
+| ------------------------------- | ------------------------------ | ----------- |
+| `NEXT_PUBLIC_SUPABASE_URL`      | `https://xxxxx.supabase.co`    | Production  |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Your anon key                  | Production  |
+| `SUPABASE_SERVICE_ROLE_KEY`     | Your service role key          | Production  |
+| `NEXT_PUBLIC_APP_URL`           | `https://ariyadham.vercel.app` | Production  |
+| `NODE_ENV`                      | `production`                   | Production  |
+| `NEXT_PUBLIC_SENTRY_DSN`        | (optional) Sentry DSN          | Production  |
 
 ### Development (Local)
 
@@ -188,6 +188,7 @@ git push origin main
 ```
 
 GitHub Actions will:
+
 1. Run linting and type checking
 2. Build the application
 3. Run tests (when configured)
@@ -232,24 +233,29 @@ vercel
 Our CI/CD pipeline (`.github/workflows/ci.yml`) includes:
 
 #### 1. Lint & Type Check
+
 - Runs ESLint
 - Runs TypeScript type checking
 - Checks code formatting with Prettier
 
 #### 2. Build
+
 - Installs dependencies with `npm ci`
 - Builds Next.js application
 - Uploads build artifacts
 
 #### 3. Test
+
 - Runs test suite (when configured)
 - Runs integration tests
 
 #### 4. Deploy
+
 - **PR branches:** Deploy preview to Vercel
 - **Main branch:** Deploy to production
 
 #### 5. Health Check
+
 - Waits 30 seconds after deployment
 - Checks `/api/health` endpoint
 - Alerts if health check fails
@@ -259,7 +265,7 @@ Our CI/CD pipeline (`.github/workflows/ci.yml`) includes:
 - **Push to `main`:** Full pipeline + production deployment
 - **Push to `develop`:** Full pipeline + staging deployment
 - **Pull Request:** Lint, build, test + preview deployment
-- **Push to `claude/**`:** CI checks only
+- **Push to `claude/**`:\*\* CI checks only
 
 ### GitHub Secrets Required
 
@@ -337,6 +343,7 @@ supabase db reset
 **URL:** `/api/health`
 
 **Response:**
+
 ```json
 {
   "status": "healthy",
@@ -355,6 +362,7 @@ supabase db reset
 ```
 
 **Status Codes:**
+
 - `200`: All systems healthy
 - `503`: Degraded (some checks failing)
 
@@ -380,6 +388,7 @@ Vercel provides built-in analytics:
 ### Performance Metrics
 
 Monitor Core Web Vitals:
+
 - **LCP (Largest Contentful Paint):** < 2.5s
 - **FID (First Input Delay):** < 100ms
 - **CLS (Cumulative Layout Shift):** < 0.1
@@ -435,11 +444,13 @@ vercel rollback [deployment-url]
 **Symptom:** Vercel build fails
 
 **Causes:**
+
 - TypeScript errors
 - Missing environment variables
 - Dependency issues
 
 **Solution:**
+
 ```bash
 # Test build locally
 npm run build
@@ -456,11 +467,13 @@ vercel env pull
 **Symptom:** Health check shows database: false
 
 **Causes:**
+
 - Wrong Supabase URL or keys
 - RLS policies blocking queries
 - Network issues
 
 **Solution:**
+
 ```bash
 # Verify environment variables
 vercel env ls
@@ -475,6 +488,7 @@ npm run dev
 **Symptom:** Deployment queued or building for >10 minutes
 
 **Solution:**
+
 - Cancel deployment in Vercel dashboard
 - Re-trigger by pushing empty commit:
   ```bash
@@ -487,6 +501,7 @@ npm run dev
 **Symptom:** Changed env vars not taking effect
 
 **Solution:**
+
 - Redeploy after changing env vars:
   ```bash
   vercel --prod --force
@@ -543,6 +558,7 @@ Keep a log of production deployments:
 **Version:** 0.2.0
 
 **Changes:**
+
 - Added authentication system
 - Fixed database schema
 - Updated health check endpoint

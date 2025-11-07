@@ -28,11 +28,11 @@
 # - Stories can be worked in parallel if team capacity allows
 # - Stories are updated as they progress through the development lifecycle
 
-generated: "2025-11-07"
-project: "Ariyadham"
-project_key: "ARIYADHAM"
-tracking_system: "file-system"
-story_location: "{project-root}/docs/stories"
+generated: '2025-11-07'
+project: 'Ariyadham'
+project_key: 'ARIYADHAM'
+tracking_system: 'file-system'
+story_location: '{project-root}/docs/stories'
 
 development_status:
   # ===== EPIC 1: Foundation & Infrastructure =====
@@ -102,7 +102,6 @@ development_status:
   8-4-mobile-first-responsive-design: backlog
   8-5-elderly-user-accessibility-senior-friendly-mode: backlog
   epic-8-retrospective: optional
-
 # ===== SPRINT PLANNING SUMMARY =====
 # Total Epics: 8
 # Total Stories: 39

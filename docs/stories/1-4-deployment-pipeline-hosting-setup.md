@@ -29,9 +29,10 @@
 **Status:** ✅ Implemented
 
 **Implementation:**
+
 - Created `.github/workflows/ci.yml` with comprehensive CI/CD pipeline
 - Pipeline includes: lint, type-check, build, test, and deploy stages
-- Supports multiple branches: main, develop, claude/**
+- Supports multiple branches: main, develop, claude/\*\*
 - Automatic preview deployments for pull requests
 - Production deployments on main branch pushes
 
@@ -43,6 +44,7 @@
 **Status:** ✅ Implemented
 
 **Implementation:**
+
 - Created `vercel.json` with Next.js configuration
 - Configured Singapore region (sin1) for optimal performance
 - Added security headers (X-Content-Type-Options, X-Frame-Options, etc.)
@@ -57,6 +59,7 @@
 **Status:** ✅ Implemented
 
 **Implementation:**
+
 - Documented manual migration approval process for production
 - Created migration strategy in DEPLOYMENT.md
 - Protected production database from automatic migrations
@@ -69,6 +72,7 @@
 **Status:** ✅ Implemented
 
 **Implementation:**
+
 - Created `/api/health` endpoint
 - Checks: API availability, database connectivity, environment variables
 - Returns detailed health status with response time
@@ -86,6 +90,7 @@
 **Purpose:** Automate CI/CD pipeline
 
 **Features:**
+
 - **Lint Job:** ESLint, TypeScript type checking, Prettier formatting
 - **Build Job:** Builds Next.js application with environment variables
 - **Test Job:** Runs test suite (prepared for future tests)
@@ -94,10 +99,12 @@
 - **Health Check:** Post-deployment validation
 
 **Triggers:**
+
 - Push to `main`, `develop`, `claude/**` branches
 - Pull requests to `main`, `develop`
 
 **Workflow Stages:**
+
 ```
 Push/PR → Lint & Type Check → Build → Test → Deploy → Health Check
 ```
@@ -107,6 +114,7 @@ Push/PR → Lint & Type Check → Build → Test → Deploy → Health Check
 **Purpose:** Configure Vercel deployment settings
 
 **Features:**
+
 - Framework: Next.js
 - Region: Singapore (sin1)
 - Build command: `npm run build`
@@ -116,6 +124,7 @@ Push/PR → Lint & Type Check → Build → Test → Deploy → Health Check
 - Health check rewrite
 
 **Security Headers Added:**
+
 ```json
 {
   "X-Content-Type-Options": "nosniff",
@@ -130,8 +139,9 @@ Push/PR → Lint & Type Check → Build → Test → Deploy → Health Check
 **Purpose:** Exclude unnecessary files from deployment
 
 **Excluded:**
+
 - node_modules, testing files
-- Documentation (docs/, bmad/, *.md except README)
+- Documentation (docs/, bmad/, \*.md except README)
 - Git files (.git/, .github/)
 - IDE files (.vscode/, .idea/)
 - Development environment files
@@ -141,11 +151,13 @@ Push/PR → Lint & Type Check → Build → Test → Deploy → Health Check
 **Purpose:** Monitor application health
 
 **Checks Performed:**
+
 - ✅ API availability (always true if endpoint responds)
 - ✅ Database connectivity (queries users table)
 - ✅ Environment configuration (validates required env vars)
 
 **Response Format:**
+
 ```json
 {
   "status": "healthy",
@@ -164,6 +176,7 @@ Push/PR → Lint & Type Check → Build → Test → Deploy → Health Check
 ```
 
 **Endpoints:**
+
 - `GET /api/health` - Full health check with details
 - `HEAD /api/health` - Simple availability check
 - Rewrite: `/health` → `/api/health`
@@ -173,6 +186,7 @@ Push/PR → Lint & Type Check → Build → Test → Deploy → Health Check
 **Purpose:** Comprehensive deployment guide
 
 **Sections:**
+
 1. Overview & Architecture
 2. Prerequisites & Initial Setup
 3. Environment Variables Configuration
@@ -193,6 +207,7 @@ Push/PR → Lint & Type Check → Build → Test → Deploy → Health Check
 **Decision:** Use Vercel as the hosting platform
 
 **Rationale:**
+
 - Native Next.js support with zero configuration
 - Automatic deployments from GitHub
 - Global CDN with edge network
@@ -201,6 +216,7 @@ Push/PR → Lint & Type Check → Build → Test → Deploy → Health Check
 - Singapore region available (closest to Thailand)
 
 **Alternatives Considered:**
+
 - AWS Amplify (more complex setup)
 - Netlify (less Next.js-specific optimizations)
 - Railway (good but less mature for Next.js)
@@ -210,6 +226,7 @@ Push/PR → Lint & Type Check → Build → Test → Deploy → Health Check
 **Decision:** Use GitHub Actions for continuous integration
 
 **Rationale:**
+
 - Native GitHub integration
 - Free for public repositories
 - Excellent for Next.js projects
@@ -217,6 +234,7 @@ Push/PR → Lint & Type Check → Build → Test → Deploy → Health Check
 - Good community support
 
 **Alternatives Considered:**
+
 - CircleCI (requires separate account)
 - Travis CI (declining popularity)
 - Jenkins (too complex for MVP)
@@ -226,12 +244,14 @@ Push/PR → Lint & Type Check → Build → Test → Deploy → Health Check
 **Decision:** Require manual approval for production migrations
 
 **Rationale:**
+
 - Prevents accidental data loss
 - Allows review before critical changes
 - Maintains database integrity
 - Standard best practice for production systems
 
 **Trade-offs:**
+
 - Slightly slower deployment for schema changes
 - Requires manual intervention
 - Worth it for data safety
@@ -241,12 +261,14 @@ Push/PR → Lint & Type Check → Build → Test → Deploy → Health Check
 **Decision:** Comprehensive health check with detailed status
 
 **Rationale:**
+
 - Enables monitoring and alerting
 - Helps diagnose deployment issues quickly
 - Standard pattern for production applications
 - Required for load balancers and orchestration
 
 **Checks Included:**
+
 - Environment variables (ensures proper configuration)
 - Database connectivity (critical dependency)
 - Response time (performance indicator)
@@ -257,20 +279,20 @@ Push/PR → Lint & Type Check → Build → Test → Deploy → Health Check
 
 ### Required for Production
 
-| Variable | Description | Example |
-|----------|-------------|---------|
-| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL | `https://xxx.supabase.co` |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Public anon key | `eyJ...` |
-| `SUPABASE_SERVICE_ROLE_KEY` | Service role key (server-side) | `eyJ...` |
-| `NEXT_PUBLIC_APP_URL` | Application URL | `https://ariyadham.vercel.app` |
-| `NODE_ENV` | Environment | `production` |
+| Variable                        | Description                    | Example                        |
+| ------------------------------- | ------------------------------ | ------------------------------ |
+| `NEXT_PUBLIC_SUPABASE_URL`      | Supabase project URL           | `https://xxx.supabase.co`      |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Public anon key                | `eyJ...`                       |
+| `SUPABASE_SERVICE_ROLE_KEY`     | Service role key (server-side) | `eyJ...`                       |
+| `NEXT_PUBLIC_APP_URL`           | Application URL                | `https://ariyadham.vercel.app` |
+| `NODE_ENV`                      | Environment                    | `production`                   |
 
 ### Optional (Future)
 
-| Variable | Description |
-|----------|-------------|
-| `NEXT_PUBLIC_SENTRY_DSN` | Error tracking |
-| `ANALYTICS_ID` | Google Analytics |
+| Variable                 | Description      |
+| ------------------------ | ---------------- |
+| `NEXT_PUBLIC_SENTRY_DSN` | Error tracking   |
+| `ANALYTICS_ID`           | Google Analytics |
 
 ---
 
@@ -301,6 +323,7 @@ graph LR
    - Update environment variables if needed
 
 2. **Deploy:**
+
    ```bash
    # Merge to main branch
    git checkout main
@@ -323,18 +346,21 @@ graph LR
 ## Testing Performed
 
 ### ✅ Type Checking
+
 ```bash
 npm run type-check
 # Result: ✅ No type errors
 ```
 
 ### ✅ Linting
+
 ```bash
 npm run lint
 # Result: ✅ No ESLint warnings or errors
 ```
 
 ### ✅ Build Test (Local)
+
 ```bash
 npm run build
 # Note: Build requires network access for Google Fonts
@@ -342,12 +368,14 @@ npm run build
 ```
 
 ### ✅ Health Endpoint Structure
+
 - Endpoint created with proper types
 - Handles errors gracefully
 - Returns appropriate status codes
 - Includes all required checks
 
 ### ✅ CI/CD Configuration
+
 - Workflow file validated (YAML syntax correct)
 - Jobs properly sequenced with dependencies
 - Environment variables properly referenced
@@ -388,11 +416,13 @@ If issues occur after deployment:
 **Endpoint:** `https://ariyadham.vercel.app/api/health`
 
 **Expected Response:**
+
 - Status code: 200 (healthy) or 503 (degraded)
 - Response time: < 200ms
 - All checks: true
 
 **Monitoring Setup (Future):**
+
 - Uptime monitoring (UptimeRobot, Pingdom)
 - Error tracking (Sentry)
 - Performance monitoring (Vercel Analytics)
@@ -410,16 +440,19 @@ If issues occur after deployment:
 ### Deployment Security
 
 ✅ **Environment Variables:**
+
 - Never committed to Git
 - Stored securely in Vercel
 - Separate keys for dev/staging/prod
 
 ✅ **API Security:**
+
 - CORS properly configured
 - Security headers enabled
 - Rate limiting prepared
 
 ✅ **Database Security:**
+
 - RLS policies enforced
 - Service role key protected
 - No direct database access
@@ -427,6 +460,7 @@ If issues occur after deployment:
 ### CI/CD Security
 
 ✅ **GitHub Actions:**
+
 - Secrets properly managed
 - No sensitive data in logs
 - Limited workflow permissions
@@ -442,6 +476,7 @@ If issues occur after deployment:
 **Impact:** Cannot fully test build locally in sandbox
 
 **Resolution:**
+
 - Build will work in Vercel (has network access)
 - Alternative: Use local fonts for development
 
@@ -452,6 +487,7 @@ If issues occur after deployment:
 **Impact:** Slower deployment for schema changes
 
 **Resolution:**
+
 - By design for safety
 - Document migration process clearly
 - Plan migrations in advance
@@ -463,6 +499,7 @@ If issues occur after deployment:
 **Impact:** CI pipeline doesn't catch runtime errors
 
 **Resolution:**
+
 - Test job ready in CI pipeline
 - Will be added in future stories
 - Manual testing for now
@@ -474,18 +511,21 @@ If issues occur after deployment:
 After this story is complete:
 
 ### Story 1.5: API Foundation & Request Handling
+
 - Setup core Next.js API routes
 - Error handling middleware
 - Request validation
 - Consistent API response format
 
 ### Story 1.6: Core Utilities & Shared Infrastructure
+
 - Common utility functions
 - Custom React hooks
 - Shared TypeScript types
 - Constants and configuration
 
 ### Post-MVP Enhancements
+
 - Automated testing suite
 - Sentry error tracking integration
 - Performance monitoring
@@ -520,10 +560,12 @@ After this story is complete:
 ## Dependencies
 
 ### Prerequisites (Completed)
+
 - ✅ Story 1.1: Project Setup
 - ✅ Story 1.2: Database Schema
 
 ### Enables
+
 - Story 1.5: API Foundation
 - Story 1.6: Core Utilities
 - All future feature development
@@ -554,6 +596,7 @@ After this story is complete:
 **Story Status:** ✅ Complete
 
 **Acceptance Criteria Met:**
+
 - ✅ GitHub Actions CI/CD pipeline configured
 - ✅ Vercel deployment setup complete
 - ✅ Environment variables documented
@@ -569,6 +612,7 @@ After this story is complete:
 ---
 
 **Notes:**
+
 - Deployment pipeline is production-ready
 - Health checks pass all requirements
 - Documentation is comprehensive
