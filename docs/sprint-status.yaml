@@ -40,7 +40,7 @@ development_status:
   1-1-project-setup-repository-structure: done
   1-2-database-schema-core-data-models: done
   1-3-authentication-infrastructure-user-onboarding: done
-  1-4-deployment-pipeline-hosting-setup: backlog
+  1-4-deployment-pipeline-hosting-setup: done
   1-5-api-foundation-request-handling: backlog
   1-6-core-utilities-shared-infrastructure: backlog
   epic-1-retrospective: optional
