@@ -77,7 +77,7 @@ const rateLimitStore = new Map<string, { count: number; resetAt: number }>();
  */
 export async function checkRateLimit(
   request: NextRequest,
-  config: RateLimitConfig,
+  config: RateLimitConfig
 ): Promise<RateLimitResult> {
   // Skip rate limiting in development
   if (process.env.NODE_ENV === 'development') {
@@ -85,9 +85,7 @@ export async function checkRateLimit(
   }
 
   // Get identifier (IP address by default)
-  const identifier = config.identifier
-    ? config.identifier(request)
-    : getClientIdentifier(request);
+  const identifier = config.identifier ? config.identifier(request) : getClientIdentifier(request);
 
   const now = Date.now();
   const record = rateLimitStore.get(identifier);
@@ -116,7 +114,7 @@ export async function checkRateLimit(
             'Too many requests. Please try again later.',
             {
               retryAfter: Math.ceil((record.resetAt - now) / 1000),
-            },
+            }
           ),
           status: HttpStatus.TOO_MANY_REQUESTS,
         };
@@ -185,7 +183,7 @@ function cleanupExpiredRecords(now: number): void {
  */
 export function withRateLimit<T>(
   handler: (request: NextRequest, ...args: T[]) => Promise<Response>,
-  config: RateLimitConfig,
+  config: RateLimitConfig
 ) {
   return async (request: NextRequest, ...args: T[]): Promise<Response> => {
     const rateLimitResult = await checkRateLimit(request, config);

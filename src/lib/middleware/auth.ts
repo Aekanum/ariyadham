@@ -67,13 +67,9 @@ export async function requireAuth(_request: NextRequest): Promise<AuthResult> {
   } catch (error) {
     return {
       success: false,
-      error: createErrorResponse(
-        'INTERNAL_SERVER_ERROR',
-        'Authentication verification failed',
-        {
-          error: error instanceof Error ? error.message : 'Unknown error',
-        },
-      ),
+      error: createErrorResponse('INTERNAL_SERVER_ERROR', 'Authentication verification failed', {
+        error: error instanceof Error ? error.message : 'Unknown error',
+      }),
       status: HttpStatus.INTERNAL_SERVER_ERROR,
     };
   }
@@ -104,7 +100,7 @@ export async function requireAuth(_request: NextRequest): Promise<AuthResult> {
  */
 export async function requireRole(
   request: NextRequest,
-  allowedRoles: string[],
+  allowedRoles: string[]
 ): Promise<AuthResult> {
   // First verify authentication
   const authResult = await requireAuth(request);
@@ -143,7 +139,7 @@ export async function requireRole(
           {
             required: allowedRoles,
             actual: profile.role,
-          },
+          }
         ),
         status: HttpStatus.FORBIDDEN,
       };
@@ -156,13 +152,9 @@ export async function requireRole(
   } catch (error) {
     return {
       success: false,
-      error: createErrorResponse(
-        'INTERNAL_SERVER_ERROR',
-        'Authorization verification failed',
-        {
-          error: error instanceof Error ? error.message : 'Unknown error',
-        },
-      ),
+      error: createErrorResponse('INTERNAL_SERVER_ERROR', 'Authorization verification failed', {
+        error: error instanceof Error ? error.message : 'Unknown error',
+      }),
       status: HttpStatus.INTERNAL_SERVER_ERROR,
     };
   }
@@ -272,7 +264,7 @@ export async function requireVerifiedEmail(request: NextRequest): Promise<AuthRe
       success: false,
       error: createErrorResponse(
         'EMAIL_NOT_VERIFIED',
-        'Please verify your email address before proceeding',
+        'Please verify your email address before proceeding'
       ),
       status: HttpStatus.FORBIDDEN,
     };

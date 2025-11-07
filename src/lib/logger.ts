@@ -93,7 +93,7 @@ class Logger {
     level: LogLevel,
     message: string,
     context?: Record<string, unknown>,
-    error?: { message: string; stack?: string },
+    error?: { message: string; stack?: string }
   ): void {
     // Skip debug logs in production
     if (level === LogLevel.DEBUG && process.env.NODE_ENV === 'production') {
@@ -183,7 +183,10 @@ export const logger = createLogger();
  * }
  * ```
  */
-export function logRequest(request: NextRequest, additionalContext?: Record<string, unknown>): void {
+export function logRequest(
+  request: NextRequest,
+  additionalContext?: Record<string, unknown>
+): void {
   const url = new URL(request.url);
 
   logger.info('API Request', {
@@ -222,7 +225,7 @@ export function logResponse(
   request: NextRequest,
   status: number,
   duration: number,
-  additionalContext?: Record<string, unknown>,
+  additionalContext?: Record<string, unknown>
 ): void {
   const url = new URL(request.url);
   const level = status >= 500 ? LogLevel.ERROR : status >= 400 ? LogLevel.WARN : LogLevel.INFO;
@@ -290,9 +293,7 @@ function generateRequestId(): string {
  * });
  * ```
  */
-export function withLogging<T>(
-  handler: (request: NextRequest, ...args: T[]) => Promise<Response>,
-) {
+export function withLogging<T>(handler: (request: NextRequest, ...args: T[]) => Promise<Response>) {
   return async (request: NextRequest, ...args: T[]): Promise<Response> => {
     const startTime = Date.now();
     const requestLogger = createRequestLogger(request);

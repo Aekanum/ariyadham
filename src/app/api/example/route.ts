@@ -16,11 +16,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import {
-  validateRequestBody,
-  validateQueryParams,
-  createErrorResponse,
-} from '@/lib/validation';
+import { validateRequestBody, validateQueryParams, createErrorResponse } from '@/lib/validation';
 import { requireAuth, optionalAuth } from '@/lib/middleware/auth';
 import { createRequestLogger } from '@/lib/logger';
 import { ApiSuccessResponse, HttpStatus } from '@/types/api';
@@ -172,7 +168,7 @@ export async function POST(request: NextRequest) {
       }),
       {
         status: HttpStatus.INTERNAL_SERVER_ERROR,
-      },
+      }
     );
   }
 }

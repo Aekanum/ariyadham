@@ -48,7 +48,7 @@ export type ValidationResult<T> =
  */
 export async function validateRequestBody<T>(
   request: NextRequest,
-  schema: ZodSchema<T>,
+  schema: ZodSchema<T>
 ): Promise<ValidationResult<T>> {
   try {
     const body = await request.json();
@@ -109,7 +109,7 @@ export async function validateRequestBody<T>(
  */
 export function validateQueryParams<T>(
   request: NextRequest,
-  schema: ZodSchema<T>,
+  schema: ZodSchema<T>
 ): ValidationResult<T> {
   try {
     const { searchParams } = new URL(request.url);
@@ -170,10 +170,7 @@ export function validateQueryParams<T>(
  * }
  * ```
  */
-export function validateRouteParams<T>(
-  params: unknown,
-  schema: ZodSchema<T>,
-): ValidationResult<T> {
+export function validateRouteParams<T>(params: unknown, schema: ZodSchema<T>): ValidationResult<T> {
   try {
     const data = schema.parse(params);
     return { success: true, data };
@@ -289,7 +286,7 @@ export const commonSchemas = {
 export function createErrorResponse(
   code: ErrorCode,
   message: string,
-  details?: Record<string, unknown>,
+  details?: Record<string, unknown>
 ): ApiErrorResponse {
   return {
     success: false,

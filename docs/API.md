@@ -88,20 +88,20 @@ All API responses follow a consistent structure.
 
 Use standard HTTP status codes:
 
-| Code | Usage                                              |
-| ---- | -------------------------------------------------- |
-| 200  | Success (GET, PATCH, DELETE with body)             |
-| 201  | Created (POST)                                     |
-| 204  | No Content (DELETE without body)                   |
-| 400  | Bad Request (validation errors, invalid input)     |
-| 401  | Unauthorized (not authenticated)                   |
-| 403  | Forbidden (authenticated but lacks permission)     |
-| 404  | Not Found (resource doesn't exist)                 |
-| 409  | Conflict (duplicate entry, resource already exists)|
-| 422  | Unprocessable Entity (semantic validation errors)  |
-| 429  | Too Many Requests (rate limit exceeded)            |
-| 500  | Internal Server Error                              |
-| 503  | Service Unavailable                                |
+| Code | Usage                                               |
+| ---- | --------------------------------------------------- |
+| 200  | Success (GET, PATCH, DELETE with body)              |
+| 201  | Created (POST)                                      |
+| 204  | No Content (DELETE without body)                    |
+| 400  | Bad Request (validation errors, invalid input)      |
+| 401  | Unauthorized (not authenticated)                    |
+| 403  | Forbidden (authenticated but lacks permission)      |
+| 404  | Not Found (resource doesn't exist)                  |
+| 409  | Conflict (duplicate entry, resource already exists) |
+| 422  | Unprocessable Entity (semantic validation errors)   |
+| 429  | Too Many Requests (rate limit exceeded)             |
+| 500  | Internal Server Error                               |
+| 503  | Service Unavailable                                 |
 
 ---
 
@@ -112,43 +112,51 @@ Use standard HTTP status codes:
 All errors use standardized error codes defined in `src/types/api.ts`:
 
 **Authentication Errors (401)**
+
 - `UNAUTHORIZED` - Not authenticated
 - `INVALID_TOKEN` - Token is invalid
 - `TOKEN_EXPIRED` - Token has expired
 - `SESSION_EXPIRED` - Session has expired
 
 **Authorization Errors (403)**
+
 - `FORBIDDEN` - Generic authorization failure
 - `INSUFFICIENT_PERMISSIONS` - User lacks required permissions
 - `ACCOUNT_SUSPENDED` - Account is suspended
 - `EMAIL_NOT_VERIFIED` - Email not verified
 
 **Validation Errors (400)**
+
 - `VALIDATION_ERROR` - Input validation failed
 - `INVALID_INPUT` - Invalid input format
 - `MISSING_REQUIRED_FIELD` - Required field missing
 - `INVALID_FORMAT` - Data format invalid
 
 **Resource Errors (404)**
+
 - `NOT_FOUND` - Generic not found
 - `RESOURCE_NOT_FOUND` - Specific resource not found
 - `ENDPOINT_NOT_FOUND` - API endpoint doesn't exist
 
 **Conflict Errors (409)**
+
 - `CONFLICT` - Generic conflict
 - `DUPLICATE_ENTRY` - Resource already exists
 - `RESOURCE_ALREADY_EXISTS` - Duplicate resource
 
 **Rate Limiting (429)**
+
 - `RATE_LIMIT_EXCEEDED` - Rate limit exceeded
 - `TOO_MANY_REQUESTS` - Too many requests
 
 **Server Errors (500)**
+
 - `INTERNAL_SERVER_ERROR` - Generic server error
 - `DATABASE_ERROR` - Database operation failed
 - `EXTERNAL_SERVICE_ERROR` - External service failed
 
 **Business Logic Errors (400-499)**
+
 - `ARTICLE_NOT_PUBLISHED` - Article not published
 - `ARTICLE_ALREADY_PUBLISHED` - Article already published
 - `AUTHOR_NOT_APPROVED` - Author not approved
@@ -162,18 +170,16 @@ import { createErrorResponse } from '@/lib/validation';
 import { HttpStatus } from '@/types/api';
 
 // Simple error
-return NextResponse.json(
-  createErrorResponse('NOT_FOUND', 'Article not found'),
-  { status: HttpStatus.NOT_FOUND }
-);
+return NextResponse.json(createErrorResponse('NOT_FOUND', 'Article not found'), {
+  status: HttpStatus.NOT_FOUND,
+});
 
 // Error with details
 return NextResponse.json(
-  createErrorResponse(
-    'VALIDATION_ERROR',
-    'Invalid input',
-    { field: 'email', expected: 'valid email address' }
-  ),
+  createErrorResponse('VALIDATION_ERROR', 'Invalid input', {
+    field: 'email',
+    expected: 'valid email address',
+  }),
   { status: HttpStatus.BAD_REQUEST }
 );
 ```
@@ -202,7 +208,7 @@ export async function POST(request: NextRequest) {
 
   if (!result.success) {
     return NextResponse.json(result.error, {
-      status: HttpStatus.BAD_REQUEST
+      status: HttpStatus.BAD_REQUEST,
     });
   }
 
@@ -222,7 +228,7 @@ export async function GET(request: NextRequest) {
 
   if (!result.success) {
     return NextResponse.json(result.error, {
-      status: HttpStatus.BAD_REQUEST
+      status: HttpStatus.BAD_REQUEST,
     });
   }
 
@@ -236,10 +242,7 @@ export async function GET(request: NextRequest) {
 ```typescript
 import { validateRouteParams } from '@/lib/validation';
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
   const schema = z.object({
     id: z.string().uuid(),
   });
@@ -248,7 +251,7 @@ export async function GET(
 
   if (!result.success) {
     return NextResponse.json(result.error, {
-      status: HttpStatus.BAD_REQUEST
+      status: HttpStatus.BAD_REQUEST,
     });
   }
 
@@ -265,25 +268,25 @@ Reusable schemas are available in `commonSchemas`:
 import { commonSchemas } from '@/lib/validation';
 
 // UUID
-commonSchemas.uuid
+commonSchemas.uuid;
 
 // Email
-commonSchemas.email
+commonSchemas.email;
 
 // Password (min 8, uppercase, lowercase, number)
-commonSchemas.password
+commonSchemas.password;
 
 // Pagination parameters
-commonSchemas.pagination
+commonSchemas.pagination;
 
 // ISO date
-commonSchemas.isoDate
+commonSchemas.isoDate;
 
 // URL
-commonSchemas.url
+commonSchemas.url;
 
 // Slug (lowercase, numbers, hyphens)
-commonSchemas.slug
+commonSchemas.slug;
 ```
 
 ---
@@ -301,7 +304,7 @@ export async function POST(request: NextRequest) {
 
   if (!authResult.success) {
     return NextResponse.json(authResult.error, {
-      status: authResult.status
+      status: authResult.status,
     });
   }
 
@@ -321,7 +324,7 @@ export async function POST(request: NextRequest) {
 
   if (!authResult.success) {
     return NextResponse.json(authResult.error, {
-      status: authResult.status
+      status: authResult.status,
     });
   }
 
@@ -362,7 +365,7 @@ export async function POST(request: NextRequest) {
 
   if (!authResult.success) {
     return NextResponse.json(authResult.error, {
-      status: authResult.status
+      status: authResult.status,
     });
   }
 
@@ -396,9 +399,9 @@ export async function POST(request: NextRequest) {
 ### Log Levels
 
 ```typescript
-logger.debug('Debug message', { context });   // Development only
-logger.info('Info message', { context });     // General information
-logger.warn('Warning message', { context });  // Warnings
+logger.debug('Debug message', { context }); // Development only
+logger.info('Info message', { context }); // General information
+logger.warn('Warning message', { context }); // Warnings
 logger.error('Error message', error, { context }); // Errors
 ```
 
@@ -428,7 +431,7 @@ export async function POST(request: NextRequest) {
 
   if (!rateLimitResult.success) {
     return NextResponse.json(rateLimitResult.error, {
-      status: rateLimitResult.status
+      status: rateLimitResult.status,
     });
   }
 
@@ -441,12 +444,12 @@ export async function POST(request: NextRequest) {
 ```typescript
 import { rateLimitPresets } from '@/lib/middleware/rate-limit';
 
-rateLimitPresets.strict     // 5 req/min
-rateLimitPresets.standard   // 30 req/min
-rateLimitPresets.relaxed    // 100 req/min
-rateLimitPresets.write      // 10 req/min
-rateLimitPresets.read       // 60 req/min
-rateLimitPresets.auth       // 5 req/5min
+rateLimitPresets.strict; // 5 req/min
+rateLimitPresets.standard; // 30 req/min
+rateLimitPresets.relaxed; // 100 req/min
+rateLimitPresets.write; // 10 req/min
+rateLimitPresets.read; // 60 req/min
+rateLimitPresets.auth; // 5 req/5min
 ```
 
 ### Custom Rate Limit
@@ -463,12 +466,9 @@ const rateLimitResult = await checkRateLimit(request, {
 ```typescript
 import { withRateLimit, rateLimitPresets } from '@/lib/middleware/rate-limit';
 
-export const POST = withRateLimit(
-  async (request: NextRequest) => {
-    // ... your handler logic
-  },
-  rateLimitPresets.write
-);
+export const POST = withRateLimit(async (request: NextRequest) => {
+  // ... your handler logic
+}, rateLimitPresets.write);
 ```
 
 **Note**: Current implementation is a placeholder. For production, implement proper rate limiting with Redis or Upstash. See `src/lib/middleware/rate-limit.ts` for details.
@@ -480,11 +480,13 @@ export const POST = withRateLimit(
 ### Step-by-Step Guide
 
 1. **Create the route file**
+
    ```
    src/app/api/[your-endpoint]/route.ts
    ```
 
 2. **Import required utilities**
+
    ```typescript
    import { NextRequest, NextResponse } from 'next/server';
    import { z } from 'zod';
@@ -495,11 +497,13 @@ export const POST = withRateLimit(
    ```
 
 3. **Force dynamic rendering**
+
    ```typescript
    export const dynamic = 'force-dynamic';
    ```
 
 4. **Implement handler**
+
    ```typescript
    export async function POST(request: NextRequest) {
      const logger = createRequestLogger(request);
@@ -508,7 +512,7 @@ export const POST = withRateLimit(
      const authResult = await requireAuth(request);
      if (!authResult.success) {
        return NextResponse.json(authResult.error, {
-         status: authResult.status
+         status: authResult.status,
        });
      }
 
@@ -520,7 +524,7 @@ export const POST = withRateLimit(
      const bodyResult = await validateRequestBody(request, schema);
      if (!bodyResult.success) {
        return NextResponse.json(bodyResult.error, {
-         status: HttpStatus.BAD_REQUEST
+         status: HttpStatus.BAD_REQUEST,
        });
      }
 
@@ -532,18 +536,17 @@ export const POST = withRateLimit(
        const response: ApiSuccessResponse<YourDataType> = {
          success: true,
          data: yourData,
-         message: 'Success message'
+         message: 'Success message',
        };
 
        return NextResponse.json(response, {
-         status: HttpStatus.CREATED
+         status: HttpStatus.CREATED,
        });
      } catch (error) {
        logger.error('Operation failed', error);
-       return NextResponse.json(
-         createErrorResponse('INTERNAL_SERVER_ERROR', 'Operation failed'),
-         { status: HttpStatus.INTERNAL_SERVER_ERROR }
-       );
+       return NextResponse.json(createErrorResponse('INTERNAL_SERVER_ERROR', 'Operation failed'), {
+         status: HttpStatus.INTERNAL_SERVER_ERROR,
+       });
      }
    }
    ```
@@ -551,6 +554,7 @@ export const POST = withRateLimit(
 ### Complete Example
 
 See `src/app/api/example/route.ts` for a complete working example demonstrating:
+
 - GET with optional auth
 - POST with required auth
 - PATCH with partial updates
@@ -574,7 +578,7 @@ export async function GET(request: NextRequest) {
 
   if (!result.success) {
     return NextResponse.json(result.error, {
-      status: HttpStatus.BAD_REQUEST
+      status: HttpStatus.BAD_REQUEST,
     });
   }
 
@@ -592,8 +596,8 @@ export async function GET(request: NextRequest) {
       pageSize,
       totalItems,
       totalPages: Math.ceil(totalItems / pageSize),
-      hasMore: page * pageSize < totalItems
-    }
+      hasMore: page * pageSize < totalItems,
+    },
   };
 
   return NextResponse.json(response);
@@ -618,10 +622,7 @@ const result = validateQueryParams(request, querySchema);
 ### Resource by ID
 
 ```typescript
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
   // Validate ID
   const schema = z.object({
     id: z.string().uuid(),
@@ -631,7 +632,7 @@ export async function GET(
 
   if (!result.success) {
     return NextResponse.json(result.error, {
-      status: HttpStatus.BAD_REQUEST
+      status: HttpStatus.BAD_REQUEST,
     });
   }
 
@@ -639,15 +640,14 @@ export async function GET(
   const resource = await fetchById(result.data.id);
 
   if (!resource) {
-    return NextResponse.json(
-      createErrorResponse('NOT_FOUND', 'Resource not found'),
-      { status: HttpStatus.NOT_FOUND }
-    );
+    return NextResponse.json(createErrorResponse('NOT_FOUND', 'Resource not found'), {
+      status: HttpStatus.NOT_FOUND,
+    });
   }
 
   return NextResponse.json({
     success: true,
-    data: resource
+    data: resource,
   });
 }
 ```
@@ -655,15 +655,16 @@ export async function GET(
 ### Partial Updates (PATCH)
 
 ```typescript
-const updateSchema = z.object({
-  title: z.string().min(1).max(200),
-  content: z.string().min(1),
-  status: z.enum(['draft', 'published']),
-})
-.partial()  // Make all fields optional
-.refine(data => Object.keys(data).length > 0, {
-  message: 'At least one field must be provided'
-});
+const updateSchema = z
+  .object({
+    title: z.string().min(1).max(200),
+    content: z.string().min(1),
+    status: z.enum(['draft', 'published']),
+  })
+  .partial() // Make all fields optional
+  .refine((data) => Object.keys(data).length > 0, {
+    message: 'At least one field must be provided',
+  });
 ```
 
 ### Batch Operations
@@ -678,19 +679,19 @@ const result = await validateRequestBody(request, batchSchema);
 
 // Process in batches
 const results = await Promise.allSettled(
-  result.data.ids.map(id => performAction(id, result.data.action))
+  result.data.ids.map((id) => performAction(id, result.data.action))
 );
 
-const successful = results.filter(r => r.status === 'fulfilled').length;
-const failed = results.filter(r => r.status === 'rejected').length;
+const successful = results.filter((r) => r.status === 'fulfilled').length;
+const failed = results.filter((r) => r.status === 'rejected').length;
 
 return NextResponse.json({
   success: true,
   data: {
     successful,
     failed,
-    total: result.data.ids.length
-  }
+    total: result.data.ids.length,
+  },
 });
 ```
 
