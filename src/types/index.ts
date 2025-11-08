@@ -8,11 +8,41 @@
  * import { User, Article, PaginatedResponse, AsyncState } from '@/types';
  */
 
-// API types
+// API types (includes ApiResponse, PaginationParams, PaginatedResponse)
 export * from './api';
 
-// Database types
-export * from './database';
+// Database types (excluding duplicates that are in api.ts)
+export type {
+  User,
+  Author,
+  Article,
+  Category,
+  ArticleCategory,
+  ArticleTranslation,
+  Comment,
+  AnjaliReaction,
+  Bookmark,
+  ReadingHistory,
+  AuditLog,
+  ArticleWithAuthor,
+  ArticleWithAuthorAndCategories,
+  UserProfile,
+  CommentWithUser,
+  ArticleFilters,
+  CreateArticleInput,
+  UpdateArticleInput,
+  CreateCommentInput,
+  UpdateCommentInput,
+  UpdateUserProfileInput,
+} from './database';
+
+export {
+  isValidUserRole,
+  isValidArticleStatus,
+  isValidLanguage,
+  isValidCommentStatus,
+  isValidVerificationStatus,
+} from './database';
 
 // Common types
 export * from './common';
