@@ -5,8 +5,15 @@
  * These types are used for type-safe database operations throughout the application.
  *
  * Generated from: migrations/001_create_base_tables.sql
- * Last Updated: 2025-11-07
+ * Last Updated: 2025-11-08
+ * Updated: Added UserRole type and RoleChangeLog (Story 2.2)
  */
+
+/**
+ * User Role Type
+ * Represents the role hierarchy in the system
+ */
+export type UserRole = 'reader' | 'author' | 'admin';
 
 /**
  * User type
@@ -19,7 +26,7 @@ export interface User {
   full_name: string | null;
   avatar_url: string | null;
   bio: string | null;
-  role: 'user' | 'author' | 'admin';
+  role: UserRole;
   email_verified: boolean;
   is_active: boolean;
   language_preference: 'en' | 'th';
@@ -207,6 +214,20 @@ export interface AuditLog {
   details: Record<string, any> | null; // Additional context
   success: boolean;
   error_message: string | null;
+  created_at: string; // ISO 8601 timestamp
+}
+
+/**
+ * RoleChangeLog type
+ * Audit trail for user role changes (Story 2.2)
+ */
+export interface RoleChangeLog {
+  id: string; // UUID
+  user_id: string; // UUID - user whose role was changed
+  old_role: UserRole | null; // Previous role (null for initial assignment)
+  new_role: UserRole; // New role assigned
+  changed_by: string; // UUID - admin who made the change
+  reason: string | null; // Optional reason for the change
   created_at: string; // ISO 8601 timestamp
 }
 

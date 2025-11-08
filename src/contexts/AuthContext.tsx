@@ -6,10 +6,32 @@ import { createClient } from '@/lib/supabase-client';
 import type { User } from '@/types/database';
 
 interface AuthContextType {
-  user: SupabaseUser | null;
+  /**
+   * Supabase auth user (from auth.users)
+   */
+  authUser: SupabaseUser | null;
+
+  /**
+   * User profile with role (from user_profiles)
+   * Use this for role-based access control
+   */
+  user: User | null;
+
+  /**
+   * Convenience alias for user (for backward compatibility)
+   * @deprecated Use 'user' instead
+   */
   profile: User | null;
+
   session: Session | null;
+  /**
+   * @deprecated Use 'loading' instead
+   */
   isLoading: boolean;
+  loading: boolean;
+  /**
+   * @deprecated Use '!!user' instead
+   */
   isLoggedIn: boolean;
   signUp: (email: string, password: string) => Promise<{ error: Error | null }>;
   signIn: (email: string, password: string) => Promise<{ error: Error | null }>;
@@ -22,8 +44,8 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<SupabaseUser | null>(null);
-  const [profile, setProfile] = useState<User | null>(null);
+  const [authUser, setAuthUser] = useState<SupabaseUser | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -43,17 +65,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const supabase = getSupabase();
 
-  // Load user profile from database
+  // Load user profile from database (including role)
   const loadUserProfile = useCallback(
     async (userId: string) => {
       if (!supabase) return;
       try {
-        const { data, error } = await supabase.from('users').select('*').eq('id', userId).single();
+        const { data, error } = await supabase
+          .from('user_profiles')
+          .select('*')
+          .eq('user_id', userId)
+          .single();
 
         if (error) throw error;
-        setProfile(data);
+        setUser(data as User);
       } catch (error) {
         console.error('Error loading user profile:', error);
+        setUser(null);
       }
     },
     [supabase]
@@ -73,7 +100,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         } = await supabase.auth.getSession();
 
         setSession(currentSession);
-        setUser(currentSession?.user ?? null);
+        setAuthUser(currentSession?.user ?? null);
 
         // Load user profile if session exists
         if (currentSession?.user) {
@@ -102,12 +129,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       console.log('Auth state changed:', event);
 
       setSession(currentSession);
-      setUser(currentSession?.user ?? null);
+      setAuthUser(currentSession?.user ?? null);
 
       if (currentSession?.user) {
         await loadUserProfile(currentSession.user.id);
       } else {
-        setProfile(null);
+        setUser(null);
       }
 
       setIsLoading(false);
@@ -137,10 +164,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       // Create user profile if signup successful
       if (data.user) {
-        const { error: profileError } = await supabase.from('users').insert({
-          id: data.user.id,
+        const { error: profileError } = await supabase.from('user_profiles').insert({
+          user_id: data.user.id,
           email: data.user.email!,
+          full_name: data.user.email!.split('@')[0], // Default name from email
           role: 'reader', // Default role
+          language_preference: 'th', // Default language
         });
 
         if (profileError) {
@@ -207,8 +236,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
 
+      setAuthUser(null);
       setUser(null);
-      setProfile(null);
       setSession(null);
 
       return { error: null };
@@ -244,14 +273,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
 
     try {
-      if (!user) throw new Error('No user logged in');
+      if (!authUser) throw new Error('No user logged in');
 
-      const { error } = await supabase.from('users').update(updates).eq('id', user.id);
+      const { error } = await supabase
+        .from('user_profiles')
+        .update(updates)
+        .eq('user_id', authUser.id);
 
       if (error) throw error;
 
       // Reload profile
-      await loadUserProfile(user.id);
+      await loadUserProfile(authUser.id);
 
       return { error: null };
     } catch (error) {
@@ -261,10 +293,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const value: AuthContextType = {
+    authUser,
     user,
-    profile,
+    profile: user, // Backward compatibility alias
     session,
     isLoading,
+    loading: isLoading,
     isLoggedIn: !!user,
     signUp,
     signIn,

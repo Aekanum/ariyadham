@@ -1,8 +1,8 @@
 # Story 2.2: User Roles & Permissions
 
 **Epic**: 2 - Authentication & User Management
-**Status**: 📋 READY FOR DEV
-**Started**: -
+**Status**: 🔨 IN PROGRESS
+**Started**: 2025-11-08
 **Completed**: -
 
 ---
@@ -152,7 +152,10 @@ export async function requireRole(
   const supabase = createServerSupabaseClient();
 
   // Check authentication
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
 
   if (authError || !user) {
     return { authorized: false };
@@ -191,8 +194,8 @@ export function withRole(allowedRoles: UserRole[]) {
           success: false,
           error: {
             message: 'Insufficient permissions',
-            code: 'FORBIDDEN'
-          }
+            code: 'FORBIDDEN',
+          },
         },
         { status: 403 }
       );
@@ -305,10 +308,7 @@ const updateRoleSchema = z.object({
  * POST /api/admin/users/:userId/role
  * Update user role (admin only)
  */
-export async function POST(
-  request: NextRequest,
-  { params }: { params: { userId: string } }
-) {
+export async function POST(request: NextRequest, { params }: { params: { userId: string } }) {
   return withRole(['admin'])(request, async (req, adminUser, adminRole) => {
     const supabase = createServerSupabaseClient();
     const targetUserId = params.userId;
@@ -607,6 +607,7 @@ Expand user settings with additional preferences beyond profile.
 ### Role Capabilities
 
 **Reader:**
+
 - View public articles
 - Comment on articles (if enabled)
 - Manage own profile
@@ -614,6 +615,7 @@ Expand user settings with additional preferences beyond profile.
 - Give Anjali reactions
 
 **Author:**
+
 - All reader capabilities
 - Create/edit own articles
 - Submit articles for approval
@@ -621,6 +623,7 @@ Expand user settings with additional preferences beyond profile.
 - Access CMS dashboard
 
 **Admin:**
+
 - All author capabilities
 - Approve/reject articles
 - Manage user roles
