@@ -29,16 +29,16 @@ type UpdateRoleRequest = z.infer<typeof updateRoleSchema>;
  * Update user role (admin only)
  *
  * @param request - Next.js request
- * @param params - Route params with userId
+ * @param props - Route props with params (async in Next.js 16)
  * @returns JSON response with result
  */
 export async function POST(
   request: NextRequest,
-  { params }: { params: { userId: string } }
+  props: { params: Promise<{ userId: string }> }
 ): Promise<NextResponse> {
   return withAdmin(request, async (_req, adminUser) => {
     const supabase = createServerClient();
-    const targetUserId = params.userId;
+    const { userId: targetUserId } = await props.params;
 
     // Validate request body
     let body: UpdateRoleRequest;
@@ -177,16 +177,16 @@ export async function POST(
  * Get user's current role (admin only)
  *
  * @param request - Next.js request
- * @param params - Route params with userId
+ * @param props - Route props with params (async in Next.js 16)
  * @returns JSON response with user role
  */
 export async function GET(
   request: NextRequest,
-  { params }: { params: { userId: string } }
+  props: { params: Promise<{ userId: string }> }
 ): Promise<NextResponse> {
   return withAdmin(request, async () => {
     const supabase = createServerClient();
-    const targetUserId = params.userId;
+    const { userId: targetUserId } = await props.params;
 
     const { data: profile, error } = await supabase
       .from('user_profiles')
