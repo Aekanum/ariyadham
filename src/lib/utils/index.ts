@@ -44,8 +44,29 @@ export { average as averageArray } from './array';
 export { min as minArray } from './array';
 export { max as maxArray } from './array';
 
-// Object utilities
-export * from './object';
+// Object utilities (with renamed exports to avoid conflicts)
+export {
+  deepClone,
+  get,
+  set,
+  has,
+  pick,
+  omit,
+  merge,
+  keys,
+  values,
+  entries,
+  fromEntries,
+  mapValues,
+  mapKeys,
+  isEqual,
+  diff,
+  deepFreeze,
+} from './object';
+
+// Object utilities with renamed exports to avoid conflicts
+export { isEmpty as isObjectEmpty } from './object';
+export { compact as compactObject } from './object';
 
 // Number utilities (with renamed exports to avoid conflicts)
 export {

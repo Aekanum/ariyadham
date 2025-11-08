@@ -3,35 +3,9 @@
  *
  * Shared TypeScript types used across the Ariyadham platform
  * for common patterns, forms, pagination, and utility types.
+ *
+ * Note: PaginationParams, PaginationMeta, and PaginatedResponse are defined in api.ts
  */
-
-/**
- * Generic pagination parameters
- */
-export interface PaginationParams {
-  page: number;
-  pageSize: number;
-}
-
-/**
- * Pagination metadata
- */
-export interface PaginationMeta {
-  page: number;
-  pageSize: number;
-  totalItems: number;
-  totalPages: number;
-  hasMore: boolean;
-  hasPrevious: boolean;
-}
-
-/**
- * Paginated response wrapper
- */
-export interface PaginatedResponse<T> {
-  data: T[];
-  meta: PaginationMeta;
-}
 
 /**
  * Sort order
