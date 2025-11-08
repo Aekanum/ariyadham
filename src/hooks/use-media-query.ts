@@ -48,7 +48,7 @@ export function useMediaQuery(query: string): boolean {
     if (mediaQuery.addEventListener) {
       mediaQuery.addEventListener('change', handler);
     } else {
-      // @ts-ignore - deprecated but needed for older browsers
+      // Deprecated but needed for older browsers
       mediaQuery.addListener(handler);
     }
 
@@ -57,7 +57,7 @@ export function useMediaQuery(query: string): boolean {
       if (mediaQuery.removeEventListener) {
         mediaQuery.removeEventListener('change', handler);
       } else {
-        // @ts-ignore - deprecated but needed for older browsers
+        // Deprecated but needed for older browsers
         mediaQuery.removeListener(handler);
       }
     };

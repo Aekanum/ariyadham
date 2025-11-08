@@ -32,7 +32,7 @@ export function deepClone<T>(obj: T): T {
   if (obj instanceof Object) {
     const cloned = {} as T;
     for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
         cloned[key] = deepClone(obj[key]);
       }
     }
@@ -287,7 +287,7 @@ export function mapValues<T extends object, R>(
 ): Record<keyof T, R> {
   const result = {} as Record<keyof T, R>;
   for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
       result[key] = fn(obj[key], key);
     }
   }
@@ -310,7 +310,7 @@ export function mapKeys<T extends object, K extends string | number | symbol>(
 ): Record<K, T[keyof T]> {
   const result = {} as Record<K, T[keyof T]>;
   for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
       const newKey = fn(key, obj[key]);
       result[newKey] = obj[key];
     }
@@ -364,7 +364,7 @@ export function diff<T extends object>(obj1: T, obj2: Partial<T>): Partial<T> {
   const result: Partial<T> = {};
 
   for (const key in obj2) {
-    if (obj2.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(obj2, key)) {
       if (!isEqual(obj1[key], obj2[key])) {
         result[key] = obj2[key];
       }
@@ -388,7 +388,11 @@ export function deepFreeze<T extends object>(obj: T): Readonly<T> {
   Object.freeze(obj);
 
   for (const key in obj) {
-    if (obj.hasOwnProperty(key) && obj[key] !== null && typeof obj[key] === 'object') {
+    if (
+      Object.prototype.hasOwnProperty.call(obj, key) &&
+      obj[key] !== null &&
+      typeof obj[key] === 'object'
+    ) {
       deepFreeze(obj[key]);
     }
   }
@@ -409,7 +413,7 @@ export function compact<T extends object>(obj: T): Partial<T> {
   const result: Partial<T> = {};
 
   for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
       const value = obj[key];
       if (value !== null && value !== undefined) {
         result[key] = value;

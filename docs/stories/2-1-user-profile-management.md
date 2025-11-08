@@ -1,9 +1,9 @@
 # Story 2.1: User Profile Management
 
 **Epic**: 2 - Authentication & User Management
-**Status**: 🔨 IN PROGRESS
+**Status**: ✅ DONE
 **Started**: 2025-11-08
-**Completed**: -
+**Completed**: 2025-11-08
 
 ---
 
