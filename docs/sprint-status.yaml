@@ -63,9 +63,9 @@ development_status:
 
   # ===== EPIC 4: Author CMS & Publishing =====
   epic-4: in-progress
-  4-1-article-creation-editing: in-progress
-  4-2-article-publishing-scheduling: backlog
-  4-3-article-categorization-tagging: backlog
+  4-1-article-creation-editing: done
+  4-2-article-publishing-scheduling: done
+  4-3-article-categorization-tagging: in-progress
   4-4-author-dashboard-analytics: backlog
   epic-4-retrospective: optional
 
