@@ -13,6 +13,7 @@ import { createServerClient } from '@/lib/supabase-server';
 import ArticleHeader from '@/components/article/ArticleHeader';
 import ArticleContent from '@/components/article/ArticleContent';
 import AnjaliButton from '@/components/article/AnjaliButton';
+import SocialShare from '@/components/article/SocialShare';
 import { CommentSection } from '@/components/comments';
 import type { ArticlePageProps, ArticleWithAuthor } from '@/types/article';
 import { Metadata } from 'next';
@@ -159,14 +160,22 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         {/* Article Content */}
         <ArticleContent content={articleWithAuthor.content} />
 
-        {/* Anjali Button (Story 5.1) */}
-        <div className="mt-8 flex justify-center">
+        {/* Engagement Actions (Story 5.1 & 5.3) */}
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          {/* Anjali Button (Story 5.1) */}
           <AnjaliButton
             articleId={articleWithAuthor.id}
             initialCount={articleWithAuthor.anjali_count}
             initialHasAnjalied={userHasAnjalied}
             isAuthenticated={!!user}
             isOwnArticle={user?.id === articleWithAuthor.author_id}
+          />
+
+          {/* Social Share (Story 5.3) */}
+          <SocialShare
+            articleId={articleWithAuthor.id}
+            articleTitle={articleWithAuthor.title}
+            articleUrl={`${process.env.NEXT_PUBLIC_APP_URL || 'https://ariyadham.vercel.app'}/articles/${slug}`}
           />
         </div>
 
