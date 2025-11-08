@@ -3,19 +3,41 @@
 @tailwind utilities;
 
 :root {
+  /* Brand colors */
   --primary: #3b82f6;
   --success: #10b981;
   --warning: #f59e0b;
   --error: #ef4444;
   --neutral: #6b7280;
+
+  /* Font size (customizable via settings) */
+  --base-font-size: 16px;
+
+  /* Light theme colors */
+  --color-background: #ffffff;
+  --color-foreground: #111827;
+  --color-muted: #f9fafb;
+  --color-muted-foreground: #6b7280;
+  --color-border: #e5e7eb;
+}
+
+.dark {
+  /* Dark theme colors */
+  --color-background: #111827;
+  --color-foreground: #f9fafb;
+  --color-muted: #1f2937;
+  --color-muted-foreground: #9ca3af;
+  --color-border: #374151;
 }
 
 html {
   scroll-behavior: smooth;
+  font-size: var(--base-font-size);
 }
 
 body {
-  @apply bg-white text-gray-900 dark:bg-gray-900 dark:text-white;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
 }
 
 /* Accessibility: Reduced motion support */
