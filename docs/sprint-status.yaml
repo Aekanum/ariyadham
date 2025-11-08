@@ -46,19 +46,19 @@ development_status:
   epic-1-retrospective: optional
 
   # ===== EPIC 2: Authentication & User Management =====
-  epic-2: in-progress
+  epic-2: done
   2-1-user-profile-management: done
-  2-2-user-roles-permissions: in-progress
-  2-3-author-approval-workflow: backlog
-  2-4-user-preferences-settings: backlog
+  2-2-user-roles-permissions: done
+  2-3-author-approval-workflow: done
+  2-4-user-preferences-settings: done
   epic-2-retrospective: optional
 
   # ===== EPIC 3: Reader Experience =====
-  epic-3: backlog
-  3-1-article-display-reading-interface: backlog
-  3-2-content-discovery-browsing: backlog
-  3-3-search-functionality: backlog
-  3-4-article-metadata-seo: backlog
+  epic-3: done
+  3-1-article-display-reading-interface: done
+  3-2-content-discovery-browsing: done
+  3-3-search-functionality: done
+  3-4-article-metadata-seo: done
   epic-3-retrospective: optional
 
   # ===== EPIC 4: Author CMS & Publishing =====
