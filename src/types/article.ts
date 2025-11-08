@@ -3,6 +3,7 @@
  * Story 3.1: Article Display & Reading Interface
  * Story 4.2: Article Publishing & Scheduling
  * Story 5.1: Anjali Button & Reactions
+ * Story 5.4: User Reading History & Bookmarks
  */
 
 export type ArticleStatus = 'draft' | 'scheduled' | 'published' | 'archived';
@@ -25,6 +26,7 @@ export interface Article {
   view_count: number;
   anjali_count: number;
   comment_count: number;
+  bookmark_count: number;
   category: string | null;
   created_at: string;
   updated_at: string;
