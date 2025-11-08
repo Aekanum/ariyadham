@@ -56,7 +56,7 @@ export function CommentItem({
     try {
       await onEdit(comment.id, editContent.trim());
       setIsEditing(false);
-    } catch (err) {
+    } catch {
       // Error is handled by parent
     }
   };
@@ -67,13 +67,11 @@ export function CommentItem({
     setIsDeleting(true);
     try {
       await onDelete(comment.id);
-    } catch (err) {
+    } catch {
       setIsDeleting(false);
       // Error is handled by parent
     }
   };
-
-  const indentClass = comment.depth > 0 ? `ml-${Math.min(comment.depth * 8, 32)}` : '';
 
   return (
     <div

@@ -8,7 +8,6 @@
  */
 
 import { useState, FormEvent } from 'react';
-import { useRouter } from 'next/navigation';
 
 interface CommentFormProps {
   articleId: string;
@@ -21,7 +20,6 @@ interface CommentFormProps {
 }
 
 export function CommentForm({
-  articleId,
   parentCommentId,
   onSubmit,
   onCancel,
@@ -29,7 +27,6 @@ export function CommentForm({
   autoFocus = false,
   isReply = false,
 }: CommentFormProps) {
-  const router = useRouter();
   const [content, setContent] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);

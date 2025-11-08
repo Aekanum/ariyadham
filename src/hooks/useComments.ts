@@ -87,7 +87,8 @@ export function useComments({
   useEffect(() => {
     setOffset(0);
     fetchComments(true);
-  }, [articleId, sort]); // eslint-disable-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [articleId, sort]);
 
   // Load more comments
   const loadMore = useCallback(async () => {

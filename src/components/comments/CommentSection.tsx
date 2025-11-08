@@ -7,7 +7,7 @@
  * Main container component that integrates all comment functionality
  */
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useComments } from '@/hooks/useComments';
 import { CommentForm } from './CommentForm';
 import { CommentList } from './CommentList';
@@ -18,11 +18,7 @@ interface CommentSectionProps {
   currentUserId?: string;
 }
 
-export function CommentSection({
-  articleId,
-  initialCommentCount = 0,
-  currentUserId,
-}: CommentSectionProps) {
+export function CommentSection({ articleId, currentUserId }: CommentSectionProps) {
   const {
     comments,
     totalCount,

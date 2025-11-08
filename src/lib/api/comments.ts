@@ -5,7 +5,6 @@
 
 import type {
   CommentsResponse,
-  CommentResponse,
   CommentWithUser,
   CreateCommentRequest,
   UpdateCommentRequest,
