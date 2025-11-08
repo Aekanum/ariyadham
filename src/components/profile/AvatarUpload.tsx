@@ -183,6 +183,7 @@ export default function AvatarUpload({
               className="h-full w-full object-cover"
               width={128}
               height={128}
+              sizes="128px"
               unoptimized
             />
           ) : (
