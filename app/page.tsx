@@ -6,23 +6,32 @@ import Link from 'next/link';
 export default async function HomePage() {
   const supabase = createServerClient();
 
-  // Fetch featured articles (most recent with high view count)
-  const { data: featuredArticles } = await supabase
-    .from('articles')
+  // Fetch featured articles (admin-curated from featured_articles table)
+  const { data: featuredData } = await supabase
+    .from('featured_articles')
     .select(
       `
       *,
-      author:user_profiles!author_id (
-        id:user_id,
-        full_name,
-        avatar_url
+      article:articles!article_id (
+        *,
+        author:user_profiles!author_id (
+          id:user_id,
+          full_name,
+          avatar_url
+        )
       )
     `
     )
-    .eq('status', 'published')
-    .order('view_count', { ascending: false })
-    .order('published_at', { ascending: false })
+    .order('display_order', { ascending: true })
     .limit(3);
+
+  // Transform featured data to match ArticleWithAuthor format
+  const featuredArticles = featuredData
+    ?.map((f) => ({
+      ...f.article,
+      author: f.article.author,
+    }))
+    .filter((a) => a && a.status === 'published');
 
   // Fetch recent articles
   const { data: recentArticles } = await supabase
@@ -81,7 +90,11 @@ export default async function HomePage() {
             </div>
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {featuredArticles.map((article) => (
-                <ArticleCard key={article.id} article={article as unknown as ArticleWithAuthor} />
+                <ArticleCard
+                  key={article.id}
+                  article={article as unknown as ArticleWithAuthor}
+                  isFeatured={true}
+                />
               ))}
             </div>
           </section>

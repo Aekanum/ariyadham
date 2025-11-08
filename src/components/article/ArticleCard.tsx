@@ -2,16 +2,26 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ArticleWithAuthor } from '@/types/article';
 import { formatDate } from '@/lib/utils/date';
+import { Star } from 'lucide-react';
 
 interface ArticleCardProps {
   article: ArticleWithAuthor;
+  isFeatured?: boolean;
 }
 
-export default function ArticleCard({ article }: ArticleCardProps) {
+export default function ArticleCard({ article, isFeatured = false }: ArticleCardProps) {
   const publishedDate = article.published_at ? formatDate(article.published_at) : null;
 
   return (
-    <article className="group overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
+    <article className="group relative overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
+      {/* Featured Badge */}
+      {isFeatured && (
+        <div className="absolute right-4 top-4 z-10 flex items-center gap-1 rounded-full bg-yellow-400 px-3 py-1 text-xs font-semibold text-gray-900 shadow-md">
+          <Star className="h-3 w-3 fill-gray-900" />
+          Featured
+        </div>
+      )}
+
       {/* Featured Image */}
       {article.featured_image_url && (
         <Link href={`/articles/${article.slug}`}>
