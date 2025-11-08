@@ -549,6 +549,7 @@ Today we completed:
 **Latest completion: Story 6.1 - Admin Dashboard Overview**
 
 Features implemented:
+
 - Platform-wide statistics dashboard for administrators
 - Real-time metrics: total users, articles, MAU, monthly publications
 - Recent activity feed showing user registrations, article publications, comments, and Anjali reactions
