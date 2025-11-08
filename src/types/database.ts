@@ -227,6 +227,65 @@ export interface ReadingHistory {
 }
 
 /**
+ * ArticleView type
+ * Tracks individual article views for analytics (Story 4.4)
+ */
+export interface ArticleView {
+  id: string; // UUID
+  article_id: string; // UUID - foreign key to articles
+  user_id: string | null; // UUID - foreign key to users (null for anonymous)
+  ip_address: string | null; // INET - for deduplication
+  user_agent: string | null; // Browser/device info
+  referrer: string | null; // Where the view came from
+  viewed_at: string; // ISO 8601 timestamp
+}
+
+/**
+ * AuthorDashboardStats type
+ * Materialized view for author dashboard statistics (Story 4.4)
+ */
+export interface AuthorDashboardStats {
+  author_id: string; // UUID
+  total_articles: number;
+  published_articles: number;
+  draft_articles: number;
+  scheduled_articles: number;
+  total_views: number;
+  total_anjali: number;
+  total_comments: number;
+  last_published_at: string | null; // ISO 8601 timestamp
+}
+
+/**
+ * ArticleDailyStats type
+ * View for daily article view statistics (Story 4.4)
+ */
+export interface ArticleDailyStats {
+  article_id: string; // UUID
+  view_date: string; // Date
+  views_count: number;
+  unique_viewers: number;
+}
+
+/**
+ * ArticleSummaryStats type
+ * Complete article statistics with time-based metrics (Story 4.4)
+ */
+export interface ArticleSummaryStats {
+  article_id: string; // UUID
+  title: string;
+  slug: string;
+  status: Article['status'];
+  published_at: string | null;
+  total_views: number;
+  total_anjali: number;
+  total_comments: number;
+  views_last_7_days: number;
+  views_last_30_days: number;
+  views_last_90_days: number;
+}
+
+/**
  * AuditLog type
  * System audit trail for compliance and debugging
  */

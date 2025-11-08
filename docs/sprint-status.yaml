@@ -62,11 +62,11 @@ development_status:
   epic-3-retrospective: optional
 
   # ===== EPIC 4: Author CMS & Publishing =====
-  epic-4: in-progress
+  epic-4: done
   4-1-article-creation-editing: done
   4-2-article-publishing-scheduling: done
-  4-3-article-categorization-tagging: in-progress
-  4-4-author-dashboard-analytics: backlog
+  4-3-article-categorization-tagging: done
+  4-4-author-dashboard-analytics: done
   epic-4-retrospective: optional
 
   # ===== EPIC 5: Community & Engagement =====
