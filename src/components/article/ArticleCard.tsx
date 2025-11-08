@@ -31,7 +31,9 @@ export default function ArticleCard({ article, isFeatured = false }: ArticleCard
               alt={article.title}
               width={600}
               height={400}
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               className="h-full w-full object-cover transition-transform group-hover:scale-105"
+              loading="lazy"
             />
           </div>
         </Link>
@@ -71,7 +73,9 @@ export default function ArticleCard({ article, isFeatured = false }: ArticleCard
               alt={article.author.full_name}
               width={32}
               height={32}
+              sizes="32px"
               className="rounded-full"
+              loading="lazy"
             />
           ) : (
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700">

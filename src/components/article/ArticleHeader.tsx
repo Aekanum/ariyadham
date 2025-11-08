@@ -26,8 +26,10 @@ export default function ArticleHeader({ article }: ArticleHeaderProps) {
             alt={article.title}
             width={1200}
             height={630}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1200px"
             className="h-auto w-full object-cover"
             priority
+            quality={90}
           />
         </div>
       )}
@@ -60,7 +62,9 @@ export default function ArticleHeader({ article }: ArticleHeaderProps) {
             alt={article.author.full_name}
             width={48}
             height={48}
+            sizes="48px"
             className="rounded-full"
+            loading="lazy"
           />
         ) : (
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700">
