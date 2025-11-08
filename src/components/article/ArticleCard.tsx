@@ -84,6 +84,18 @@ export default function ArticleCard({ article }: ArticleCardProps) {
                   <span>{article.reading_time_minutes} min read</span>
                 </>
               )}
+              {/* Anjali count (Story 5.1) */}
+              {article.anjali_count > 0 && (
+                <>
+                  <span>•</span>
+                  <span className="flex items-center gap-1">
+                    <span role="img" aria-label="anjali">
+                      🙏
+                    </span>
+                    {article.anjali_count}
+                  </span>
+                </>
+              )}
             </div>
           </div>
         </div>

@@ -2,6 +2,7 @@
  * Article Page
  * Story 3.1: Article Display & Reading Interface
  * Story 3.4: Article Metadata & SEO
+ * Story 5.1: Anjali Button & Reactions
  *
  * Displays a single article with full content and rich metadata
  */
@@ -10,6 +11,7 @@ import { notFound } from 'next/navigation';
 import { createServerClient } from '@/lib/supabase-server';
 import ArticleHeader from '@/components/article/ArticleHeader';
 import ArticleContent from '@/components/article/ArticleContent';
+import AnjaliButton from '@/components/article/AnjaliButton';
 import type { ArticlePageProps, ArticleWithAuthor } from '@/types/article';
 import { Metadata } from 'next';
 import { generateArticleMetadata, generateArticleStructuredData } from '@/lib/seo/metadata';
@@ -101,6 +103,24 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   // Type assertion for the joined data
   const articleWithAuthor = article as unknown as ArticleWithAuthor;
 
+  // Get current user
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  // Get anjali status for current user (Story 5.1)
+  let userHasAnjalied = false;
+  if (user) {
+    const { data: anjaliData } = await supabase.rpc('get_anjali_status', {
+      p_article_id: article.id,
+      p_user_id: user.id,
+    });
+
+    if (anjaliData && anjaliData.length > 0) {
+      userHasAnjalied = anjaliData[0].user_has_anjalied;
+    }
+  }
+
   // Increment view count (fire and forget - don't block rendering)
   void supabase
     .from('articles')
@@ -136,6 +156,17 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
         {/* Article Content */}
         <ArticleContent content={articleWithAuthor.content} />
+
+        {/* Anjali Button (Story 5.1) */}
+        <div className="mt-8 flex justify-center">
+          <AnjaliButton
+            articleId={articleWithAuthor.id}
+            initialCount={articleWithAuthor.anjali_count}
+            initialHasAnjalied={userHasAnjalied}
+            isAuthenticated={!!user}
+            isOwnArticle={user?.id === articleWithAuthor.author_id}
+          />
+        </div>
 
         {/* Article Footer */}
         <footer className="mt-12 border-t border-gray-200 pt-8 dark:border-gray-700">

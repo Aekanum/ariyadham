@@ -2,6 +2,7 @@
  * Article type definitions
  * Story 3.1: Article Display & Reading Interface
  * Story 4.2: Article Publishing & Scheduling
+ * Story 5.1: Anjali Button & Reactions
  */
 
 export type ArticleStatus = 'draft' | 'scheduled' | 'published' | 'archived';
@@ -22,9 +23,12 @@ export interface Article {
   scheduled_publish_at: string | null;
   reading_time_minutes: number | null;
   view_count: number;
+  anjali_count: number;
+  comment_count: number;
   category: string | null;
   created_at: string;
   updated_at: string;
+  user_has_anjalied?: boolean; // Only present when user is authenticated
 }
 
 /**
