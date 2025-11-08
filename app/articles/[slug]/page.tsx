@@ -4,6 +4,7 @@
  * Story 3.4: Article Metadata & SEO
  * Story 5.1: Anjali Button & Reactions
  * Story 5.2: Comments & Discussions
+ * Story 5.4: User Reading History & Bookmarks
  *
  * Displays a single article with full content and rich metadata
  */
@@ -13,7 +14,9 @@ import { createServerClient } from '@/lib/supabase-server';
 import ArticleHeader from '@/components/article/ArticleHeader';
 import ArticleContent from '@/components/article/ArticleContent';
 import AnjaliButton from '@/components/article/AnjaliButton';
+import BookmarkButton from '@/components/article/BookmarkButton';
 import SocialShare from '@/components/article/SocialShare';
+import ReadingHistoryTracker from '@/components/article/ReadingHistoryTracker';
 import { CommentSection } from '@/components/comments';
 import type { ArticlePageProps, ArticleWithAuthor } from '@/types/article';
 import { Metadata } from 'next';
@@ -88,6 +91,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     .select(
       `
       *,
+      bookmark_count,
       author:user_profiles!author_id (
         id:user_id,
         full_name,
@@ -124,6 +128,19 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     }
   }
 
+  // Get bookmark status for current user (Story 5.4)
+  let userHasBookmarked = false;
+  if (user) {
+    const { data: bookmarkData } = await supabase
+      .from('bookmarks')
+      .select('id')
+      .eq('article_id', article.id)
+      .eq('user_id', user.id)
+      .single();
+
+    userHasBookmarked = !!bookmarkData;
+  }
+
   // Increment view count (fire and forget - don't block rendering)
   void supabase
     .from('articles')
@@ -153,6 +170,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
+      {/* Reading History Tracker (Story 5.4) */}
+      <ReadingHistoryTracker articleId={articleWithAuthor.id} isAuthenticated={!!user} />
+
       <article className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
         {/* Article Header */}
         <ArticleHeader article={articleWithAuthor} />
@@ -160,7 +180,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         {/* Article Content */}
         <ArticleContent content={articleWithAuthor.content} />
 
-        {/* Engagement Actions (Story 5.1 & 5.3) */}
+        {/* Engagement Actions (Story 5.1, 5.3, 5.4) */}
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           {/* Anjali Button (Story 5.1) */}
           <AnjaliButton
@@ -169,6 +189,14 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             initialHasAnjalied={userHasAnjalied}
             isAuthenticated={!!user}
             isOwnArticle={user?.id === articleWithAuthor.author_id}
+          />
+
+          {/* Bookmark Button (Story 5.4) */}
+          <BookmarkButton
+            articleId={articleWithAuthor.id}
+            initialCount={articleWithAuthor.bookmark_count || 0}
+            initialHasBookmarked={userHasBookmarked}
+            isAuthenticated={!!user}
           />
 
           {/* Social Share (Story 5.3) */}
