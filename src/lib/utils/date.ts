@@ -27,9 +27,7 @@ export function formatDate(
   format: DateFormat = 'medium',
   locale: string = 'th-TH'
 ): string {
-  const dateObj = typeof date === 'string' || typeof date === 'number'
-    ? new Date(date)
-    : date;
+  const dateObj = typeof date === 'string' || typeof date === 'number' ? new Date(date) : date;
 
   if (isNaN(dateObj.getTime())) {
     return 'Invalid Date';
@@ -60,13 +58,8 @@ export function formatDate(
  * @example
  * formatDateTime(new Date()); // "7 พ.ย. 2025 14:30"
  */
-export function formatDateTime(
-  date: Date | string | number,
-  locale: string = 'th-TH'
-): string {
-  const dateObj = typeof date === 'string' || typeof date === 'number'
-    ? new Date(date)
-    : date;
+export function formatDateTime(date: Date | string | number, locale: string = 'th-TH'): string {
+  const dateObj = typeof date === 'string' || typeof date === 'number' ? new Date(date) : date;
 
   if (isNaN(dateObj.getTime())) {
     return 'Invalid Date';
@@ -91,13 +84,8 @@ export function formatDateTime(
  * @example
  * getRelativeTime(new Date(Date.now() - 2 * 60 * 60 * 1000)); // "2 hours ago"
  */
-export function getRelativeTime(
-  date: Date | string | number,
-  locale: string = 'th-TH'
-): string {
-  const dateObj = typeof date === 'string' || typeof date === 'number'
-    ? new Date(date)
-    : date;
+export function getRelativeTime(date: Date | string | number, locale: string = 'th-TH'): string {
+  const dateObj = typeof date === 'string' || typeof date === 'number' ? new Date(date) : date;
 
   if (isNaN(dateObj.getTime())) {
     return 'Invalid Date';
@@ -145,9 +133,7 @@ export function isValidDate(date: Date | string | number | null | undefined): bo
     return false;
   }
 
-  const dateObj = typeof date === 'string' || typeof date === 'number'
-    ? new Date(date)
-    : date;
+  const dateObj = typeof date === 'string' || typeof date === 'number' ? new Date(date) : date;
 
   return !isNaN(dateObj.getTime());
 }
@@ -176,9 +162,8 @@ export function parseISODate(isoString: string): Date | null {
  * startOfDay(new Date('2025-11-07T14:30:00')); // 2025-11-07T00:00:00
  */
 export function startOfDay(date: Date | string | number): Date {
-  const dateObj = typeof date === 'string' || typeof date === 'number'
-    ? new Date(date)
-    : new Date(date);
+  const dateObj =
+    typeof date === 'string' || typeof date === 'number' ? new Date(date) : new Date(date);
 
   dateObj.setHours(0, 0, 0, 0);
   return dateObj;
@@ -194,9 +179,8 @@ export function startOfDay(date: Date | string | number): Date {
  * endOfDay(new Date('2025-11-07T14:30:00')); // 2025-11-07T23:59:59.999
  */
 export function endOfDay(date: Date | string | number): Date {
-  const dateObj = typeof date === 'string' || typeof date === 'number'
-    ? new Date(date)
-    : new Date(date);
+  const dateObj =
+    typeof date === 'string' || typeof date === 'number' ? new Date(date) : new Date(date);
 
   dateObj.setHours(23, 59, 59, 999);
   return dateObj;
@@ -213,9 +197,8 @@ export function endOfDay(date: Date | string | number): Date {
  * addDays(new Date('2025-11-07'), 7); // 2025-11-14
  */
 export function addDays(date: Date | string | number, days: number): Date {
-  const dateObj = typeof date === 'string' || typeof date === 'number'
-    ? new Date(date)
-    : new Date(date);
+  const dateObj =
+    typeof date === 'string' || typeof date === 'number' ? new Date(date) : new Date(date);
 
   dateObj.setDate(dateObj.getDate() + days);
   return dateObj;
@@ -235,12 +218,8 @@ export function getDaysDifference(
   date1: Date | string | number,
   date2: Date | string | number
 ): number {
-  const d1 = typeof date1 === 'string' || typeof date1 === 'number'
-    ? new Date(date1)
-    : date1;
-  const d2 = typeof date2 === 'string' || typeof date2 === 'number'
-    ? new Date(date2)
-    : date2;
+  const d1 = typeof date1 === 'string' || typeof date1 === 'number' ? new Date(date1) : date1;
+  const d2 = typeof date2 === 'string' || typeof date2 === 'number' ? new Date(date2) : date2;
 
   const diffMs = Math.abs(d2.getTime() - d1.getTime());
   return Math.floor(diffMs / (1000 * 60 * 60 * 24));
@@ -256,9 +235,7 @@ export function getDaysDifference(
  * isPast(new Date('2020-01-01')); // true
  */
 export function isPast(date: Date | string | number): boolean {
-  const dateObj = typeof date === 'string' || typeof date === 'number'
-    ? new Date(date)
-    : date;
+  const dateObj = typeof date === 'string' || typeof date === 'number' ? new Date(date) : date;
 
   return dateObj.getTime() < Date.now();
 }
@@ -273,9 +250,7 @@ export function isPast(date: Date | string | number): boolean {
  * isFuture(new Date('2030-01-01')); // true
  */
 export function isFuture(date: Date | string | number): boolean {
-  const dateObj = typeof date === 'string' || typeof date === 'number'
-    ? new Date(date)
-    : date;
+  const dateObj = typeof date === 'string' || typeof date === 'number' ? new Date(date) : date;
 
   return dateObj.getTime() > Date.now();
 }
@@ -290,9 +265,7 @@ export function isFuture(date: Date | string | number): boolean {
  * formatForAPI(new Date()); // "2025-11-07T14:30:00.000Z"
  */
 export function formatForAPI(date: Date | string | number): string {
-  const dateObj = typeof date === 'string' || typeof date === 'number'
-    ? new Date(date)
-    : date;
+  const dateObj = typeof date === 'string' || typeof date === 'number' ? new Date(date) : date;
 
   return dateObj.toISOString();
 }

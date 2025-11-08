@@ -118,8 +118,7 @@ export const VALIDATION_PATTERNS = {
   SLUG: /^[a-z0-9-]+$/,
   URL: /^https?:\/\/.+/,
   PHONE_TH: /^0[0-9]{9}$/,
-  PASSWORD_STRONG:
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+  PASSWORD_STRONG: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
 } as const;
 
 /**
@@ -128,7 +127,8 @@ export const VALIDATION_PATTERNS = {
 export const ERROR_MESSAGES = {
   REQUIRED: 'This field is required',
   INVALID_EMAIL: 'Please enter a valid email address',
-  INVALID_USERNAME: 'Username must be 3-30 characters and contain only letters, numbers, and underscores',
+  INVALID_USERNAME:
+    'Username must be 3-30 characters and contain only letters, numbers, and underscores',
   INVALID_PASSWORD: 'Password must be at least 8 characters with uppercase, lowercase, and number',
   PASSWORD_MISMATCH: 'Passwords do not match',
   INVALID_URL: 'Please enter a valid URL starting with http:// or https://',

@@ -84,8 +84,7 @@ export const API_ROUTES = {
   ARTICLES: '/api/articles',
   ARTICLE: (id: string) => `/api/articles/${id}`,
   ARTICLE_BY_SLUG: (slug: string) => `/api/articles/slug/${slug}`,
-  ARTICLES_BY_CATEGORY: (categoryId: string) =>
-    `/api/articles/category/${categoryId}`,
+  ARTICLES_BY_CATEGORY: (categoryId: string) => `/api/articles/category/${categoryId}`,
   ARTICLES_BY_TAG: (tagId: string) => `/api/articles/tag/${tagId}`,
   ARTICLES_BY_AUTHOR: (authorId: string) => `/api/articles/author/${authorId}`,
 

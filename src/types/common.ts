@@ -273,10 +273,7 @@ export type ValueOf<T> = T[keyof T];
 /**
  * Require at least one property
  */
-export type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Pick<
-  T,
-  Exclude<keyof T, Keys>
-> &
+export type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Pick<T, Exclude<keyof T, Keys>> &
   {
     [K in Keys]-?: Required<Pick<T, K>> & Partial<Pick<T, Exclude<Keys, K>>>;
   }[Keys];
@@ -284,8 +281,7 @@ export type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Pick<
 /**
  * Require all properties except specified
  */
-export type RequireAllExcept<T, K extends keyof T> = Required<Omit<T, K>> &
-  Partial<Pick<T, K>>;
+export type RequireAllExcept<T, K extends keyof T> = Required<Omit<T, K>> & Partial<Pick<T, K>>;
 
 /**
  * Mutable type - remove readonly modifiers

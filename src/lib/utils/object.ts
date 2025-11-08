@@ -56,11 +56,7 @@ export function deepClone<T>(obj: T): T {
  * get(obj, 'user.profile.age', 30); // 30 (default)
  * get(obj, ['user', 'profile', 'name']); // 'John'
  */
-export function get<T = any>(
-  obj: any,
-  path: string | string[],
-  defaultValue?: T
-): T {
+export function get<T = any>(obj: any, path: string | string[], defaultValue?: T): T {
   const keys = Array.isArray(path) ? path : path.split('.');
   let result = obj;
 
@@ -87,11 +83,7 @@ export function get<T = any>(
  * set(obj, 'user.profile.name', 'John');
  * // obj.user.profile.name === 'John'
  */
-export function set<T extends object>(
-  obj: T,
-  path: string | string[],
-  value: any
-): T {
+export function set<T extends object>(obj: T, path: string | string[], value: any): T {
   const keys = Array.isArray(path) ? path : path.split('.');
   const lastKey = keys.pop()!;
   let current: any = obj;
@@ -143,10 +135,7 @@ export function has(obj: any, path: string | string[]): boolean {
  * @example
  * pick({ a: 1, b: 2, c: 3 }, 'a', 'c'); // { a: 1, c: 3 }
  */
-export function pick<T extends object, K extends keyof T>(
-  obj: T,
-  ...keys: K[]
-): Pick<T, K> {
+export function pick<T extends object, K extends keyof T>(obj: T, ...keys: K[]): Pick<T, K> {
   const result = {} as Pick<T, K>;
   for (const key of keys) {
     if (key in obj) {
@@ -166,10 +155,7 @@ export function pick<T extends object, K extends keyof T>(
  * @example
  * omit({ a: 1, b: 2, c: 3 }, 'b'); // { a: 1, c: 3 }
  */
-export function omit<T extends object, K extends keyof T>(
-  obj: T,
-  ...keys: K[]
-): Omit<T, K> {
+export function omit<T extends object, K extends keyof T>(obj: T, ...keys: K[]): Omit<T, K> {
   const result = { ...obj };
   for (const key of keys) {
     delete result[key];
@@ -345,12 +331,7 @@ export function mapKeys<T extends object, K extends string | number | symbol>(
 export function isEqual(obj1: any, obj2: any): boolean {
   if (obj1 === obj2) return true;
 
-  if (
-    typeof obj1 !== 'object' ||
-    typeof obj2 !== 'object' ||
-    obj1 === null ||
-    obj2 === null
-  ) {
+  if (typeof obj1 !== 'object' || typeof obj2 !== 'object' || obj1 === null || obj2 === null) {
     return false;
   }
 
@@ -407,11 +388,7 @@ export function deepFreeze<T extends object>(obj: T): Readonly<T> {
   Object.freeze(obj);
 
   for (const key in obj) {
-    if (
-      obj.hasOwnProperty(key) &&
-      obj[key] !== null &&
-      typeof obj[key] === 'object'
-    ) {
+    if (obj.hasOwnProperty(key) && obj[key] !== null && typeof obj[key] === 'object') {
       deepFreeze(obj[key]);
     }
   }

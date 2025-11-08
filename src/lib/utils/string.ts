@@ -19,19 +19,21 @@
  * generateSlug('การปฏิบัติธรรม'); // "การปฏ-บัต-ธรรม"
  */
 export function generateSlug(text: string, maxLength: number = 100): string {
-  return text
-    .toLowerCase()
-    .trim()
-    // Replace spaces and underscores with hyphens
-    .replace(/[\s_]+/g, '-')
-    // Remove special characters except hyphens and Thai/English characters
-    .replace(/[^\u0E00-\u0E7Fa-z0-9-]/g, '')
-    // Replace multiple hyphens with single hyphen
-    .replace(/-+/g, '-')
-    // Remove leading/trailing hyphens
-    .replace(/^-+|-+$/g, '')
-    // Limit length
-    .slice(0, maxLength);
+  return (
+    text
+      .toLowerCase()
+      .trim()
+      // Replace spaces and underscores with hyphens
+      .replace(/[\s_]+/g, '-')
+      // Remove special characters except hyphens and Thai/English characters
+      .replace(/[^\u0E00-\u0E7Fa-z0-9-]/g, '')
+      // Replace multiple hyphens with single hyphen
+      .replace(/-+/g, '-')
+      // Remove leading/trailing hyphens
+      .replace(/^-+|-+$/g, '')
+      // Limit length
+      .slice(0, maxLength)
+  );
 }
 
 /**
@@ -46,11 +48,7 @@ export function generateSlug(text: string, maxLength: number = 100): string {
  * truncate('This is a long text that needs truncation', 20);
  * // "This is a long text..."
  */
-export function truncate(
-  text: string,
-  maxLength: number,
-  suffix: string = '...'
-): string {
+export function truncate(text: string, maxLength: number, suffix: string = '...'): string {
   if (text.length <= maxLength) {
     return text;
   }
@@ -70,11 +68,7 @@ export function truncate(
  * truncateWords('This is a very long sentence', 15);
  * // "This is a very..."
  */
-export function truncateWords(
-  text: string,
-  maxLength: number,
-  suffix: string = '...'
-): string {
+export function truncateWords(text: string, maxLength: number, suffix: string = '...'): string {
   if (text.length <= maxLength) {
     return text;
   }
@@ -172,10 +166,7 @@ export function countWords(text: string): number {
  * @example
  * estimateReadingTime('Long article content...'); // 5
  */
-export function estimateReadingTime(
-  text: string,
-  wordsPerMinute: number = 200
-): number {
+export function estimateReadingTime(text: string, wordsPerMinute: number = 200): number {
   const words = countWords(stripHtml(text));
   return Math.ceil(words / wordsPerMinute);
 }
@@ -327,12 +318,8 @@ export function maskString(
  * pluralize(5, 'article'); // "5 articles"
  * pluralize(2, 'category', 'categories'); // "2 categories"
  */
-export function pluralize(
-  count: number,
-  singular: string,
-  plural?: string
-): string {
-  const word = count === 1 ? singular : (plural || `${singular}s`);
+export function pluralize(count: number, singular: string, plural?: string): string {
+  const word = count === 1 ? singular : plural || `${singular}s`;
   return `${count} ${word}`;
 }
 

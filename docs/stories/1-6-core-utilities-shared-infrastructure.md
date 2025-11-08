@@ -42,24 +42,28 @@
 ### 1. Core Utilities (`src/lib/utils/`)
 
 **Date & Time Utilities:**
+
 - Format dates for display
 - Calculate relative time (e.g., "2 hours ago")
 - Parse and validate dates
 - Timezone handling
 
 **String Utilities:**
+
 - Slug generation from titles
 - Text truncation with ellipsis
 - Capitalize/title case formatting
 - URL encoding/decoding
 
 **Array/Object Utilities:**
+
 - Deep clone objects
 - Array deduplication
 - Safe nested property access
 - Object diff/merge
 
 **Number Utilities:**
+
 - Number formatting (thousands separators)
 - Currency formatting
 - Percentage calculations
@@ -68,6 +72,7 @@
 ### 2. Shared Types (`src/types/`)
 
 **Common Types:**
+
 - User types (extending Supabase User)
 - Article types with all metadata
 - Comment types with threading
@@ -78,32 +83,38 @@
 ### 3. Custom React Hooks (`src/hooks/`)
 
 **Data Fetching:**
+
 - `useArticle()` - Fetch single article
 - `useArticles()` - Fetch article list with pagination
 - `useUser()` - Get current user with profile
 
 **UI State:**
+
 - `useToggle()` - Boolean toggle state
 - `useDebounce()` - Debounced values
 - `useLocalStorage()` - Persistent local state
 - `useMediaQuery()` - Responsive breakpoint detection
 
 **Form Handling:**
+
 - `useForm()` - Form state and validation
 - `useFormField()` - Individual field state
 
 ### 4. Constants (`src/constants/`)
 
 **Routes:**
+
 - All application routes centralized
 - API endpoint constants
 
 **Config:**
+
 - Environment variables with defaults
 - Feature flags
 - API configuration
 
 **Content:**
+
 - Default values
 - Maximum lengths
 - Validation rules
@@ -157,6 +168,7 @@ src/
 ## Dependencies
 
 No new dependencies required - uses existing packages:
+
 - TypeScript
 - React
 - Next.js
@@ -279,6 +291,7 @@ After completing Story 1.6:
 ### Epic 1 Complete ✅
 
 All foundation stories (1.1 through 1.6) will be complete. Epic 1 delivers:
+
 - ✅ Project setup and structure
 - ✅ Database schema
 - ✅ Authentication infrastructure
@@ -289,6 +302,7 @@ All foundation stories (1.1 through 1.6) will be complete. Epic 1 delivers:
 ### Epic 2: Authentication & User Management
 
 Ready to begin:
+
 - Story 2.1: User Profile Management
 - Story 2.2: User Roles & Permissions
 - Story 2.3: Author Approval Workflow
@@ -332,6 +346,7 @@ Ready to begin:
 All files implemented with comprehensive JSDoc documentation:
 
 ### Utility Functions (src/lib/utils/)
+
 - `date.ts` (355 lines) - Date formatting, relative time, date manipulation
 - `string.ts` (421 lines) - Slug generation, text truncation, string manipulation
 - `array.ts` (412 lines) - Array operations, grouping, sorting, filtering
@@ -340,10 +355,12 @@ All files implemented with comprehensive JSDoc documentation:
 - `index.ts` (76 lines) - Central export with conflict resolution
 
 ### TypeScript Types (src/types/)
+
 - `common.ts` (312 lines) - Pagination, forms, async state, utility types
 - `index.ts` (14 lines) - Central export for all types
 
 ### Custom React Hooks (src/hooks/)
+
 - `use-toggle.ts` (27 lines) - Boolean toggle state
 - `use-debounce.ts` (40 lines) - Debounced values
 - `use-local-storage.ts` (87 lines) - Persistent local storage
@@ -354,6 +371,7 @@ All files implemented with comprehensive JSDoc documentation:
 - `index.ts` (17 lines) - Central export for all hooks
 
 ### Constants (src/constants/)
+
 - `routes.ts` (127 lines) - All route definitions
 - `config.ts` (252 lines) - App configuration, feature flags
 - `content.ts` (272 lines) - Content constants, validation, messages
@@ -366,6 +384,7 @@ All files implemented with comprehensive JSDoc documentation:
 ## Quality Checks
 
 ### ✅ Code Quality
+
 - All functions have comprehensive JSDoc documentation
 - Inline comments explaining complex logic
 - Type-safe implementations with TypeScript
@@ -373,6 +392,7 @@ All files implemented with comprehensive JSDoc documentation:
 - Conflict resolution in index exports
 
 ### ✅ Best Practices
+
 - Pure functions where applicable
 - No side effects in utilities
 - Proper error handling
@@ -381,6 +401,7 @@ All files implemented with comprehensive JSDoc documentation:
 - Modular file structure
 
 ### ✅ Developer Experience
+
 - Auto-completion friendly
 - Clear function signatures
 - Helpful JSDoc examples
@@ -399,6 +420,7 @@ Story 1.6 successfully delivers:
 4. **150+ constants** for routes, configuration, and content
 
 All acceptance criteria met:
+
 - ✅ Utility functions available in `/lib/utils`
 - ✅ Custom hooks available in `/hooks`
 - ✅ Constants centralized in `/constants`
@@ -408,6 +430,7 @@ All acceptance criteria met:
 **Epic 1 Status**: COMPLETE ✅
 
 All 6 stories in Epic 1 (Foundation & Infrastructure) are now complete:
+
 - ✅ Story 1.1: Project Setup & Repository Structure
 - ✅ Story 1.2: Database Schema & Core Data Models
 - ✅ Story 1.3: Authentication Infrastructure & User Onboarding

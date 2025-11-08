@@ -77,11 +77,7 @@ export function formatPercentage(
  * formatCompact(1234567); // "1.2M"
  * formatCompact(1234567890); // "1.2B"
  */
-export function formatCompact(
-  num: number,
-  decimals: number = 1,
-  locale: string = 'en-US'
-): string {
+export function formatCompact(num: number, decimals: number = 1, locale: string = 'en-US'): string {
   if (num < 1000) {
     return num.toString();
   }
@@ -178,11 +174,7 @@ export function randomInt(min: number, max: number): number {
  * randomFloat(0, 1); // Random float between 0 and 1
  * randomFloat(0, 10, 2); // Random float with 2 decimals
  */
-export function randomFloat(
-  min: number,
-  max: number,
-  decimals?: number
-): number {
+export function randomFloat(min: number, max: number, decimals?: number): number {
   const random = Math.random() * (max - min) + min;
   return decimals !== undefined ? round(random, decimals) : random;
 }
@@ -199,11 +191,7 @@ export function randomFloat(
  * percentage(25, 100); // 25
  * percentage(1, 3, 2); // 33.33
  */
-export function percentage(
-  value: number,
-  total: number,
-  decimals: number = 2
-): number {
+export function percentage(value: number, total: number, decimals: number = 2): number {
   if (total === 0) return 0;
   return round((value / total) * 100, decimals);
 }
@@ -310,8 +298,7 @@ export function parseNumber(value: string, defaultValue: number = 0): number {
 export function ordinal(num: number): string {
   const suffixes = ['th', 'st', 'nd', 'rd'];
   const value = num % 100;
-  const suffix =
-    suffixes[(value - 20) % 10] || suffixes[value] || suffixes[0];
+  const suffix = suffixes[(value - 20) % 10] || suffixes[value] || suffixes[0];
   return num + suffix;
 }
 

@@ -75,18 +75,18 @@ export function chunk<T>(array: T[], size: number): T[][] {
  * ], 'category');
  * // { A: [{category: 'A', value: 1}, {category: 'A', value: 3}], B: [...] }
  */
-export function groupBy<T>(
-  array: T[],
-  key: keyof T
-): Record<string, T[]> {
-  return array.reduce((groups, item) => {
-    const groupKey = String(item[key]);
-    if (!groups[groupKey]) {
-      groups[groupKey] = [];
-    }
-    groups[groupKey].push(item);
-    return groups;
-  }, {} as Record<string, T[]>);
+export function groupBy<T>(array: T[], key: keyof T): Record<string, T[]> {
+  return array.reduce(
+    (groups, item) => {
+      const groupKey = String(item[key]);
+      if (!groups[groupKey]) {
+        groups[groupKey] = [];
+      }
+      groups[groupKey].push(item);
+      return groups;
+    },
+    {} as Record<string, T[]>
+  );
 }
 
 /**
@@ -101,11 +101,7 @@ export function groupBy<T>(
  * sortBy([{age: 30}, {age: 20}, {age: 25}], 'age', 'asc');
  * // [{age: 20}, {age: 25}, {age: 30}]
  */
-export function sortBy<T>(
-  array: T[],
-  key: keyof T,
-  order: 'asc' | 'desc' = 'asc'
-): T[] {
+export function sortBy<T>(array: T[], key: keyof T, order: 'asc' | 'desc' = 'asc'): T[] {
   return [...array].sort((a, b) => {
     const aVal = a[key];
     const bVal = b[key];
