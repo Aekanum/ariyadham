@@ -60,7 +60,7 @@ export function useCopyToClipboard(): [CopyState, (text: string) => Promise<void
 
       // Reset success state after 2 seconds
       setTimeout(() => {
-        setState((prev) => ({ ...prev, success: false }));
+        setState((prev: CopyState) => ({ ...prev, success: false }));
       }, 2000);
     } catch (error) {
       setState({

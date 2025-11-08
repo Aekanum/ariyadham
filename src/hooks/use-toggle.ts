@@ -23,7 +23,7 @@ export function useToggle(
   const [value, setValue] = useState<boolean>(initialValue);
 
   const toggle = useCallback(() => {
-    setValue((prev) => !prev);
+    setValue((prev: boolean) => !prev);
   }, []);
 
   return [value, toggle, setValue];

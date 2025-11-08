@@ -7,6 +7,8 @@
  * Note: PaginationParams, PaginationMeta, and PaginatedResponse are defined in api.ts
  */
 
+import type { PaginationParams } from './api';
+
 /**
  * Sort order
  */
