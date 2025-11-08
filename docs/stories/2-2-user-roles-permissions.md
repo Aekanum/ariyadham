@@ -1,9 +1,9 @@
 # Story 2.2: User Roles & Permissions
 
 **Epic**: 2 - Authentication & User Management
-**Status**: 🔨 IN PROGRESS
+**Status**: ✅ COMPLETED
 **Started**: 2025-11-08
-**Completed**: -
+**Completed**: 2025-11-08
 
 ---
 

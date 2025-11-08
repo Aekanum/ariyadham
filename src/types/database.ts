@@ -6,7 +6,7 @@
  *
  * Generated from: migrations/001_create_base_tables.sql
  * Last Updated: 2025-11-08
- * Updated: Added UserRole type and RoleChangeLog (Story 2.2)
+ * Updated: Added AuthorApplication types (Story 2.3)
  */
 
 /**
@@ -232,6 +232,44 @@ export interface RoleChangeLog {
 }
 
 /**
+ * ApplicationStatus type
+ * Represents the status of an author application (Story 2.3)
+ */
+export type ApplicationStatus = 'pending' | 'approved' | 'rejected' | 'withdrawn';
+
+/**
+ * AuthorApplication type
+ * Represents an application to become an author (Story 2.3)
+ */
+export interface AuthorApplication {
+  id: string; // UUID
+  user_id: string; // UUID - applicant user
+  bio: string; // Applicant bio (100-1000 chars)
+  credentials: string; // Credentials and experience (50-2000 chars)
+  writing_samples: string | null; // Optional writing samples or links
+  motivation: string | null; // Why they want to become author (100-1000 chars)
+  status: ApplicationStatus; // Application status
+  reviewed_by: string | null; // UUID - admin who reviewed
+  reviewed_at: string | null; // ISO 8601 timestamp
+  rejection_reason: string | null; // Optional reason for rejection
+  created_at: string; // ISO 8601 timestamp
+  updated_at: string; // ISO 8601 timestamp
+}
+
+/**
+ * AuthorApplicationWithUser type
+ * Author application joined with user information
+ */
+export interface AuthorApplicationWithUser extends AuthorApplication {
+  user?: {
+    id: string;
+    email: string;
+    full_name: string | null;
+    avatar_url: string | null;
+  };
+}
+
+/**
  * ============================================================================
  * COMPOSITE TYPES - For queries that join multiple tables
  * ============================================================================
@@ -386,6 +424,26 @@ export interface UpdateUserProfileInput {
 }
 
 /**
+ * CreateAuthorApplicationInput type
+ * Required fields for submitting an author application (Story 2.3)
+ */
+export interface CreateAuthorApplicationInput {
+  bio: string; // 100-1000 chars
+  credentials: string; // 50-2000 chars
+  writing_samples?: string;
+  motivation: string; // 100-1000 chars
+}
+
+/**
+ * ReviewApplicationRequest type
+ * Request body for admin to approve/reject application (Story 2.3)
+ */
+export interface ReviewApplicationRequest {
+  status: 'approved' | 'rejected';
+  reason?: string;
+}
+
+/**
  * ============================================================================
  * HELPER FUNCTIONS FOR TYPE GUARDS
  * ============================================================================
@@ -424,4 +482,11 @@ export function isValidCommentStatus(value: any): value is Comment['status'] {
  */
 export function isValidVerificationStatus(value: any): value is Author['verification_status'] {
   return ['pending', 'verified', 'rejected'].includes(value);
+}
+
+/**
+ * Type guard to check if value is a valid application status
+ */
+export function isValidApplicationStatus(value: any): value is ApplicationStatus {
+  return ['pending', 'approved', 'rejected', 'withdrawn'].includes(value);
 }
