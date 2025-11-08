@@ -3,6 +3,7 @@
  * Story 3.1: Article Display & Reading Interface
  * Story 3.4: Article Metadata & SEO
  * Story 5.1: Anjali Button & Reactions
+ * Story 5.2: Comments & Discussions
  *
  * Displays a single article with full content and rich metadata
  */
@@ -12,6 +13,7 @@ import { createServerClient } from '@/lib/supabase-server';
 import ArticleHeader from '@/components/article/ArticleHeader';
 import ArticleContent from '@/components/article/ArticleContent';
 import AnjaliButton from '@/components/article/AnjaliButton';
+import { CommentSection } from '@/components/comments';
 import type { ArticlePageProps, ArticleWithAuthor } from '@/types/article';
 import { Metadata } from 'next';
 import { generateArticleMetadata, generateArticleStructuredData } from '@/lib/seo/metadata';
@@ -165,6 +167,15 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             initialHasAnjalied={userHasAnjalied}
             isAuthenticated={!!user}
             isOwnArticle={user?.id === articleWithAuthor.author_id}
+          />
+        </div>
+
+        {/* Comments Section (Story 5.2) */}
+        <div className="mt-12">
+          <CommentSection
+            articleId={articleWithAuthor.id}
+            initialCommentCount={articleWithAuthor.comment_count}
+            currentUserId={user?.id}
           />
         </div>
 
