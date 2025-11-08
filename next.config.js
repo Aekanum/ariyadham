@@ -31,6 +31,46 @@ const nextConfig = {
   compress: true,
   // Production source maps
   productionBrowserSourceMaps: false,
+  // Performance optimizations
+  compiler: {
+    // Remove console logs in production
+    removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error', 'warn'] } : false,
+  },
+  // Experimental features for better performance
+  experimental: {
+    // Optimize package imports
+    optimizePackageImports: ['lucide-react', 'recharts'],
+    // Optimize CSS loading
+    optimizeCss: true,
+  },
+  // Headers for caching and security
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-DNS-Prefetch-Control',
+            value: 'on',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN',
+          },
+        ],
+      },
+      // Cache static assets
+      {
+        source: '/static/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

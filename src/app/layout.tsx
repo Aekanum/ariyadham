@@ -3,6 +3,7 @@ import '@/styles/globals.css';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import { PreferencesProvider } from '@/contexts/PreferencesContext';
+import WebVitalsReporter from '@/components/analytics/WebVitalsReporter';
 
 export const metadata: Metadata = {
   title: 'Ariyadham - Buddhist Dharma Platform',
@@ -34,7 +35,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="font-sans antialiased">
         <ThemeProvider>
           <AuthProvider>
-            <PreferencesProvider>{children}</PreferencesProvider>
+            <PreferencesProvider>
+              {children}
+              {/* Web Vitals monitoring - Story 7.2 */}
+              <WebVitalsReporter debug={process.env.NODE_ENV === 'development'} />
+            </PreferencesProvider>
           </AuthProvider>
         </ThemeProvider>
       </body>
