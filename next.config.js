@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   images: {
     remotePatterns: [
       {
@@ -9,9 +8,6 @@ const nextConfig = {
         hostname: '**',
       },
     ],
-  },
-  eslint: {
-    ignoreDuringBuilds: false,
   },
   typescript: {
     tsconfigPath: './tsconfig.json',
