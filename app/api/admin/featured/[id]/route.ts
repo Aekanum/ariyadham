@@ -18,7 +18,6 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
     const supabase = createServerClient();
 
     try {
-
       if (!id) {
         return NextResponse.json(
           {
