@@ -1,8 +1,10 @@
 /**
  * Sitemap Generation
  * Story 3.4: Article Metadata & SEO
+ * Story 7.3: SEO Foundation & Structured Data
  *
- * Generates XML sitemap for search engines
+ * Generates comprehensive XML sitemap for search engines
+ * Includes articles, categories, and static pages
  */
 
 import { MetadataRoute } from 'next';
@@ -28,6 +30,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     })) || [];
 
+  // Fetch all unique categories from published articles
+  const { data: categoriesData } = await supabase
+    .from('articles')
+    .select('category')
+    .eq('status', 'published')
+    .not('category', 'is', null);
+
+  const uniqueCategories = [
+    ...new Set(categoriesData?.map((item) => item.category).filter(Boolean)),
+  ];
+
+  const categoryUrls = uniqueCategories.map((category) => ({
+    url: `${SITE_URL}/categories/${category}`,
+    lastModified: new Date(),
+    changeFrequency: 'daily' as const,
+    priority: 0.7,
+  }));
+
   // Static pages
   const staticPages = [
     {
@@ -43,6 +63,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
     {
+      url: `${SITE_URL}/search`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.6,
+    },
+    {
       url: `${SITE_URL}/about`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
@@ -50,5 +76,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  return [...staticPages, ...articleUrls];
+  return [...staticPages, ...categoryUrls, ...articleUrls];
 }
