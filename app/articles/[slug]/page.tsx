@@ -42,7 +42,11 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
     .eq('status', 'published')
     .single();
 
-  if (!article || !article.author || (Array.isArray(article.author) && article.author.length === 0)) {
+  if (
+    !article ||
+    !article.author ||
+    (Array.isArray(article.author) && article.author.length === 0)
+  ) {
     return {
       title: 'Article Not Found | Ariyadham',
     };
