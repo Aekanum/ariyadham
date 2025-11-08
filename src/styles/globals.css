@@ -61,3 +61,86 @@ body {
     @apply border border-gray-900 dark:border-white;
   }
 }
+
+/* Print styles for articles */
+@media print {
+  /* Hide navigation and non-essential elements */
+  nav,
+  header:not(article header),
+  footer:not(article footer),
+  .no-print,
+  button {
+    display: none !important;
+  }
+
+  /* Ensure content uses full width */
+  article {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Improve typography for print */
+  body {
+    font-size: 12pt !important;
+    line-height: 1.5 !important;
+    color: #000 !important;
+    background: #fff !important;
+  }
+
+  /* Page breaks */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  p,
+  blockquote,
+  pre,
+  code {
+    page-break-inside: avoid;
+  }
+
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+
+  /* Links: Show URL in print */
+  a[href]:after {
+    content: ' (' attr(href) ')';
+    font-size: 10pt;
+    color: #666;
+  }
+
+  /* Don't show URL for internal links */
+  a[href^='#']:after,
+  a[href^='/']:after {
+    content: '';
+  }
+
+  /* Article styles */
+  .article-content {
+    font-size: 11pt !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Remove shadows and backgrounds */
+  * {
+    background: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* Keep some backgrounds for code blocks */
+  pre,
+  code {
+    background: #f5f5f5 !important;
+    border: 1px solid #ddd !important;
+  }
+}
