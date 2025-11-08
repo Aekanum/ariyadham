@@ -89,7 +89,7 @@ development_status:
   # ===== EPIC 7: Performance & SEO Optimization =====
   epic-7: in-progress
   7-1-image-optimization-cdn: done
-  7-2-core-web-vitals-performance: backlog
+  7-2-core-web-vitals-performance: done
   7-3-seo-foundation-structured-data: backlog
   7-4-caching-strategy: backlog
   epic-7-retrospective: optional
