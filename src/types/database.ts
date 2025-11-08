@@ -122,6 +122,33 @@ export interface ArticleCategory {
 }
 
 /**
+ * Tag type
+ * Represents user-created tags for flexible article labeling (Story 4.3)
+ */
+export interface Tag {
+  id: string; // UUID
+  name: string; // Tag name
+  slug: string; // URL-friendly identifier
+  description: string | null; // Optional description
+  status: 'pending' | 'approved' | 'rejected'; // Moderation status
+  created_by: string | null; // UUID - foreign key to users
+  usage_count: number; // Denormalized count of how many articles use this tag
+  created_at: string; // ISO 8601 timestamp
+  updated_at: string; // ISO 8601 timestamp
+}
+
+/**
+ * ArticleTag type
+ * Junction table linking articles to tags (Story 4.3)
+ */
+export interface ArticleTag {
+  id: string; // UUID
+  article_id: string; // UUID - foreign key to articles
+  tag_id: string; // UUID - foreign key to tags
+  created_at: string; // ISO 8601 timestamp
+}
+
+/**
  * ArticleTranslation type
  * Tracks translations of articles to other languages
  */
@@ -292,6 +319,15 @@ export interface ArticleWithAuthorAndCategories extends ArticleWithAuthor {
 }
 
 /**
+ * ArticleWithTaxonomy type
+ * Article joined with author, categories, and tags (Story 4.3)
+ */
+export interface ArticleWithTaxonomy extends ArticleWithAuthor {
+  categories?: Category[];
+  tags?: Tag[];
+}
+
+/**
  * UserProfile type
  * User information with author details if applicable
  */
@@ -384,7 +420,9 @@ export interface CreateArticleInput {
   seo_description?: string;
   seo_keywords?: string;
   reading_time_minutes?: number;
-  category_ids?: string[];
+  category_ids?: string[]; // Category IDs to assign (Story 4.3)
+  tag_ids?: string[]; // Tag IDs to assign (Story 4.3)
+  new_tags?: string[]; // New tag names to create and assign (Story 4.3)
 }
 
 /**

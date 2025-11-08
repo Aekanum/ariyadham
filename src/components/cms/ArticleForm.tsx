@@ -6,6 +6,8 @@ import { Loader2, Save, AlertCircle, Send, Calendar, X } from 'lucide-react';
 import RichTextEditor from '@/components/editor/RichTextEditor';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
+import CategorySelector from '@/components/cms/CategorySelector';
+import TagInput from '@/components/cms/TagInput';
 import {
   saveArticleDraft,
   publishArticle,
@@ -14,6 +16,7 @@ import {
 } from '@/lib/api/articles';
 import { useAutoSave } from '@/hooks/useAutoSave';
 import { useUnsavedChanges } from '@/hooks/useUnsavedChanges';
+import { Tag } from '@/types/database';
 
 interface Article {
   id?: string;
@@ -22,6 +25,8 @@ interface Article {
   excerpt?: string;
   status?: string;
   scheduled_publish_at?: string | null;
+  category_ids?: string[];
+  tags?: Tag[];
 }
 
 interface ArticleFormProps {
@@ -33,6 +38,8 @@ export default function ArticleForm({ article }: ArticleFormProps) {
   const [title, setTitle] = useState(article?.title || '');
   const [content, setContent] = useState(article?.content || '');
   const [excerpt, setExcerpt] = useState(article?.excerpt || '');
+  const [categoryIds, setCategoryIds] = useState<string[]>(article?.category_ids || []);
+  const [selectedTags, setSelectedTags] = useState<Tag[]>(article?.tags || []);
   const [saving, setSaving] = useState(false);
   const [publishing, setPublishing] = useState(false);
   const [scheduling, setScheduling] = useState(false);
@@ -352,6 +359,16 @@ export default function ArticleForm({ article }: ArticleFormProps) {
             maxLength={200}
           />
           <p className="text-xs text-gray-500 mt-1">{excerpt.length}/200 characters</p>
+        </div>
+
+        {/* Categories */}
+        <div>
+          <CategorySelector selectedIds={categoryIds} onChange={setCategoryIds} />
+        </div>
+
+        {/* Tags */}
+        <div>
+          <TagInput selectedTags={selectedTags} onChange={setSelectedTags} />
         </div>
 
         {/* Content Editor */}
