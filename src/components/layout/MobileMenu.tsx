@@ -108,7 +108,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           {/* Menu Footer */}
           <div className="border-t border-gray-200 px-6 py-4 dark:border-gray-800">
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              © 2025 Ariyadham. Buddhist Dharma Platform
+              © 2025 {t('app.name')}. {t('app.tagline')}
             </p>
           </div>
         </div>

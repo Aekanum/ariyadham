@@ -10,10 +10,12 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 import { useAuth } from '@/contexts/AuthContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function SignUpPage() {
   const router = useRouter();
   const { signUp, signInWithGoogle } = useAuth();
+  const { t } = useLanguage();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -90,10 +92,10 @@ export default function SignUpPage() {
         {/* Header */}
         <div className="text-center">
           <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Create Account
+            {t('signup.heading', {}, 'auth')}
           </h1>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            Join Ariyadham to share and discover dharma teachings
+            {t('signup.subtitle', {}, 'auth')}
           </p>
         </div>
 

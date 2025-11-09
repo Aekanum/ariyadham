@@ -46,7 +46,7 @@ export default function Header({ className = '' }: HeaderProps) {
             <span className="text-2xl" role="img" aria-label="lotus">
               🪷
             </span>
-            <span className="hidden sm:inline">Ariyadham</span>
+            <span className="hidden sm:inline">{t('app.name')}</span>
           </Link>
 
           {/* Desktop Navigation */}

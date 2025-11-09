@@ -4,6 +4,7 @@ import { useState, FormEvent, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 // Force dynamic rendering - don't pre-render at build time
 export const dynamic = 'force-dynamic';
@@ -12,6 +13,7 @@ function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { signIn, signInWithGoogle, isLoggedIn } = useAuth();
+  const { t } = useLanguage();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -91,10 +93,10 @@ function LoginForm() {
         {/* Header */}
         <div className="text-center">
           <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Welcome Back
+            {t('login.heading', {}, 'auth')}
           </h1>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            Sign in to your Ariyadham account
+            {t('login.subtitle', { appName: t('app.name', {}, 'common') }, 'auth')}
           </p>
         </div>
 
