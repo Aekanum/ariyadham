@@ -28,6 +28,20 @@ interface WebVitalsPayload {
  */
 export async function POST(request: NextRequest) {
   try {
+    // Check if Supabase is properly configured
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+    if (!supabaseUrl || !supabaseKey) {
+      // Supabase not configured - silently return success
+      // Web Vitals collection is optional and shouldn't break the app
+      console.warn('Web Vitals collection disabled: Supabase credentials not configured');
+      return NextResponse.json({
+        success: true,
+        message: 'Metric received (Supabase not configured)',
+      });
+    }
+
     const supabase = createServerClient();
 
     // Parse request body - handle both JSON (fetch) and form data (sendBeacon)
@@ -67,45 +81,61 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Get authenticated user (optional - metrics can be anonymous)
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+    // Safely attempt to store metric in database
+    try {
+      // Get authenticated user (optional - metrics can be anonymous)
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
 
-    // Store metric in database
-    const { error: insertError } = await supabase.from('web_vitals_metrics').insert({
-      user_id: user?.id || null,
-      metric_name: payload.metric,
-      metric_value: payload.value,
-      rating: payload.rating,
-      metric_id: payload.id,
-      delta: payload.delta,
-      navigation_type: payload.navigationType,
-      page_url: payload.url,
-      user_agent: payload.userAgent,
-      created_at: new Date(payload.timestamp).toISOString(),
-    });
-
-    if (insertError) {
-      console.error('Failed to insert Web Vitals metric:', {
-        metric: payload.metric,
-        value: payload.value,
-        error: insertError.message,
-        details: insertError,
+      // Store metric in database
+      const { error: insertError } = await supabase.from('web_vitals_metrics').insert({
+        user_id: user?.id || null,
+        metric_name: payload.metric,
+        metric_value: payload.value,
+        rating: payload.rating,
+        metric_id: payload.id,
+        delta: payload.delta,
+        navigation_type: payload.navigationType,
+        page_url: payload.url,
+        user_agent: payload.userAgent,
+        created_at: new Date(payload.timestamp).toISOString(),
       });
 
-      // Don't fail the request if we can't insert - just log it
-      // This ensures metrics collection doesn't impact user experience
+      if (insertError) {
+        console.error('Failed to insert Web Vitals metric:', {
+          metric: payload.metric,
+          value: payload.value,
+          error: insertError.message,
+          details: insertError,
+        });
+
+        // Don't fail the request if we can't insert - just log it
+        // This ensures metrics collection doesn't impact user experience
+        return NextResponse.json({
+          success: true,
+          message: 'Metric received but not stored',
+        });
+      }
+
       return NextResponse.json({
         success: true,
-        message: 'Metric received but not stored',
+        message: 'Metric stored successfully',
+      });
+    } catch (supabaseError) {
+      // Supabase operations failed (network, auth, etc.)
+      const errorMessage = supabaseError instanceof Error ? supabaseError.message : String(supabaseError);
+      console.warn('Supabase operation failed for Web Vitals:', {
+        metric: payload.metric,
+        error: errorMessage,
+      });
+
+      // Still return success - metrics collection is optional
+      return NextResponse.json({
+        success: true,
+        message: 'Metric received (storage failed)',
       });
     }
-
-    return NextResponse.json({
-      success: true,
-      message: 'Metric stored successfully',
-    });
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     const errorStack = error instanceof Error ? error.stack : '';
