@@ -18,6 +18,7 @@ import BookmarkButton from '@/components/article/BookmarkButton';
 import SocialShare from '@/components/article/SocialShare';
 import ReadingHistoryTracker from '@/components/article/ReadingHistoryTracker';
 import { CommentSection } from '@/components/comments';
+import { StructuredData } from '@/components/seo/StructuredData';
 import type { ArticlePageProps, ArticleWithAuthor } from '@/types/article';
 import { Metadata } from 'next';
 import { generateArticleMetadata, generateArticleStructuredData } from '@/lib/seo/metadata';
@@ -172,10 +173,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   return (
     <>
       {/* Structured Data (Schema.org) - Story 3.4 */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      <StructuredData data={structuredData} />
 
       {/* Reading History Tracker (Story 5.4) */}
       <ReadingHistoryTracker articleId={articleWithAuthor.id} isAuthenticated={!!user} />

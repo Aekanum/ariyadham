@@ -13,6 +13,7 @@ import { createServerClient } from '@/lib/supabase-server';
 import ArticleCard from '@/components/article/ArticleCard';
 import { ArticleWithAuthor } from '@/types/article';
 import Link from 'next/link';
+import { StructuredData } from '@/components/seo/StructuredData';
 import {
   generateWebSiteStructuredData,
   generateOrganizationStructuredData,
@@ -95,14 +96,8 @@ export default async function HomePage() {
   return (
     <>
       {/* Structured Data (Schema.org) - Story 7.3 */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteData) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationData) }}
-      />
+      <StructuredData data={webSiteData} />
+      <StructuredData data={organizationData} />
 
       <main id="main-content" className="min-h-screen bg-gray-50 dark:bg-gray-900">
         {/* Story 8.4: Mobile-first spacing - sm on mobile, grows with breakpoints */}
