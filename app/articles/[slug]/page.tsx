@@ -23,6 +23,13 @@ import { Metadata } from 'next';
 import { generateArticleMetadata, generateArticleStructuredData } from '@/lib/seo/metadata';
 
 /**
+ * ISR Configuration (Story 7.4: Caching Strategy)
+ * Revalidate article pages every 60 seconds
+ * This enables Incremental Static Regeneration for better performance
+ */
+export const revalidate = 60;
+
+/**
  * Generate metadata for SEO
  * Story 3.4: Enhanced with Open Graph, Twitter Cards, and canonical URLs
  */

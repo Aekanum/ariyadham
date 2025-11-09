@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerClient } from '@/lib/supabase-server';
+import { cachedJson, CacheConfig } from '@/lib/cache';
 
 /**
  * GET /api/articles
  * Get published articles with optional filtering
  * Query params: status, limit, offset, category
+ *
+ * Story 7.4: Caching Strategy
+ * - Public articles are cached with SHORT strategy (30s)
+ * - Private/draft articles are not cached
  */
 export async function GET(request: NextRequest) {
   const supabase = createServerClient();
@@ -47,10 +52,16 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    return NextResponse.json({
-      success: true,
-      data: articles || [],
-    });
+    // Cache strategy: Only cache published articles (public data)
+    const cacheStrategy = status === 'published' ? CacheConfig.SHORT : CacheConfig.NONE;
+
+    return cachedJson(
+      {
+        success: true,
+        data: articles || [],
+      },
+      cacheStrategy
+    );
   } catch (error) {
     console.error('Error in articles fetch:', error);
     return NextResponse.json(

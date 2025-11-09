@@ -87,11 +87,11 @@ development_status:
   epic-6-retrospective: optional
 
   # ===== EPIC 7: Performance & SEO Optimization =====
-  epic-7: in-progress
+  epic-7: done
   7-1-image-optimization-cdn: done
   7-2-core-web-vitals-performance: done
   7-3-seo-foundation-structured-data: done
-  7-4-caching-strategy: backlog
+  7-4-caching-strategy: done
   epic-7-retrospective: optional
 
   # ===== EPIC 8: Multi-Language & Accessibility =====

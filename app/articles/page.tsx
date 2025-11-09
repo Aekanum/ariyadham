@@ -14,6 +14,12 @@ export const metadata = {
   description: 'Browse all published articles',
 };
 
+/**
+ * ISR Configuration (Story 7.4: Caching Strategy)
+ * Revalidate article list page every 30 seconds
+ */
+export const revalidate = 30;
+
 export default async function ArticlesPage({ searchParams }: ArticlesPageProps) {
   const page = parseInt(searchParams.page || '1', 10);
   const pageSize = 12;
