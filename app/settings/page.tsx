@@ -3,6 +3,7 @@
 import { useTheme } from '@/contexts/ThemeContext';
 import { usePreferences } from '@/contexts/PreferencesContext';
 import { useState } from 'react';
+import SeniorModeToggle from '@/components/accessibility/SeniorModeToggle'; // Story 8.5
 
 export default function SettingsPage() {
   const { theme, setTheme } = useTheme();
@@ -170,6 +171,9 @@ export default function SettingsPage() {
               </button>
             </div>
           </div>
+
+          {/* Story 8.5: Senior-Friendly Mode */}
+          <SeniorModeToggle />
         </div>
       </div>
     </div>
