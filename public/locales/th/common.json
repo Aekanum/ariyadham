@@ -6,10 +6,15 @@
   "nav": {
     "home": "หน้าแรก",
     "articles": "บทความ",
+    "meditation": "การทำสมาธิ",
+    "dharma": "ธรรมะ",
     "categories": "หมวดหมู่",
     "search": "ค้นหา",
     "about": "เกี่ยวกับ",
-    "contact": "ติดต่อ"
+    "contact": "ติดต่อ",
+    "menu": "เมนู",
+    "bookmarks": "ที่คั่นหนังสือของฉัน",
+    "settings": "การตั้งค่า"
   },
   "actions": {
     "readMore": "อ่านต่อ",

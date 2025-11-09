@@ -10,6 +10,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
+import { useTranslation } from '@/contexts/LanguageContext';
 import { Menu, X } from 'lucide-react';
 import MobileMenu from './MobileMenu';
 import LanguageSwitcher from './LanguageSwitcher';
@@ -21,6 +22,7 @@ interface HeaderProps {
 export default function Header({ className = '' }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { isDesktop } = useBreakpoint();
+  const { t } = useTranslation('common');
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((prev) => !prev);
@@ -54,25 +56,25 @@ export default function Header({ className = '' }: HeaderProps) {
                 href="/articles"
                 className="text-gray-700 transition-colors hover:text-primary dark:text-gray-300 dark:hover:text-primary"
               >
-                Articles
+                {t('nav.articles')}
               </Link>
               <Link
                 href="/categories/meditation"
                 className="text-gray-700 transition-colors hover:text-primary dark:text-gray-300 dark:hover:text-primary"
               >
-                Meditation
+                {t('nav.meditation')}
               </Link>
               <Link
                 href="/categories/dharma"
                 className="text-gray-700 transition-colors hover:text-primary dark:text-gray-300 dark:hover:text-primary"
               >
-                Dharma
+                {t('nav.dharma')}
               </Link>
               <Link
                 href="/search"
                 className="text-gray-700 transition-colors hover:text-primary dark:text-gray-300 dark:hover:text-primary"
               >
-                Search
+                {t('nav.search')}
               </Link>
             </nav>
           )}

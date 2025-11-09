@@ -6,10 +6,15 @@
   "nav": {
     "home": "Home",
     "articles": "Articles",
+    "meditation": "Meditation",
+    "dharma": "Dharma",
     "categories": "Categories",
     "search": "Search",
     "about": "About",
-    "contact": "Contact"
+    "contact": "Contact",
+    "menu": "Menu",
+    "bookmarks": "My Bookmarks",
+    "settings": "Settings"
   },
   "actions": {
     "readMore": "Read More",

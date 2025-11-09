@@ -8,6 +8,7 @@ import WebVitalsReporter from '@/components/analytics/WebVitalsReporter';
 import SkipToContent from '@/components/accessibility/SkipToContent';
 import ScreenReaderAnnouncer from '@/components/accessibility/ScreenReaderAnnouncer';
 import HtmlLangUpdater from '@/components/accessibility/HtmlLangUpdater';
+import LanguageLoadingIndicator from '@/components/seo/LanguageLoadingIndicator';
 import Header from '@/components/layout/Header';
 
 export const metadata: Metadata = {
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="th" suppressHydrationWarning>
       <body className="font-sans antialiased">
         <LanguageProvider>
           <ThemeProvider>
@@ -50,6 +51,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
                 {/* Story 8.3: Dynamic lang attribute updater */}
                 <HtmlLangUpdater />
+
+                {/* Story 8.1: Language loading indicator */}
+                <LanguageLoadingIndicator />
 
                 {/* Story 8.4: Mobile-first responsive header */}
                 <Header />

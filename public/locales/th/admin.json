@@ -1,0 +1,100 @@
+{
+  "dashboard": {
+    "title": "แดชบอร์ดผู้ดูแลระบบ",
+    "welcome": "ยินดีต้อนรับ ผู้ดูแลระบบ!",
+    "overallStats": "สถิติโดยรวม",
+    "totalUsers": "ผู้ใช้ทั้งหมด",
+    "totalArticles": "บทความทั้งหมด",
+    "totalComments": "ความเห็นทั้งหมด",
+    "activeAuthors": "ผู้เขียนที่ใช้งาน",
+    "platformHealth": "สุขภาพแพลตฟอร์ม"
+  },
+  "users": {
+    "title": "การจัดการผู้ใช้",
+    "allUsers": "ผู้ใช้ทั้งหมด",
+    "authors": "ผู้เขียน",
+    "readers": "ผู้อ่าน",
+    "admins": "ผู้ดูแลระบบ",
+    "suspended": "ผู้ใช้ที่ถูกระงับ",
+    "blockUser": "ปิดกั้นผู้ใช้",
+    "unblockUser": "ยกเลิกการปิดกั้นผู้ใช้",
+    "resetPassword": "รีเซ็ตรหัสผ่าน",
+    "noUsers": "ไม่พบผู้ใช้"
+  },
+  "articles": {
+    "title": "การตรวจสอบบทความ",
+    "allArticles": "บทความทั้งหมด",
+    "pending": "รอการตรวจสอบ",
+    "published": "เผยแพร่แล้ว",
+    "flagged": "ทำเครื่องหมายสำหรับการตรวจสอบ",
+    "approve": "อนุมัติ",
+    "reject": "ปฏิเสธ",
+    "flag": "ทำเครื่องหมาย",
+    "unflag": "ยกเลิกการทำเครื่องหมาย",
+    "deleteArticle": "ลบบทความ",
+    "reviewReason": "เหตุผลการตรวจสอบ"
+  },
+  "comments": {
+    "title": "การตรวจสอบความเห็น",
+    "allComments": "ความเห็นทั้งหมด",
+    "pending": "รอการตรวจสอบ",
+    "approved": "อนุมัติแล้ว",
+    "flagged": "ความเห็นที่ทำเครื่องหมาย",
+    "approveComment": "อนุมัติความเห็น",
+    "deleteComment": "ลบความเห็น",
+    "banUser": "แบนผู้ใช้"
+  },
+  "featured": {
+    "title": "บทความแนะนำ",
+    "manage": "จัดการบทความแนะนำ",
+    "setFeatured": "ตั้งเป็นแนะนำ",
+    "removeFeatured": "ลบออกจากแนะนำ",
+    "reorder": "จัดเรียงลำดับบทความแนะนำ",
+    "dragToReorder": "ลากเพื่อจัดเรียงลำดับใหม่"
+  },
+  "reports": {
+    "title": "รายงานและการวิเคราะห์",
+    "userGrowth": "การเติบโตของผู้ใช้",
+    "articleStats": "สถิติบทความ",
+    "engagementMetrics": "เมตริกการมีส่วนร่วม",
+    "trafficAnalytics": "การวิเคราะห์การเข้าชม",
+    "exportData": "ส่งออกข้อมูล",
+    "dateRange": "ช่วงวันที่"
+  },
+  "settings": {
+    "title": "การตั้งค่าแพลตฟอร์ม",
+    "siteInfo": "ข้อมูลไซต์",
+    "siteName": "ชื่อไซต์",
+    "tagline": "สโลแกน",
+    "description": "คำอธิบาย",
+    "maintenance": "โหมดการบำรุงรักษา",
+    "enableMaintenance": "เปิดโหมดการบำรุงรักษา",
+    "maintenanceMessage": "ข้อความการบำรุงรักษา",
+    "emailSettings": "การตั้งค่าอีเมล",
+    "smtpServer": "เซิร์ฟเวอร์ SMTP",
+    "senderEmail": "อีเมลผู้ส่ง"
+  },
+  "logs": {
+    "title": "บันทึกระบบ",
+    "activityLog": "บันทึกกิจกรรม",
+    "errorLog": "บันทึกข้อผิดพลาด",
+    "securityLog": "บันทึกความปลอดภัย",
+    "timestamp": "ประทับเวลา",
+    "action": "การกระทำ",
+    "user": "ผู้ใช้",
+    "details": "รายละเอียด"
+  },
+  "errors": {
+    "loadingFailed": "ไม่สามารถโหลดข้อมูลผู้ดูแลระบบ",
+    "actionFailed": "การดำเนินการล้มเหลว",
+    "permissionDenied": "ปฏิเสธการอนุญาต",
+    "tryAgain": "ลองอีกครั้ง"
+  },
+  "success": {
+    "userBlocked": "ปิดกั้นผู้ใช้สำเร็จ",
+    "userUnblocked": "ยกเลิกการปิดกั้นผู้ใช้สำเร็จ",
+    "articleDeleted": "ลบบทความสำเร็จ",
+    "commentDeleted": "ลบความเห็นสำเร็จ",
+    "settingsSaved": "บันทึกการตั้งค่าสำเร็จ"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "dashboard": {
+    "title": "Admin Dashboard",
+    "welcome": "Welcome, Admin!",
+    "overallStats": "Overall Statistics",
+    "totalUsers": "Total Users",
+    "totalArticles": "Total Articles",
+    "totalComments": "Total Comments",
+    "activeAuthors": "Active Authors",
+    "platformHealth": "Platform Health"
+  },
+  "users": {
+    "title": "User Management",
+    "allUsers": "All Users",
+    "authors": "Authors",
+    "readers": "Readers",
+    "admins": "Administrators",
+    "suspended": "Suspended Users",
+    "blockUser": "Block User",
+    "unblockUser": "Unblock User",
+    "resetPassword": "Reset Password",
+    "noUsers": "No users found"
+  },
+  "articles": {
+    "title": "Article Moderation",
+    "allArticles": "All Articles",
+    "pending": "Pending Review",
+    "published": "Published",
+    "flagged": "Flagged for Review",
+    "approve": "Approve",
+    "reject": "Reject",
+    "flag": "Flag",
+    "unflag": "Unflag",
+    "deleteArticle": "Delete Article",
+    "reviewReason": "Review Reason"
+  },
+  "comments": {
+    "title": "Comment Moderation",
+    "allComments": "All Comments",
+    "pending": "Pending Review",
+    "approved": "Approved",
+    "flagged": "Flagged Comments",
+    "approveComment": "Approve Comment",
+    "deleteComment": "Delete Comment",
+    "banUser": "Ban User"
+  },
+  "featured": {
+    "title": "Featured Articles",
+    "manage": "Manage Featured",
+    "setFeatured": "Set as Featured",
+    "removeFeatured": "Remove from Featured",
+    "reorder": "Reorder Featured Articles",
+    "dragToReorder": "Drag to reorder"
+  },
+  "reports": {
+    "title": "Reports & Analytics",
+    "userGrowth": "User Growth",
+    "articleStats": "Article Statistics",
+    "engagementMetrics": "Engagement Metrics",
+    "trafficAnalytics": "Traffic Analytics",
+    "exportData": "Export Data",
+    "dateRange": "Date Range"
+  },
+  "settings": {
+    "title": "Platform Settings",
+    "siteInfo": "Site Information",
+    "siteName": "Site Name",
+    "tagline": "Tagline",
+    "description": "Description",
+    "maintenance": "Maintenance Mode",
+    "enableMaintenance": "Enable Maintenance Mode",
+    "maintenanceMessage": "Maintenance Message",
+    "emailSettings": "Email Settings",
+    "smtpServer": "SMTP Server",
+    "senderEmail": "Sender Email"
+  },
+  "logs": {
+    "title": "System Logs",
+    "activityLog": "Activity Log",
+    "errorLog": "Error Log",
+    "securityLog": "Security Log",
+    "timestamp": "Timestamp",
+    "action": "Action",
+    "user": "User",
+    "details": "Details"
+  },
+  "errors": {
+    "loadingFailed": "Failed to load admin data",
+    "actionFailed": "Action failed",
+    "permissionDenied": "Permission denied",
+    "tryAgain": "Try Again"
+  },
+  "success": {
+    "userBlocked": "User blocked successfully",
+    "userUnblocked": "User unblocked successfully",
+    "articleDeleted": "Article deleted successfully",
+    "commentDeleted": "Comment deleted successfully",
+    "settingsSaved": "Settings saved successfully"
+  }
+}

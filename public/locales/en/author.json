@@ -1,0 +1,64 @@
+{
+  "dashboard": {
+    "title": "Author Dashboard",
+    "welcome": "Welcome, {authorName}!",
+    "stats": "Your Statistics",
+    "totalArticles": "Total Articles",
+    "totalViews": "Total Views",
+    "totalAnjali": "Total Anjali",
+    "totalComments": "Total Comments",
+    "recentActivity": "Recent Activity"
+  },
+  "articles": {
+    "title": "My Articles",
+    "published": "Published",
+    "draft": "Draft",
+    "scheduled": "Scheduled",
+    "archived": "Archived",
+    "newArticle": "New Article",
+    "edit": "Edit",
+    "delete": "Delete",
+    "publish": "Publish",
+    "schedule": "Schedule",
+    "archive": "Archive",
+    "restore": "Restore",
+    "noArticles": "You haven't written any articles yet.",
+    "startWriting": "Start Writing"
+  },
+  "analytics": {
+    "title": "Article Analytics",
+    "views": "Views",
+    "anjali": "Anjali",
+    "comments": "Comments",
+    "bookmarks": "Bookmarks",
+    "engagementRate": "Engagement Rate",
+    "averageReadTime": "Average Read Time",
+    "mostViewed": "Most Viewed",
+    "trending": "Trending"
+  },
+  "settings": {
+    "title": "Author Settings",
+    "bio": "Author Bio",
+    "avatar": "Avatar",
+    "displayName": "Display Name",
+    "email": "Email",
+    "notificationPreferences": "Notification Preferences",
+    "emailNotifications": "Email Notifications",
+    "newComments": "New Comments",
+    "newAnjali": "New Anjali",
+    "weeklyReport": "Weekly Report"
+  },
+  "errors": {
+    "loadingFailed": "Failed to load author data",
+    "deleteFailed": "Failed to delete article",
+    "publishFailed": "Failed to publish article",
+    "scheduleFailed": "Failed to schedule article",
+    "tryAgain": "Try Again"
+  },
+  "success": {
+    "published": "Article published successfully",
+    "deleted": "Article deleted successfully",
+    "scheduled": "Article scheduled successfully",
+    "updated": "Article updated successfully"
+  }
+}

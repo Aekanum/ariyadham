@@ -84,10 +84,7 @@ export function LanguageProvider({ children, initialLocale }: LanguageProviderPr
   const setLocale = useCallback((newLocale: Locale) => {
     setLocaleState(newLocale);
     setCurrentLocale(newLocale);
-
-    // Reload the page to ensure all content updates
-    // In a more sophisticated implementation, we might handle this client-side
-    window.location.reload();
+    // No page reload needed - context and components will re-render automatically
   }, []);
 
   const t = useCallback(
