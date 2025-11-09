@@ -30,8 +30,28 @@ export async function POST(request: NextRequest) {
   try {
     const supabase = createServerClient();
 
-    // Parse request body
-    const payload: WebVitalsPayload = await request.json();
+    // Parse request body - handle both JSON (fetch) and form data (sendBeacon)
+    let payload: WebVitalsPayload;
+
+    const contentType = request.headers.get('content-type') || '';
+
+    if (contentType.includes('application/json')) {
+      // Handle JSON from fetch requests
+      payload = await request.json();
+    } else {
+      // Handle form data from sendBeacon (application/x-www-form-urlencoded)
+      // sendBeacon sends the body as the first form field
+      try {
+        const text = await request.text();
+        // Try to parse as JSON (sendBeacon often sends JSON as plain text)
+        payload = JSON.parse(text);
+      } catch {
+        // If not JSON, try to parse as form data
+        const formData = await request.formData();
+        const bodyString = formData.get('') as string;
+        payload = JSON.parse(bodyString || '{}');
+      }
+    }
 
     // Validate payload
     if (!payload.metric || !payload.value || !payload.rating) {
@@ -67,7 +87,12 @@ export async function POST(request: NextRequest) {
     });
 
     if (insertError) {
-      console.error('Failed to insert Web Vitals metric:', insertError);
+      console.error('Failed to insert Web Vitals metric:', {
+        metric: payload.metric,
+        value: payload.value,
+        error: insertError.message,
+        details: insertError,
+      });
 
       // Don't fail the request if we can't insert - just log it
       // This ensures metrics collection doesn't impact user experience
@@ -82,9 +107,17 @@ export async function POST(request: NextRequest) {
       message: 'Metric stored successfully',
     });
   } catch (error) {
-    console.error('Error processing Web Vitals metric:', error);
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    const errorStack = error instanceof Error ? error.stack : '';
+
+    console.error('Error processing Web Vitals metric:', {
+      message: errorMessage,
+      stack: errorStack,
+      timestamp: new Date().toISOString(),
+    });
 
     // Return success even on error to not impact client performance
+    // The error is logged for debugging
     return NextResponse.json({
       success: true,
       message: 'Metric received',

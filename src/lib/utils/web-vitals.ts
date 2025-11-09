@@ -280,7 +280,7 @@ export function clearWebVitalsMetrics(): void {
  */
 export async function sendWebVitalsToAnalytics(metric: WebVitalsMetric): Promise<void> {
   try {
-    const body = JSON.stringify({
+    const payload = {
       metric: metric.name,
       value: metric.value,
       rating: metric.rating,
@@ -290,14 +290,24 @@ export async function sendWebVitalsToAnalytics(metric: WebVitalsMetric): Promise
       url: window.location.href,
       userAgent: navigator.userAgent,
       timestamp: Date.now(),
-    });
+    };
+
+    // Construct absolute URL for the API endpoint
+    const apiUrl = typeof window !== 'undefined' && window.location
+      ? `${window.location.protocol}//${window.location.host}/api/analytics/web-vitals`
+      : '/api/analytics/web-vitals';
+
+    const body = JSON.stringify(payload);
 
     // Use sendBeacon for reliable analytics even during page unload
+    // Note: sendBeacon sends as application/x-www-form-urlencoded, not JSON
     if (navigator.sendBeacon) {
-      navigator.sendBeacon('/api/analytics/web-vitals', body);
+      // sendBeacon doesn't support custom headers, so we send JSON string as-is
+      // The backend will handle both formats
+      navigator.sendBeacon(apiUrl, body);
     } else {
       // Fallback to fetch for browsers that don't support sendBeacon
-      await fetch('/api/analytics/web-vitals', {
+      await fetch(apiUrl, {
         method: 'POST',
         body,
         headers: { 'Content-Type': 'application/json' },
@@ -305,6 +315,13 @@ export async function sendWebVitalsToAnalytics(metric: WebVitalsMetric): Promise
       });
     }
   } catch (error) {
-    console.error('Failed to send Web Vitals to analytics:', error);
+    // Log with more context for debugging
+    if (typeof window !== 'undefined') {
+      console.error('Failed to send Web Vitals to analytics:', {
+        error: error instanceof Error ? error.message : String(error),
+        metric: metric.name,
+        value: metric.value,
+      });
+    }
   }
 }
