@@ -1,8 +1,9 @@
 /**
  * Button Component
  * Story 8.3: WCAG 2.1 AA Accessibility
+ * Story 8.4: Mobile-First Responsive Design
  *
- * Enhanced button component with loading states, ARIA support, and accessibility features
+ * Enhanced button component with loading states, ARIA support, and touch-friendly sizing
  */
 
 import { ButtonHTMLAttributes, forwardRef } from 'react';
@@ -39,10 +40,11 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       danger: 'bg-red-600 text-white hover:bg-red-700',
     };
 
+    // Story 8.4: All button sizes meet minimum 44x44px touch target
     const sizes = {
-      sm: 'px-3 py-1.5 text-sm min-h-[32px]',
-      md: 'px-4 py-2 text-base min-h-[40px]',
-      lg: 'px-6 py-3 text-lg min-h-[48px]',
+      sm: 'px-3 py-2 text-sm min-h-touch-min min-w-[44px]', // 44px minimum
+      md: 'px-4 py-2.5 text-base min-h-touch-min min-w-[56px]', // 44px+ comfortable
+      lg: 'px-6 py-3 text-lg min-h-[52px] min-w-[80px]', // Large touch target
     };
 
     const isDisabled = disabled || isLoading;

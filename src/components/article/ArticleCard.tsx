@@ -1,3 +1,10 @@
+/**
+ * ArticleCard Component
+ * Story 8.4: Mobile-First Responsive Design
+ *
+ * Responsive article card with mobile-optimized spacing and typography
+ */
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArticleWithAuthor } from '@/types/article';
@@ -39,29 +46,32 @@ export default function ArticleCard({ article, isFeatured = false }: ArticleCard
         </Link>
       )}
 
-      <div className="p-6">
-        {/* Category Badge */}
+      {/* Story 8.4: Mobile-first padding - smaller on mobile, grows on larger screens */}
+      <div className="p-4 sm:p-5 md:p-6">
+        {/* Category Badge - Story 8.4: Touch-friendly sizing */}
         {article.category && (
-          <div className="mb-3">
+          <div className="mb-2 sm:mb-3">
             <Link
               href={`/categories/${article.category.toLowerCase()}`}
-              className="inline-block rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-800 transition-colors hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-200 dark:hover:bg-blue-800"
+              className="inline-block min-h-[32px] rounded-full bg-blue-100 px-3 py-1.5 text-xs font-medium text-blue-800 transition-colors hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-200 dark:hover:bg-blue-800"
             >
               {article.category}
             </Link>
           </div>
         )}
 
-        {/* Title */}
+        {/* Title - Story 8.4: Responsive typography */}
         <Link href={`/articles/${article.slug}`}>
-          <h3 className="mb-2 text-xl font-bold text-gray-900 transition-colors group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">
+          <h3 className="mb-2 text-lg font-bold text-gray-900 transition-colors group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400 sm:text-xl">
             {article.title}
           </h3>
         </Link>
 
-        {/* Excerpt */}
+        {/* Excerpt - Story 8.4: Responsive text */}
         {article.excerpt && (
-          <p className="mb-4 line-clamp-3 text-gray-600 dark:text-gray-400">{article.excerpt}</p>
+          <p className="mb-3 line-clamp-3 text-sm text-gray-600 dark:text-gray-400 sm:mb-4 sm:text-base">
+            {article.excerpt}
+          </p>
         )}
 
         {/* Author and Metadata */}

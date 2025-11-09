@@ -8,6 +8,7 @@ import WebVitalsReporter from '@/components/analytics/WebVitalsReporter';
 import SkipToContent from '@/components/accessibility/SkipToContent';
 import ScreenReaderAnnouncer from '@/components/accessibility/ScreenReaderAnnouncer';
 import HtmlLangUpdater from '@/components/accessibility/HtmlLangUpdater';
+import Header from '@/components/layout/Header';
 
 export const metadata: Metadata = {
   title: 'Ariyadham - Buddhist Dharma Platform',
@@ -49,6 +50,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
                 {/* Story 8.3: Dynamic lang attribute updater */}
                 <HtmlLangUpdater />
+
+                {/* Story 8.4: Mobile-first responsive header */}
+                <Header />
 
                 {children}
 
