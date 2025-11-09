@@ -7,6 +7,7 @@ interface Preferences {
   fontSize: number;
   language: 'en' | 'th';
   accessibilityMode: boolean;
+  seniorMode: boolean; // Story 8.5: Senior-Friendly Mode
 }
 
 interface PreferencesContextType {
@@ -14,6 +15,7 @@ interface PreferencesContextType {
   updateFontSize: (size: number) => Promise<void>;
   updateLanguage: (lang: 'en' | 'th') => Promise<void>;
   updateAccessibilityMode: (enabled: boolean) => Promise<void>;
+  updateSeniorMode: (enabled: boolean) => Promise<void>; // Story 8.5
   loading: boolean;
 }
 
@@ -23,6 +25,7 @@ const DEFAULT_PREFERENCES: Preferences = {
   fontSize: 16,
   language: 'en',
   accessibilityMode: false,
+  seniorMode: false, // Story 8.5: Senior Mode disabled by default
 };
 
 export function PreferencesProvider({ children }: { children: ReactNode }) {
@@ -37,6 +40,7 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
         fontSize: user.reading_font_size,
         language: user.language_preference,
         accessibilityMode: user.accessibility_mode,
+        seniorMode: (user as any).senior_mode || false, // Story 8.5 - Property may not exist yet in DB
       });
     } else {
       // Load from localStorage if not logged in
@@ -51,9 +55,19 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
     }
   }, [user]);
 
-  // Apply font size to document
+  // Apply preferences to document
   useEffect(() => {
+    // Story 8.5: Apply senior mode class to html element
+    if (preferences.seniorMode) {
+      document.documentElement.classList.add('senior-mode');
+    } else {
+      document.documentElement.classList.remove('senior-mode');
+    }
+
+    // Apply font size
     document.documentElement.style.setProperty('--base-font-size', `${preferences.fontSize}px`);
+
+    // Save to localStorage
     localStorage.setItem('preferences', JSON.stringify(preferences));
   }, [preferences]);
 
@@ -83,6 +97,7 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
           fontSize: user.reading_font_size,
           language: user.language_preference,
           accessibilityMode: user.accessibility_mode,
+          seniorMode: (user as any).senior_mode || false, // Story 8.5 - Property may not exist yet in DB
         });
       }
     } finally {
@@ -94,6 +109,7 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
   const updateLanguage = (lang: 'en' | 'th') => updatePreference('language', lang);
   const updateAccessibilityMode = (enabled: boolean) =>
     updatePreference('accessibilityMode', enabled);
+  const updateSeniorMode = (enabled: boolean) => updatePreference('seniorMode', enabled); // Story 8.5
 
   return (
     <PreferencesContext.Provider
@@ -102,6 +118,7 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
         updateFontSize,
         updateLanguage,
         updateAccessibilityMode,
+        updateSeniorMode, // Story 8.5
         loading,
       }}
     >
