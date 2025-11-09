@@ -1,4 +1,5 @@
 # Ariyadham Accessibility Guide
+
 **Story 8.3: WCAG 2.1 AA Accessibility Compliance**
 
 ## Overview
@@ -22,18 +23,21 @@ Ariyadham is committed to providing an inclusive experience for all users, inclu
 ## Accessibility Features
 
 ### 1. Skip to Content Link
+
 - **Location**: First focusable element on every page
 - **Purpose**: Allows keyboard users to bypass navigation and jump directly to main content
 - **Keyboard**: Press `Tab` on page load to reveal the link
 - **Implementation**: `src/components/accessibility/SkipToContent.tsx`
 
 ### 2. Semantic HTML
+
 - Proper heading hierarchy (h1 → h2 → h3)
 - Landmark regions: `<header>`, `<nav>`, `<main>`, `<footer>`
 - Article and section elements for content structure
 - Lists for navigation and grouped content
 
 ### 3. ARIA Attributes
+
 - `aria-label` for icons and ambiguous elements
 - `aria-describedby` for form error messages
 - `aria-live` regions for dynamic content updates
@@ -41,18 +45,21 @@ Ariyadham is committed to providing an inclusive experience for all users, inclu
 - `role` attributes where semantic HTML isn't sufficient
 
 ### 4. Focus Management
+
 - Visible focus indicators on all interactive elements
 - Focus trap in modals and dialogs
 - Logical tab order throughout the application
 - Return focus to trigger element when closing modals
 
 ### 5. Screen Reader Announcements
+
 - Live regions for dynamic content changes
 - Polite announcements for non-critical updates
 - Assertive announcements for important alerts
 - Hidden helper text for context
 
 ### 6. Keyboard Navigation
+
 - All functionality accessible via keyboard
 - Custom keyboard shortcuts documented
 - Arrow keys for list navigation
@@ -60,12 +67,14 @@ Ariyadham is committed to providing an inclusive experience for all users, inclu
 - Enter/Space to activate buttons
 
 ### 7. Color Contrast
+
 - Minimum 4.5:1 for normal text
 - Minimum 3:1 for large text (18pt+)
 - Information not conveyed by color alone
 - See [Color Contrast Verification](./color-contrast-verification.md)
 
 ### 8. Responsive Text
+
 - Base font size respects user preferences
 - Text scales up to 200% without horizontal scrolling
 - Line height and spacing optimize readability
@@ -78,17 +87,20 @@ Ariyadham is committed to providing an inclusive experience for all users, inclu
 ### Perceivable
 
 #### 1.1 Text Alternatives
+
 ✅ All images have meaningful alt text
 ✅ Decorative images use empty alt or aria-hidden
 ✅ Icons have aria-labels or are accompanied by text
 
 #### 1.3 Adaptable
+
 ✅ Semantic HTML maintains meaningful structure
 ✅ Content order is logical without CSS
 ✅ Form labels properly associated with inputs
 ✅ Dynamic lang attribute for internationalization
 
 #### 1.4 Distinguishable
+
 ✅ Color contrast meets AA standards (4.5:1)
 ✅ Text resizable up to 200%
 ✅ Images of text avoided (except logos)
@@ -97,17 +109,20 @@ Ariyadham is committed to providing an inclusive experience for all users, inclu
 ### Operable
 
 #### 2.1 Keyboard Accessible
+
 ✅ All functionality available via keyboard
 ✅ No keyboard traps
 ✅ Skip to content link provided
 ✅ Custom keyboard shortcuts documented
 
 #### 2.2 Enough Time
+
 ✅ No time limits on user interactions
 ✅ Auto-save for form drafts
 ✅ Session timeout warnings (when implemented)
 
 #### 2.4 Navigable
+
 ✅ Skip to content mechanism
 ✅ Descriptive page titles
 ✅ Logical focus order
@@ -118,17 +133,20 @@ Ariyadham is committed to providing an inclusive experience for all users, inclu
 ### Understandable
 
 #### 3.1 Readable
+
 ✅ Page language identified (html lang)
 ✅ Dynamic language switching
 ✅ Unusual words explained in context
 
 #### 3.2 Predictable
+
 ✅ Consistent navigation across pages
 ✅ Consistent identification of components
 ✅ No automatic context changes
 ✅ Navigation order is consistent
 
 #### 3.3 Input Assistance
+
 ✅ Error identification in forms
 ✅ Labels and instructions provided
 ✅ Error suggestions offered
@@ -137,6 +155,7 @@ Ariyadham is committed to providing an inclusive experience for all users, inclu
 ### Robust
 
 #### 4.1 Compatible
+
 ✅ Valid HTML markup
 ✅ Proper ARIA usage
 ✅ Name, role, value available for UI components
@@ -148,32 +167,35 @@ Ariyadham is committed to providing an inclusive experience for all users, inclu
 
 ### Global Shortcuts
 
-| Key | Action |
-|-----|--------|
-| `Tab` | Move focus forward |
-| `Shift + Tab` | Move focus backward |
-| `Enter` | Activate button/link |
-| `Space` | Activate button, toggle checkbox |
-| `Escape` | Close modal/dialog/dropdown |
-| `Arrow Keys` | Navigate lists/menus |
-| `Home` | Jump to first item in list |
-| `End` | Jump to last item in list |
+| Key           | Action                           |
+| ------------- | -------------------------------- |
+| `Tab`         | Move focus forward               |
+| `Shift + Tab` | Move focus backward              |
+| `Enter`       | Activate button/link             |
+| `Space`       | Activate button, toggle checkbox |
+| `Escape`      | Close modal/dialog/dropdown      |
+| `Arrow Keys`  | Navigate lists/menus             |
+| `Home`        | Jump to first item in list       |
+| `End`         | Jump to last item in list        |
 
 ### Component-Specific
 
 #### Dialogs/Modals
+
 - `Tab`: Navigate within dialog
 - `Escape`: Close dialog
 - Focus trapped within dialog
 - Focus returns to trigger on close
 
 #### Dropdowns/Menus
+
 - `Enter/Space`: Open menu
 - `Arrow Up/Down`: Navigate items
 - `Escape`: Close menu
 - `Enter`: Select item
 
 #### Forms
+
 - `Tab`: Move between fields
 - `Space`: Toggle checkbox/radio
 - `Enter`: Submit form
@@ -184,6 +206,7 @@ Ariyadham is committed to providing an inclusive experience for all users, inclu
 ## Screen Reader Support
 
 ### Tested With
+
 - **NVDA** (Windows)
 - **JAWS** (Windows)
 - **VoiceOver** (macOS, iOS)
@@ -192,6 +215,7 @@ Ariyadham is committed to providing an inclusive experience for all users, inclu
 ### Features
 
 #### Announcements
+
 ```tsx
 // Polite announcements (non-interrupting)
 announceToScreenReader('Article saved', 'polite');
@@ -201,12 +225,14 @@ announceToScreenReader('Error occurred', 'assertive');
 ```
 
 #### Live Regions
+
 - Form validation errors
 - Loading states
 - Success/error messages
 - Dynamic content updates
 
 #### Descriptive Labels
+
 ```tsx
 // Good: Descriptive label
 <button aria-label="Delete article 'Introduction to Dharma'">
@@ -227,11 +253,13 @@ announceToScreenReader('Error occurred', 'assertive');
 ### Text Contrast Ratios
 
 #### Light Theme
+
 - **Primary text**: #111827 on #FFFFFF (16.11:1) ✅ AAA
 - **Secondary text**: #6B7280 on #FFFFFF (4.65:1) ✅ AA
 - **Links**: #3B82F6 on #FFFFFF (4.65:1) ✅ AA
 
 #### Dark Theme
+
 - **Primary text**: #F9FAFB on #111827 (16.05:1) ✅ AAA
 - **Secondary text**: #9CA3AF on #111827 (5.25:1) ✅ AA
 - **Links**: #3B82F6 on #111827 (7.89:1) ✅ AAA
@@ -239,7 +267,9 @@ announceToScreenReader('Error occurred', 'assertive');
 See [Color Contrast Verification](./color-contrast-verification.md) for complete details.
 
 ### Non-Color Indicators
+
 Information is never conveyed by color alone:
+
 - Error states use icons + text + border
 - Required fields marked with asterisk
 - Focus uses outline + color change
@@ -252,6 +282,7 @@ Information is never conveyed by color alone:
 ### Best Practices
 
 #### 1. Label Association
+
 ```tsx
 <Label htmlFor="email" required>
   Email Address
@@ -266,6 +297,7 @@ Information is never conveyed by color alone:
 ```
 
 #### 2. Error Handling
+
 ```tsx
 <FormField
   id="password"
@@ -281,6 +313,7 @@ Information is never conveyed by color alone:
 ```
 
 #### 3. Required Fields
+
 ```tsx
 <Label htmlFor="name" required>
   Full Name
@@ -289,6 +322,7 @@ Information is never conveyed by color alone:
 ```
 
 ### Validation
+
 - Errors announced to screen readers
 - Focus moved to first error field
 - Clear, actionable error messages
@@ -299,18 +333,21 @@ Information is never conveyed by color alone:
 ## Responsive and Scalable
 
 ### Font Scaling
+
 - Base font size: 16px
 - Respects user browser settings
 - Text scales to 200% without breaking
 - No fixed heights that prevent scaling
 
 ### Responsive Design
+
 - Mobile-first approach
 - Touch targets minimum 44x44px
 - Content reflows at all sizes
 - No horizontal scrolling (except data tables)
 
 ### Reduced Motion
+
 ```css
 @media (prefers-reduced-motion: reduce) {
   * {
@@ -325,6 +362,7 @@ Information is never conveyed by color alone:
 ## Testing and Validation
 
 ### Automated Testing Tools
+
 1. **axe DevTools** (Browser extension)
    - Run on every page
    - Check for WCAG violations
@@ -343,6 +381,7 @@ Information is never conveyed by color alone:
 ### Manual Testing
 
 #### Keyboard Navigation
+
 - [ ] Tab through entire page
 - [ ] All interactive elements reachable
 - [ ] Focus visible on all elements
@@ -350,6 +389,7 @@ Information is never conveyed by color alone:
 - [ ] Logical tab order
 
 #### Screen Reader
+
 - [ ] All content announced
 - [ ] Headings properly structured
 - [ ] Forms properly labeled
@@ -357,12 +397,14 @@ Information is never conveyed by color alone:
 - [ ] Dynamic updates announced
 
 #### Color Contrast
+
 - [ ] All text meets 4.5:1 ratio
 - [ ] Large text meets 3:1 ratio
 - [ ] UI components meet 3:1 ratio
 - [ ] Test with color blindness simulator
 
 #### Responsive Design
+
 - [ ] Works at 320px width
 - [ ] Text scales to 200%
 - [ ] No horizontal scrolling
@@ -375,6 +417,7 @@ Information is never conveyed by color alone:
 ### When Adding New Features
 
 #### 1. Use Semantic HTML
+
 ```tsx
 // Good
 <button onClick={handleClick}>Submit</button>
@@ -384,6 +427,7 @@ Information is never conveyed by color alone:
 ```
 
 #### 2. Provide Text Alternatives
+
 ```tsx
 // Images
 <Image src="dharma.jpg" alt="Buddhist dharma wheel" />
@@ -398,6 +442,7 @@ Information is never conveyed by color alone:
 ```
 
 #### 3. Manage Focus
+
 ```tsx
 import { useFocusTrap } from '@/hooks/useFocusTrap';
 
@@ -416,6 +461,7 @@ function Modal({ isOpen, onClose }) {
 ```
 
 #### 4. Use ARIA Appropriately
+
 ```tsx
 // Live regions for dynamic content
 <div aria-live="polite" aria-atomic="true">
@@ -433,6 +479,7 @@ function Modal({ isOpen, onClose }) {
 ```
 
 #### 5. Test Before Committing
+
 ```bash
 # Run automated tests
 npm run test:a11y
@@ -468,6 +515,7 @@ import { keyboardHandlers } from '@/lib/utils/accessibility';
 ### Component Checklist
 
 When creating a new component, ensure:
+
 - [ ] Semantic HTML used
 - [ ] All text has sufficient contrast
 - [ ] Keyboard accessible
@@ -484,15 +532,18 @@ When creating a new component, ensure:
 ## Resources
 
 ### WCAG Guidelines
+
 - [WCAG 2.1 Quick Reference](https://www.w3.org/WAI/WCAG21/quickref/)
 - [Understanding WCAG 2.1](https://www.w3.org/WAI/WCAG21/Understanding/)
 
 ### Testing Tools
+
 - [axe DevTools](https://www.deque.com/axe/devtools/)
 - [WAVE](https://wave.webaim.org/)
 - [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
 
 ### Guides
+
 - [MDN Accessibility](https://developer.mozilla.org/en-US/docs/Web/Accessibility)
 - [A11y Project](https://www.a11yproject.com/)
 - [Inclusive Components](https://inclusive-components.design/)
@@ -502,6 +553,7 @@ When creating a new component, ensure:
 ## Contact
 
 For accessibility concerns or feedback:
+
 - **GitHub Issues**: Tag with `accessibility` label
 - **Email**: accessibility@ariyadham.com (placeholder)
 

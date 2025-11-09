@@ -97,7 +97,10 @@ export function meetsContrastRatio(
 /**
  * Announce message to screen readers
  */
-export function announceToScreenReader(message: string, priority: 'polite' | 'assertive' = 'polite') {
+export function announceToScreenReader(
+  message: string,
+  priority: 'polite' | 'assertive' = 'polite'
+) {
   const announcement = document.getElementById('a11y-announcer');
   if (announcement) {
     announcement.setAttribute('aria-live', priority);
@@ -165,29 +168,26 @@ export const keyboardHandlers = {
   /**
    * Handle Arrow keys navigation
    */
-  onArrowNavigation: (
-    onUp?: () => void,
-    onDown?: () => void,
-    onLeft?: () => void,
-    onRight?: () => void
-  ) => (event: ReactKeyboardEvent) => {
-    switch (event.key) {
-      case 'ArrowUp':
-        event.preventDefault();
-        onUp?.();
-        break;
-      case 'ArrowDown':
-        event.preventDefault();
-        onDown?.();
-        break;
-      case 'ArrowLeft':
-        event.preventDefault();
-        onLeft?.();
-        break;
-      case 'ArrowRight':
-        event.preventDefault();
-        onRight?.();
-        break;
-    }
-  },
+  onArrowNavigation:
+    (onUp?: () => void, onDown?: () => void, onLeft?: () => void, onRight?: () => void) =>
+    (event: ReactKeyboardEvent) => {
+      switch (event.key) {
+        case 'ArrowUp':
+          event.preventDefault();
+          onUp?.();
+          break;
+        case 'ArrowDown':
+          event.preventDefault();
+          onDown?.();
+          break;
+        case 'ArrowLeft':
+          event.preventDefault();
+          onLeft?.();
+          break;
+        case 'ArrowRight':
+          event.preventDefault();
+          onRight?.();
+          break;
+      }
+    },
 };

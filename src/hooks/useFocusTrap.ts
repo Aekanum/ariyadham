@@ -14,11 +14,7 @@ interface UseFocusTrapOptions {
   initialFocus?: boolean;
 }
 
-export function useFocusTrap({
-  isActive,
-  onEscape,
-  initialFocus = true,
-}: UseFocusTrapOptions) {
+export function useFocusTrap({ isActive, onEscape, initialFocus = true }: UseFocusTrapOptions) {
   const containerRef = useRef<HTMLElement>(null);
   const previousActiveElement = useRef<HTMLElement | null>(null);
 

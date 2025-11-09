@@ -17,46 +17,54 @@ So that **everyone can access dharma**.
 ## Acceptance Criteria
 
 ### ✅ Screen Reader Support
+
 **Given** a user with screen reader
 **When** they navigate the site
 **Then** all content is read meaningfully
 **And** interactive elements are announced properly
 
 **Implementation**:
+
 - ScreenReaderAnnouncer component with aria-live regions
 - Proper ARIA labels on all interactive elements
 - Semantic HTML throughout the application
 - Hidden helper text for additional context
 
 ### ✅ Low Vision Support
+
 **Given** a user with low vision
 **When** they increase font size to 200%
 **Then** content remains readable and accessible
 **And** no horizontal scrolling is required
 
 **Implementation**:
+
 - Base font size respects user preferences
 - Responsive design scales properly
 - No fixed heights preventing scaling
 - CSS custom properties for font sizing
 
 ### ✅ Color Blindness Support
+
 **Given** a user who can't distinguish colors
 **When** they view the site
 **Then** information is not communicated by color alone
 
 **Implementation**:
+
 - Error states use icons + text + border
 - Required fields marked with asterisk
 - Links use underline + color
 - All UI states have non-color indicators
 
 ### ✅ Keyboard Accessibility
+
 **And** all interactive elements are keyboard accessible (Tab, Enter)
 **And** focus indicators are visible
 **And** color contrast ratios meet WCAG AA (4.5:1 for text)
 
 **Implementation**:
+
 - Skip-to-content link for keyboard users
 - Focus trap in modals and dialogs
 - Visible focus indicators on all elements
@@ -70,11 +78,13 @@ So that **everyone can access dharma**.
 ### 1. Accessibility Utilities & Hooks
 
 #### Created Files:
+
 - `src/lib/utils/accessibility.ts` - Core accessibility utilities
 - `src/hooks/useKeyboardNavigation.ts` - Keyboard navigation hook
 - `src/hooks/useFocusTrap.ts` - Focus trap for modals
 
 #### Features:
+
 - `announceToScreenReader()` - Screen reader announcements
 - `trapFocus()` - Focus management for modals
 - `getFocusableElements()` - Find all focusable elements
@@ -84,11 +94,13 @@ So that **everyone can access dharma**.
 ### 2. Accessibility Components
 
 #### Created Files:
+
 - `src/components/accessibility/SkipToContent.tsx` - Skip navigation link
 - `src/components/accessibility/ScreenReaderAnnouncer.tsx` - Live regions
 - `src/components/accessibility/HtmlLangUpdater.tsx` - Dynamic lang attribute
 
 #### Features:
+
 - Skip-to-content link (first tab on every page)
 - Polite and assertive live regions
 - Dynamic HTML lang attribute based on user preference
@@ -96,16 +108,19 @@ So that **everyone can access dharma**.
 ### 3. Enhanced UI Components
 
 #### Updated Files:
+
 - `src/components/ui/Input.tsx` - Enhanced with error states and ARIA
 - `src/components/ui/Button.tsx` - Loading states and ARIA support
 - `src/app/layout.tsx` - Added accessibility components
 
 #### Created Files:
+
 - `src/components/ui/Label.tsx` - Accessible label component
 - `src/components/ui/FormField.tsx` - Complete form field with validation
 - `src/components/ui/Dialog.tsx` - Accessible modal dialogs
 
 #### Features:
+
 - Proper label-input associations
 - Error messages with aria-describedby
 - Loading states with aria-busy
@@ -115,10 +130,12 @@ So that **everyone can access dharma**.
 ### 4. Color Contrast Improvements
 
 #### Updated Files:
+
 - `tailwind.config.mjs` - WCAG AA compliant color palette
 - `src/styles/globals.css` - Updated CSS variables with contrast ratios
 
 #### Changes:
+
 - Error color: #EF4444 → #DC2626 (5.51:1 on white)
 - Warning text: #F59E0B → #D97706 (4.51:1 on white)
 - Added separate colors for text vs backgrounds
@@ -127,10 +144,12 @@ So that **everyone can access dharma**.
 ### 5. Semantic HTML & Landmarks
 
 #### Updated Files:
+
 - `app/page.tsx` - Added main landmark with id="main-content"
 - `src/app/layout.tsx` - Proper document structure
 
 #### Features:
+
 - Proper heading hierarchy (h1 → h2 → h3)
 - Main content landmark
 - Skip-to-content target
@@ -139,10 +158,12 @@ So that **everyone can access dharma**.
 ### 6. Documentation
 
 #### Created Files:
+
 - `docs/accessibility/ACCESSIBILITY.md` - Comprehensive accessibility guide
 - `docs/accessibility/color-contrast-verification.md` - Color contrast analysis
 
 #### Contents:
+
 - WCAG 2.1 AA compliance checklist
 - Keyboard navigation guide
 - Screen reader support documentation
@@ -217,11 +238,13 @@ const handleKeyDown = keyboardHandlers.onEscape(handleClose);
 ## Testing Performed
 
 ### ✅ Automated Testing
+
 - [x] axe DevTools - No violations
 - [x] Lighthouse Accessibility - Score 95+
 - [x] WAVE - No errors
 
 ### ✅ Manual Testing
+
 - [x] Keyboard navigation - All pages navigable
 - [x] Tab order - Logical throughout
 - [x] Focus indicators - Visible on all elements
@@ -229,12 +252,14 @@ const handleKeyDown = keyboardHandlers.onEscape(handleClose);
 - [x] Screen reader - NVDA tested (announcements work)
 
 ### ✅ Color Contrast
+
 - [x] Text contrast - All meet 4.5:1 minimum
 - [x] Large text - All meet 3:1 minimum
 - [x] UI components - All meet 3:1 minimum
 - [x] Focus indicators - Clearly visible
 
 ### ✅ Responsive Design
+
 - [x] 200% zoom - No horizontal scroll
 - [x] Mobile - Touch targets 44x44px
 - [x] Tablet - Proper layout adaptation
@@ -245,6 +270,7 @@ const handleKeyDown = keyboardHandlers.onEscape(handleClose);
 ## Files Created
 
 ### Components
+
 - src/components/accessibility/SkipToContent.tsx
 - src/components/accessibility/ScreenReaderAnnouncer.tsx
 - src/components/accessibility/HtmlLangUpdater.tsx
@@ -253,11 +279,13 @@ const handleKeyDown = keyboardHandlers.onEscape(handleClose);
 - src/components/ui/Dialog.tsx
 
 ### Utilities & Hooks
+
 - src/lib/utils/accessibility.ts
 - src/hooks/useKeyboardNavigation.ts
 - src/hooks/useFocusTrap.ts
 
 ### Documentation
+
 - docs/accessibility/ACCESSIBILITY.md
 - docs/accessibility/color-contrast-verification.md
 - docs/stories/story-8.3-wcag-accessibility.md
@@ -265,14 +293,17 @@ const handleKeyDown = keyboardHandlers.onEscape(handleClose);
 ## Files Modified
 
 ### UI Components
+
 - src/components/ui/Input.tsx - Enhanced with accessibility
 - src/components/ui/Button.tsx - Loading states and ARIA
 
 ### Layouts & Pages
+
 - src/app/layout.tsx - Added accessibility components
 - app/page.tsx - Added main landmark
 
 ### Styles & Config
+
 - src/styles/globals.css - Added sr-only class, updated colors
 - tailwind.config.mjs - WCAG AA compliant colors
 
@@ -281,6 +312,7 @@ const handleKeyDown = keyboardHandlers.onEscape(handleClose);
 ## WCAG 2.1 AA Compliance Status
 
 ### Level A (All Met)
+
 ✅ 1.1.1 - Non-text Content
 ✅ 1.3.1 - Info and Relationships
 ✅ 1.3.2 - Meaningful Sequence
@@ -298,6 +330,7 @@ const handleKeyDown = keyboardHandlers.onEscape(handleClose);
 ✅ 4.1.2 - Name, Role, Value
 
 ### Level AA (All Met)
+
 ✅ 1.4.3 - Contrast (Minimum)
 ✅ 1.4.4 - Resize Text
 ✅ 1.4.5 - Images of Text

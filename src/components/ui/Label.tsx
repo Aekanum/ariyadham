@@ -14,8 +14,7 @@ interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
 
 const Label = forwardRef<HTMLLabelElement, LabelProps>(
   ({ className = '', required = false, error = false, children, ...props }, ref) => {
-    const baseStyles =
-      'block text-sm font-medium transition-colors';
+    const baseStyles = 'block text-sm font-medium transition-colors';
 
     const colorStyles = error
       ? 'text-red-700 dark:text-red-400'

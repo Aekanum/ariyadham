@@ -80,10 +80,7 @@ export function Dialog({
         {/* Dialog Header */}
         <div className="flex items-start justify-between border-b border-gray-200 p-6 dark:border-gray-700">
           <div className="flex-1">
-            <h2
-              id="dialog-title"
-              className="text-xl font-semibold text-gray-900 dark:text-white"
-            >
+            <h2 id="dialog-title" className="text-xl font-semibold text-gray-900 dark:text-white">
               {title}
             </h2>
             {description && (
@@ -119,9 +116,7 @@ export function Dialog({
         </div>
 
         {/* Dialog Content */}
-        <div className="p-6">
-          {children}
-        </div>
+        <div className="p-6">{children}</div>
 
         {/* Dialog Footer */}
         {footer && (
