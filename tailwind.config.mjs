@@ -9,6 +9,14 @@ export default {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    // Story 8.4: Mobile-First Responsive Design - Custom breakpoints
+    screens: {
+      xs: '320px', // Mobile small
+      sm: '640px', // Mobile large (Tailwind default, keeping for compatibility)
+      md: '768px', // Tablet
+      lg: '1024px', // Desktop
+      xl: '1440px', // Large desktop
+    },
     extend: {
       colors: {
         primary: '#3B82F6', // Blue - 4.65:1 on white (AA compliant)
@@ -22,6 +30,10 @@ export default {
           light: '#EF4444', // Lighter red - for backgrounds
         },
         neutral: '#6B7280', // Gray - 4.65:1 on white (AA compliant)
+      },
+      // Story 8.4: Mobile-first spacing for touch targets
+      spacing: {
+        'touch-min': '44px', // Minimum touch target size (WCAG/iOS)
       },
     },
   },
