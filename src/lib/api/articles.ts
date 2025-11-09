@@ -1,9 +1,13 @@
+import { ArticleLanguage } from '@/types/article';
+
 export interface ArticleDraft {
   id?: string;
   title: string;
   content: string;
   excerpt?: string;
   status: string;
+  language?: ArticleLanguage;
+  translated_from_id?: string | null;
 }
 
 export async function saveArticleDraft(data: ArticleDraft): Promise<ArticleDraft & { id: string }> {
@@ -84,6 +88,21 @@ export async function cancelScheduledArticle(
   if (!response.ok) {
     const error = await response.json();
     throw new Error(error.error || 'Failed to cancel scheduled publication');
+  }
+
+  return response.json();
+}
+
+/**
+ * Get article translations (all language versions)
+ * Story 8.2: Translate Dynamic Content (Articles)
+ */
+export async function getArticleTranslations(articleId: string) {
+  const response = await fetch(`/api/articles/${articleId}/translations`);
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.error || 'Failed to fetch article translations');
   }
 
   return response.json();

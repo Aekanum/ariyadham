@@ -97,7 +97,7 @@ development_status:
   # ===== EPIC 8: Multi-Language & Accessibility =====
   epic-8: in-progress
   8-1-internationalization-i18n-setup: done
-  8-2-translate-dynamic-content-articles: backlog
+  8-2-translate-dynamic-content-articles: done
   8-3-wcag-2-1-aa-accessibility: backlog
   8-4-mobile-first-responsive-design: backlog
   8-5-elderly-user-accessibility-senior-friendly-mode: backlog

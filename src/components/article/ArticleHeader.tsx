@@ -1,6 +1,7 @@
 /**
  * ArticleHeader Component
  * Story 3.1: Article Display & Reading Interface
+ * Story 8.2: Translate Dynamic Content (Articles)
  *
  * Displays article metadata including title, excerpt, author, date, and reading time
  */
@@ -8,6 +9,7 @@
 import Image from 'next/image';
 import { ArticleWithAuthor } from '@/types/article';
 import { formatDate } from '@/lib/utils/date';
+import LanguageSwitcher from './LanguageSwitcher';
 
 interface ArticleHeaderProps {
   article: ArticleWithAuthor;
@@ -51,6 +53,17 @@ export default function ArticleHeader({ article }: ArticleHeaderProps) {
       {/* Excerpt */}
       {article.excerpt && (
         <p className="mb-6 text-xl text-gray-600 dark:text-gray-400">{article.excerpt}</p>
+      )}
+
+      {/* Language Switcher */}
+      {article.translations && article.translations.length > 0 && (
+        <div className="mb-6">
+          <LanguageSwitcher
+            currentLanguage={article.language}
+            currentSlug={article.slug}
+            translations={article.translations}
+          />
+        </div>
       )}
 
       {/* Author and Metadata */}

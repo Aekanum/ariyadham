@@ -17,6 +17,8 @@ import {
 import { useAutoSave } from '@/hooks/useAutoSave';
 import { useUnsavedChanges } from '@/hooks/useUnsavedChanges';
 import { Tag } from '@/types/database';
+import { ArticleLanguage } from '@/types/article';
+import { LOCALE_NAMES } from '@/lib/i18n';
 
 interface Article {
   id?: string;
@@ -24,6 +26,8 @@ interface Article {
   content: string;
   excerpt?: string;
   status?: string;
+  language?: ArticleLanguage;
+  translated_from_id?: string | null;
   scheduled_publish_at?: string | null;
   category_ids?: string[];
   tags?: Tag[];
@@ -38,6 +42,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
   const [title, setTitle] = useState(article?.title || '');
   const [content, setContent] = useState(article?.content || '');
   const [excerpt, setExcerpt] = useState(article?.excerpt || '');
+  const [language, setLanguage] = useState<ArticleLanguage>(article?.language || 'th');
   const [categoryIds, setCategoryIds] = useState<string[]>(article?.category_ids || []);
   const [selectedTags, setSelectedTags] = useState<Tag[]>(article?.tags || []);
   const [saving, setSaving] = useState(false);
@@ -61,12 +66,13 @@ export default function ArticleForm({ article }: ArticleFormProps) {
       const changed =
         title !== article.title ||
         content !== article.content ||
-        excerpt !== (article.excerpt || '');
+        excerpt !== (article.excerpt || '') ||
+        language !== (article.language || 'th');
       setHasUnsavedChanges(changed);
     } else {
       setHasUnsavedChanges(title !== '' || content !== '' || excerpt !== '');
     }
-  }, [title, content, excerpt, article, setHasUnsavedChanges]);
+  }, [title, content, excerpt, language, article, setHasUnsavedChanges]);
 
   // Auto-save functionality
   useAutoSave(
@@ -78,6 +84,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
           title,
           content,
           excerpt,
+          language,
           status: 'draft',
         });
         setLastSaved(new Date());
@@ -85,7 +92,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
         console.error('Auto-save failed:', err);
       }
     },
-    [title, content, excerpt],
+    [title, content, excerpt, language],
     30000 // Auto-save every 30 seconds
   );
 
@@ -108,6 +115,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
         title,
         content,
         excerpt,
+        language,
         status: 'draft',
       });
 
@@ -359,6 +367,25 @@ export default function ArticleForm({ article }: ArticleFormProps) {
             maxLength={200}
           />
           <p className="text-xs text-gray-500 mt-1">{excerpt.length}/200 characters</p>
+        </div>
+
+        {/* Language Selection */}
+        <div>
+          <label className="block text-sm font-medium mb-2">Language *</label>
+          <select
+            value={language}
+            onChange={(e) => setLanguage(e.target.value as ArticleLanguage)}
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            disabled={!!article?.id} // Cannot change language after creation
+          >
+            <option value="th">{LOCALE_NAMES.th} (ไทย)</option>
+            <option value="en">{LOCALE_NAMES.en} (English)</option>
+          </select>
+          {article?.id && (
+            <p className="text-xs text-gray-500 mt-1">
+              Language cannot be changed after article creation
+            </p>
+          )}
         </div>
 
         {/* Categories */}

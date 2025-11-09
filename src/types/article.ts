@@ -4,9 +4,11 @@
  * Story 4.2: Article Publishing & Scheduling
  * Story 5.1: Anjali Button & Reactions
  * Story 5.4: User Reading History & Bookmarks
+ * Story 8.2: Translate Dynamic Content (Articles)
  */
 
 export type ArticleStatus = 'draft' | 'scheduled' | 'published' | 'archived';
+export type ArticleLanguage = 'th' | 'en';
 
 /**
  * Base article interface
@@ -20,6 +22,8 @@ export interface Article {
   featured_image_url: string | null;
   author_id: string;
   status: ArticleStatus;
+  language: ArticleLanguage;
+  translated_from_id: string | null;
   published_at: string | null;
   scheduled_publish_at: string | null;
   reading_time_minutes: number | null;
@@ -34,6 +38,19 @@ export interface Article {
 }
 
 /**
+ * Article translation information
+ * Story 8.2: Translate Dynamic Content (Articles)
+ */
+export interface ArticleTranslation {
+  id: string;
+  article_id: string;
+  language: ArticleLanguage;
+  slug: string;
+  title: string;
+  status: ArticleStatus;
+}
+
+/**
  * Article with author information
  */
 export interface ArticleWithAuthor extends Article {
@@ -42,6 +59,7 @@ export interface ArticleWithAuthor extends Article {
     full_name: string;
     avatar_url: string | null;
   };
+  translations?: ArticleTranslation[];
 }
 
 /**
@@ -83,6 +101,8 @@ export interface CreateArticleRequest {
   featured_image_url?: string;
   category?: string;
   status?: ArticleStatus;
+  language?: ArticleLanguage;
+  translated_from_id?: string | null;
   scheduled_publish_at?: string | null;
 }
 
@@ -97,6 +117,8 @@ export interface UpdateArticleRequest {
   featured_image_url?: string;
   category?: string;
   status?: ArticleStatus;
+  language?: ArticleLanguage;
+  translated_from_id?: string | null;
   published_at?: string | null;
   scheduled_publish_at?: string | null;
 }
