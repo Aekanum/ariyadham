@@ -1,0 +1,55 @@
+{
+  "articles": {
+    "title": "บทความทั้งหมด",
+    "noArticles": "ยังไม่มีบทความที่เผยแพร่",
+    "published": "เผยแพร่แล้ว",
+    "views": "การดู",
+    "readingTime": "{minutes} นาทีในการอ่าน",
+    "publishedOn": "เผยแพร่เมื่อ",
+    "lastUpdated": "อัปเดตล่าสุดเมื่อ",
+    "by": "โดย",
+    "in": "ใน",
+    "printArticle": "พิมพ์บทความ"
+  },
+  "categories": {
+    "title": "หมวดหมู่",
+    "all": "ทั้งหมด",
+    "browse": "เรียกดูตามหมวดหมู่"
+  },
+  "search": {
+    "placeholder": "ค้นหาบทความ...",
+    "title": "ค้นหา",
+    "results": "ผลการค้นหาสำหรับ \"{query}\"",
+    "noResults": "ไม่พบบทความสำหรับ \"{query}\"",
+    "found": "พบ {count} บทความ"
+  },
+  "engagement": {
+    "anjali": "พนมมือ",
+    "anjaliCount": "{count} คนพนมมือ",
+    "bookmark": "บุ๊คมาร์ก",
+    "bookmarkCount": "{count} บุ๊คมาร์ก",
+    "share": "แชร์",
+    "shareArticle": "แชร์บทความนี้",
+    "comments": "ความคิดเห็น",
+    "commentCount": "{count} ความคิดเห็น",
+    "writeComment": "เขียนความคิดเห็น...",
+    "postComment": "โพสต์ความคิดเห็น",
+    "reply": "ตอบกลับ",
+    "loginToComment": "เข้าสู่ระบบเพื่อแสดงความคิดเห็น",
+    "loginToAnjali": "เข้าสู่ระบบเพื่อพนมมือ",
+    "loginToBookmark": "เข้าสู่ระบบเพื่อบุ๊คมาร์ก"
+  },
+  "bookmarks": {
+    "title": "บุ๊คมาร์ก",
+    "myBookmarks": "บุ๊คมาร์กของฉัน",
+    "noBookmarks": "คุณยังไม่มีบุ๊คมาร์ก",
+    "addBookmark": "เพิ่มบุ๊คมาร์ก",
+    "removeBookmark": "ลบบุ๊คมาร์ก"
+  },
+  "history": {
+    "title": "ประวัติการอ่าน",
+    "myHistory": "ประวัติการอ่านของฉัน",
+    "noHistory": "คุณยังไม่มีประวัติการอ่าน",
+    "clearHistory": "ล้างประวัติ"
+  }
+}

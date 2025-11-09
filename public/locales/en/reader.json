@@ -1,0 +1,55 @@
+{
+  "articles": {
+    "title": "All Articles",
+    "noArticles": "No articles published yet",
+    "published": "Published",
+    "views": "views",
+    "readingTime": "{minutes} min read",
+    "publishedOn": "Published on",
+    "lastUpdated": "Last updated on",
+    "by": "by",
+    "in": "in",
+    "printArticle": "Print Article"
+  },
+  "categories": {
+    "title": "Categories",
+    "all": "All",
+    "browse": "Browse by Category"
+  },
+  "search": {
+    "placeholder": "Search articles...",
+    "title": "Search",
+    "results": "Search results for \"{query}\"",
+    "noResults": "No articles found for \"{query}\"",
+    "found": "Found {count} articles"
+  },
+  "engagement": {
+    "anjali": "Anjali",
+    "anjaliCount": "{count} anjali",
+    "bookmark": "Bookmark",
+    "bookmarkCount": "{count} bookmarks",
+    "share": "Share",
+    "shareArticle": "Share this article",
+    "comments": "Comments",
+    "commentCount": "{count} comments",
+    "writeComment": "Write a comment...",
+    "postComment": "Post Comment",
+    "reply": "Reply",
+    "loginToComment": "Log in to comment",
+    "loginToAnjali": "Log in to anjali",
+    "loginToBookmark": "Log in to bookmark"
+  },
+  "bookmarks": {
+    "title": "Bookmarks",
+    "myBookmarks": "My Bookmarks",
+    "noBookmarks": "You don't have any bookmarks yet",
+    "addBookmark": "Add Bookmark",
+    "removeBookmark": "Remove Bookmark"
+  },
+  "history": {
+    "title": "Reading History",
+    "myHistory": "My Reading History",
+    "noHistory": "You don't have any reading history yet",
+    "clearHistory": "Clear History"
+  }
+}

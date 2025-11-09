@@ -1,0 +1,48 @@
+{
+  "app": {
+    "name": "อริยธรรม",
+    "tagline": "ค้นพบคำสอนธรรมะอันล้ำลึกและปัญญาทางจิตวิญญาณ"
+  },
+  "nav": {
+    "home": "หน้าแรก",
+    "articles": "บทความ",
+    "categories": "หมวดหมู่",
+    "search": "ค้นหา",
+    "about": "เกี่ยวกับ",
+    "contact": "ติดต่อ"
+  },
+  "actions": {
+    "readMore": "อ่านต่อ",
+    "viewAll": "ดูทั้งหมด",
+    "search": "ค้นหา",
+    "submit": "ส่ง",
+    "cancel": "ยกเลิก",
+    "save": "บันทึก",
+    "edit": "แก้ไข",
+    "delete": "ลบ",
+    "back": "กลับ",
+    "next": "ถัดไป",
+    "previous": "ก่อนหน้า",
+    "close": "ปิด",
+    "print": "พิมพ์"
+  },
+  "sections": {
+    "featured": "บทความแนะนำ",
+    "recent": "บทความล่าสุด",
+    "popular": "บทความยอดนิยม",
+    "relatedArticles": "บทความที่เกี่ยวข้อง"
+  },
+  "common": {
+    "loading": "กำลังโหลด...",
+    "error": "เกิดข้อผิดพลาด",
+    "noResults": "ไม่พบผลลัพธ์",
+    "tryAgain": "ลองอีกครั้ง",
+    "language": "ภาษา",
+    "thai": "ไทย",
+    "english": "อังกฤษ"
+  },
+  "footer": {
+    "copyright": "© {year} อริยธรรม สงวนลิขสิทธิ์",
+    "allRightsReserved": "สงวนสิทธิ์ทุกประการ"
+  }
+}
