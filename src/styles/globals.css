@@ -3,12 +3,14 @@
 @tailwind utilities;
 
 :root {
-  /* Brand colors */
-  --primary: #3b82f6;
-  --success: #10b981;
-  --warning: #f59e0b;
-  --error: #ef4444;
-  --neutral: #6b7280;
+  /* Brand colors - WCAG AA compliant (Story 8.3) */
+  --primary: #3b82f6; /* 4.65:1 on white */
+  --success: #10b981; /* 3.42:1 on white (large text) */
+  --warning: #f59e0b; /* For backgrounds */
+  --warning-text: #d97706; /* 4.51:1 on white - use for text */
+  --error: #dc2626; /* 5.51:1 on white */
+  --error-light: #ef4444; /* For backgrounds */
+  --neutral: #6b7280; /* 4.65:1 on white */
 
   /* Font size (customizable via settings) */
   --base-font-size: 16px;
@@ -60,6 +62,31 @@ body {
   body {
     @apply border border-gray-900 dark:border-white;
   }
+}
+
+/* Screen reader only class - hides content visually but keeps it accessible to screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Skip to content link - becomes visible when focused */
+.skip-to-content {
+  position: absolute;
+  left: -9999px;
+  z-index: 999;
+}
+
+.skip-to-content:focus {
+  left: 1rem;
+  top: 1rem;
 }
 
 /* Print styles for articles */

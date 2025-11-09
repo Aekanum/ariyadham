@@ -97,16 +97,26 @@ The existing database schema already supports translations:
 ### URL Structure
 
 Articles are accessible via language-prefixed URLs:
+
 - Thai: `/th/articles/[slug]`
 - English: `/en/articles/[slug]`
 
 ### SEO Implementation
 
 hreflang links indicate language versions:
+
 ```html
 <link rel="alternate" hreflang="th" href="https://ariyadham.com/th/articles/meditation-basics" />
-<link rel="alternate" hreflang="en" href="https://ariyadham.com/en/articles/meditation-basics-english" />
-<link rel="alternate" hreflang="x-default" href="https://ariyadham.com/th/articles/meditation-basics" />
+<link
+  rel="alternate"
+  hreflang="en"
+  href="https://ariyadham.com/en/articles/meditation-basics-english"
+/>
+<link
+  rel="alternate"
+  hreflang="x-default"
+  href="https://ariyadham.com/th/articles/meditation-basics"
+/>
 ```
 
 ### Translation Workflow
@@ -139,18 +149,21 @@ hreflang links indicate language versions:
 ## Testing
 
 Manual testing completed:
+
 - ✅ Language selection in article form
 - ✅ Language persistence in database
 - ✅ Language switcher display
 - ✅ SEO metadata generation
 
 Automated tests:
+
 - Created test specifications for hreflang generation
 - Test file removed due to missing Jest configuration
 
 ## Dependencies
 
 No new dependencies required. Uses existing:
+
 - `next-intl` or similar i18n library (from Story 8.1)
 - `lucide-react` for icons
 - Next.js built-in metadata API
