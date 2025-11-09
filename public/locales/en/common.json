@@ -1,0 +1,48 @@
+{
+  "app": {
+    "name": "Ariyadham",
+    "tagline": "Discover profound dharma teachings and spiritual wisdom"
+  },
+  "nav": {
+    "home": "Home",
+    "articles": "Articles",
+    "categories": "Categories",
+    "search": "Search",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "actions": {
+    "readMore": "Read More",
+    "viewAll": "View All",
+    "search": "Search",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "close": "Close",
+    "print": "Print"
+  },
+  "sections": {
+    "featured": "Featured Articles",
+    "recent": "Recent Articles",
+    "popular": "Popular Articles",
+    "relatedArticles": "Related Articles"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "noResults": "No results found",
+    "tryAgain": "Try again",
+    "language": "Language",
+    "thai": "Thai",
+    "english": "English"
+  },
+  "footer": {
+    "copyright": "© {year} Ariyadham. All rights reserved.",
+    "allRightsReserved": "All rights reserved"
+  }
+}
