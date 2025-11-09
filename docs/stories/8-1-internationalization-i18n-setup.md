@@ -21,6 +21,7 @@ So that **users can choose their preferred language and access content in their 
 Ariyadham serves a diverse audience including Thai speakers and English speakers. To maximize accessibility and reach, the platform must support both languages seamlessly. This story establishes the foundation for internationalization (i18n) by setting up the infrastructure, translation files, and language switching mechanism.
 
 **Referenced Requirements:**
+
 - PRD Section: Multi-Language Support (FR4.1, FR4.2)
 - Architecture: next-i18next for i18n implementation
 
@@ -29,9 +30,11 @@ Ariyadham serves a diverse audience including Thai speakers and English speakers
 ## Acceptance Criteria
 
 ### AC1: i18n Library Configuration
+
 **Given** the Next.js application,
 **When** next-i18next is installed and configured,
 **Then:**
+
 - [ ] `next-i18next` package is installed
 - [ ] `next-i18next.config.js` is created with proper configuration
 - [ ] Default language is set to Thai (`th`)
@@ -39,9 +42,11 @@ Ariyadham serves a diverse audience including Thai speakers and English speakers
 - [ ] Translation namespaces are configured (common, auth, reader, author, admin)
 
 ### AC2: Translation File Structure
+
 **Given** the i18n setup,
 **When** the translation file structure is created,
 **Then:**
+
 - [ ] Translation files exist at `public/locales/th/` and `public/locales/en/`
 - [ ] Namespaced translation files are created:
   - `common.json` - Common UI elements, navigation, buttons
@@ -52,9 +57,11 @@ Ariyadham serves a diverse audience including Thai speakers and English speakers
 - [ ] Each namespace contains at least 10 essential translations
 
 ### AC3: Language Switcher Component
+
 **Given** the translation infrastructure,
 **When** a language switcher component is created,
 **Then:**
+
 - [ ] `LanguageSwitcher` component exists in `components/layout/`
 - [ ] Component displays current language (TH/EN)
 - [ ] Component allows switching between Thai and English
@@ -63,9 +70,11 @@ Ariyadham serves a diverse audience including Thai speakers and English speakers
 - [ ] Page content updates immediately when language is changed
 
 ### AC4: Next.js Middleware for i18n
+
 **Given** the i18n configuration,
 **When** middleware is configured,
 **Then:**
+
 - [ ] `middleware.ts` includes i18n routing logic
 - [ ] Requests are automatically redirected to language-prefixed URLs
 - [ ] Default language (Thai) is used if no preference is set
@@ -75,9 +84,11 @@ Ariyadham serves a diverse audience including Thai speakers and English speakers
   - Accept-Language header (fallback)
 
 ### AC5: Integration with Existing Pages
+
 **Given** the i18n infrastructure,
 **When** homepage and navigation are updated,
 **Then:**
+
 - [ ] Homepage (`app/page.tsx`) uses i18n translations
 - [ ] Navigation component uses i18n translations
 - [ ] All static text is extracted to translation files
@@ -85,9 +96,11 @@ Ariyadham serves a diverse audience including Thai speakers and English speakers
 - [ ] Both Thai and English versions render correctly
 
 ### AC6: Testing & Documentation
+
 **Given** the completed i18n setup,
 **When** testing is performed,
 **Then:**
+
 - [ ] Language switching works on all major pages
 - [ ] No console errors when switching languages
 - [ ] Translations load correctly on first visit
@@ -197,9 +210,7 @@ export function middleware(request: NextRequest) {
 
   if (!pathnameHasLocale) {
     // Redirect to default locale
-    return NextResponse.redirect(
-      new URL(`/${defaultLocale}${pathname}`, request.url)
-    );
+    return NextResponse.redirect(new URL(`/${defaultLocale}${pathname}`, request.url));
   }
 }
 
@@ -237,9 +248,11 @@ export const config = {
 ## Dependencies
 
 **Requires:**
+
 - Epic 1-7 complete (foundation established)
 
 **Blocks:**
+
 - Story 8.2: Translate Dynamic Content (Articles)
 - Story 8.3: WCAG 2.1 AA Accessibility
 - Story 8.4: Mobile-First Responsive Design
@@ -253,6 +266,7 @@ export const config = {
 **Estimated Hours:** 8-12 hours
 
 **Breakdown:**
+
 - Configuration & setup: 2 hours
 - Translation files creation: 3 hours
 - Language switcher component: 2 hours
