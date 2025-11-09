@@ -5,6 +5,8 @@
  * Utility functions to support accessibility features across the application
  */
 
+import type { KeyboardEvent as ReactKeyboardEvent } from 'react';
+
 /**
  * Generate a unique ID for associating labels with form inputs
  */
@@ -77,17 +79,17 @@ export function trapFocus(container: HTMLElement): () => void {
 
 /**
  * Check if color contrast meets WCAG AA standards (4.5:1 for normal text, 3:1 for large text)
- * This is a simplified version - for production, use a proper color contrast library
+ * This is a placeholder - for production, use a proper color contrast library
  */
 export function meetsContrastRatio(
-  foreground: string,
-  background: string,
-  level: 'AA' | 'AAA' = 'AA',
-  isLargeText = false
+  _foreground: string,
+  _background: string,
+  _level: 'AA' | 'AAA' = 'AA',
+  _isLargeText = false
 ): boolean {
   // This is a placeholder - in production, you'd calculate the actual contrast ratio
   // For now, we'll assume our predefined colors meet the standards
-  const requiredRatio = isLargeText ? 3 : level === 'AA' ? 4.5 : 7;
+  // const requiredRatio = isLargeText ? 3 : level === 'AA' ? 4.5 : 7;
   // Implementation would calculate actual contrast and compare to requiredRatio
   return true; // Placeholder
 }
@@ -143,7 +145,7 @@ export const keyboardHandlers = {
   /**
    * Handle Enter and Space key presses (for custom clickable elements)
    */
-  onActivate: (callback: () => void) => (event: React.KeyboardEvent) => {
+  onActivate: (callback: () => void) => (event: ReactKeyboardEvent) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
       callback();
@@ -153,7 +155,7 @@ export const keyboardHandlers = {
   /**
    * Handle Escape key (for closing modals, dialogs, etc.)
    */
-  onEscape: (callback: () => void) => (event: React.KeyboardEvent) => {
+  onEscape: (callback: () => void) => (event: ReactKeyboardEvent) => {
     if (event.key === 'Escape') {
       event.preventDefault();
       callback();
@@ -168,7 +170,7 @@ export const keyboardHandlers = {
     onDown?: () => void,
     onLeft?: () => void,
     onRight?: () => void
-  ) => (event: React.KeyboardEvent) => {
+  ) => (event: ReactKeyboardEvent) => {
     switch (event.key) {
       case 'ArrowUp':
         event.preventDefault();

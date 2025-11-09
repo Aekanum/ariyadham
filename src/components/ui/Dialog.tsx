@@ -186,7 +186,8 @@ export function ConfirmDialog({
         </>
       }
     >
-      {/* Content can be added here if needed */}
+      {/* Empty content - all UI is in title/description/footer */}
+      <></>
     </Dialog>
   );
 }

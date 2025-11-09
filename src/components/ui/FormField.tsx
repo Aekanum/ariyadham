@@ -5,7 +5,6 @@
  * Fully accessible form field wrapper that properly associates labels, inputs, and error messages
  */
 
-import { ReactNode } from 'react';
 import { Label } from './Label';
 import { Input } from './Input';
 
