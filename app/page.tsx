@@ -1,8 +1,10 @@
 /**
  * Homepage
  * Story 7.3: SEO Foundation & Structured Data
+ * Story 7.4: Caching Strategy
  *
  * Enhanced with WebSite and Organization structured data
+ * ISR enabled for better performance
  */
 
 import { createServerClient } from '@/lib/supabase-server';
@@ -13,6 +15,12 @@ import {
   generateWebSiteStructuredData,
   generateOrganizationStructuredData,
 } from '@/lib/seo/metadata';
+
+/**
+ * ISR Configuration (Story 7.4: Caching Strategy)
+ * Revalidate homepage every 30 seconds for frequently updated content
+ */
+export const revalidate = 30;
 
 export default async function HomePage() {
   const supabase = createServerClient();

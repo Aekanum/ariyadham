@@ -59,13 +59,73 @@ const nextConfig = {
           },
         ],
       },
-      // Cache static assets
+      // Cache static assets (immutable - never changes)
       {
         source: '/static/:path*',
         headers: [
           {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      // Cache Next.js static files (immutable)
+      {
+        source: '/_next/static/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      // Cache images (long-term with revalidation)
+      {
+        source: '/_next/image/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=86400, stale-while-revalidate=604800',
+          },
+        ],
+      },
+      // Cache article pages (short-term with stale-while-revalidate)
+      {
+        source: '/articles/:slug',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=60, stale-while-revalidate=3600',
+          },
+        ],
+      },
+      // Cache category pages
+      {
+        source: '/categories/:slug',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=60, stale-while-revalidate=3600',
+          },
+        ],
+      },
+      // Cache homepage
+      {
+        source: '/',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=60, stale-while-revalidate=300',
+          },
+        ],
+      },
+      // API routes - short cache for public data
+      {
+        source: '/api/articles',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=30, stale-while-revalidate=60',
           },
         ],
       },
